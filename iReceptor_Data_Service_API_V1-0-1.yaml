@@ -3,8 +3,6 @@ info:
   title: iReceptor Data Source API
   version: 1.0.1
   contact:
-    responsibleDeveloper: Bojan Zimonja, Brian Corrie, Richard Bruskiewich
-    responsibleOrganization: Simon Fraser University
     url: 'http://ireceptor.irmacs.sfu.ca/'
     email: breden@sfu.ca
   description: >
