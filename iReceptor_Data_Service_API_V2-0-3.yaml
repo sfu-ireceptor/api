@@ -579,149 +579,149 @@ paths:
             properties:
               aggregation_summary:
                 type: array
-              items:
-                type: object
-                properties:
-                  subject_code:
-                    type: string
-                    description: |
-                      e.g. Subject One
-                  subject_id:
-                    type: integer
-                    description: |
-                      e.g. 1
-                  subject_gender:
-                    type: string
-                    description: |
-                      e.g. Male
-                  subject_species:
-                    type: string
-                    description: |
-                      e.g. Mouse
-                  subject_ethnicity:
-                    type: string
-                    description: |
-                      e.g. Eth1
-                  subject_age:
-                    type: integer
-                    description: |
-                      e.g. 1
-                  project_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  project_name:
-                    type: string
-                    description: |
-                      e.g. First Project
-                  project_parent_id:
-                    type: integer
-                    description: |
-                      e.g. null
-                  project_type:
-                    type: string
-                    description: |
-                      e.g. null
-                  sra_accession:
-                    type: string
-                    description: |
-                      e.g. null
-                  lab_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  lab_name:
-                    type: string
-                    description: |
-                      e.g. First Lab
-                  disease_state_id:
-                    type: integer
-                    description: |
-                      e.g. 1
-                  disease_state_name:
-                    type: string
-                    description: |
-                      e.g. HIV-1 infected
-                  case_control_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  case_control_name:
-                    type: string
-                    description: |
-                      e.g. Control
-                  sample_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  sample_name:
-                    type: string
-                    description: |
-                      e.g. Blood Sample 01
-                  project_sample_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  sample_subject_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  sequence_count:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  dna_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  dna_type:
-                    type: string
-                    description: |
-                      e.g. cDNA
-                  sample_source_id:
-                    type: integer
-                    description: |
-                      e.g. 0
-                  sample_source_name:
-                    type: string
-                    description: |
-                      e.g. Blood (PBMC)
-                  lab_cell_subset_name:
-                    type: string
-                    description: |
-                      e.g. Naive B Alpha
-                  ireceptor_cell_subset_name:
-                    type: string
-                    description: |
-                      e.g. Naive B
-                  marker_1:
-                    type: string
-                    description: |
-                      e.g. CR19
-                  marker_2:
-                    type: string
-                    description: |
-                      e.g. CR20
-                  marker_3:
-                    type: string
-                    description: |
-                      e.g. CR21
-                  marker_4:
-                    type: string
-                    description: |
-                      e.g. null
-                  marker_5:
-                    type: string
-                    description: |
-                      e.g. null
-                  marker_6:
-                    type: string
-                    description: |
-                      e.g. null
-                  sequences:
-                    type: integer
-                    description: |
-                      e.g. 167793
+                items:
+                  type: object
+                  properties:
+                    subject_code:
+                      type: string
+                      description: |
+                        e.g. Subject One
+                    subject_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    subject_gender:
+                      type: string
+                      description: |
+                        e.g. Male
+                    subject_species:
+                      type: string
+                      description: |
+                        e.g. Mouse
+                    subject_ethnicity:
+                      type: string
+                      description: |
+                        e.g. Eth1
+                    subject_age:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    project_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    project_name:
+                      type: string
+                      description: |
+                        e.g. First Project
+                    project_parent_id:
+                      type: integer
+                      description: |
+                        e.g. null
+                    project_type:
+                      type: string
+                      description: |
+                        e.g. null
+                    sra_accession:
+                      type: string
+                      description: |
+                        e.g. null
+                    lab_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    lab_name:
+                      type: string
+                      description: |
+                        e.g. First Lab
+                    disease_state_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    disease_state_name:
+                      type: string
+                      description: |
+                        e.g. HIV-1 infected
+                    case_control_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    case_control_name:
+                      type: string
+                      description: |
+                        e.g. Control
+                    sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_name:
+                      type: string
+                      description: |
+                        e.g. Blood Sample 01
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_subject_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sequence_count:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_type:
+                      type: string
+                      description: |
+                        e.g. cDNA
+                    sample_source_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_source_name:
+                      type: string
+                      description: |
+                        e.g. Blood (PBMC)
+                    lab_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B Alpha
+                    ireceptor_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B
+                    marker_1:
+                      type: string
+                      description: |
+                        e.g. CR19
+                    marker_2:
+                      type: string
+                      description: |
+                        e.g. CR20
+                    marker_3:
+                      type: string
+                      description: |
+                        e.g. CR21
+                    marker_4:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_5:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_6:
+                      type: string
+                      description: |
+                        e.g. null
+                    sequences:
+                      type: integer
+                      description: |
+                        e.g. 167793
               sequences:
                 type: array
                 items:
@@ -1204,158 +1204,181 @@ paths:
           examples:
             application/json:
               aggregation_summary:
-                subject_code: IAVI 84
-                subject_id: 1
-                subject_gender: null
-                subject_ethnicity: NA
-                subject_species: Homo Sapiens
-                project_id: 1
-                project_name: >-
-                  Mining the antibodyome for HIV-1 neutralizing antibodies with
-                  next generation sequencing and phylogenetic pairing of
-                  heavy/light chains
-                project_parent_id: -1
-                project_type: null
-                sra_accession: SRP018335
-                lab_id: 1
-                lab_name: National Institute of Allergy and Infectious -DiseaseVaccine
-                Research Center: Kwong Lab
-                disease_state_id: 7
-                disease_state_name: >-
-                  HIV-1 infected for at least 3 years, not receiving
-                  antiretroviral treatment
-                case_control_id: 1
-                case_control_name: Case
-                sample_id: 1
-                project_sample_id: 1
-                sequence_count: 253684
-                project_sample_note: null
-                sra_run_id: SRR654169
-                sample_name: SRS388604
-                subject_age: null
-                sample_subject_id: 1
-                dna_id: 1
-                dna_type: cDNA
-                sample_source_id: 1
-                sample_source_name: PBMCs
-                lab_cell_subset_name: B cell memory
-                ireceptor_cell_subset_name: Memory B Cell
-                marker_1: IgG+
-                marker_2: CD19+
-                marker_3: sIgG+
-                marker_4: ' negative depletion to CD3'
-                marker_5: ' CD14'
-                marker_6: ' CD16, IgM, IgA, IgD '
-                sequences: 167793
+                - subject_code: IAVI 84
+                  subject_id: 1
+                  subject_gender: null
+                  subject_ethnicity: NA
+                  subject_species: Homo Sapiens
+                  project_id: 1
+                  project_name: >-
+                    Mining the antibodyome for HIV-1 neutralizing antibodies
+                    with next generation sequencing and phylogenetic pairing of
+                    heavy/light chains
+                  project_parent_id: -1
+                  project_type: null
+                  sra_accession: SRP018335
+                  lab_id: 1
+                  lab_name: National Institute of Allergy and Infectious -DiseaseVaccine
+                  Research Center: Kwong Lab
+                  disease_state_id: 7
+                  disease_state_name: >-
+                    HIV-1 infected for at least 3 years, not receiving
+                    antiretroviral treatment
+                  case_control_id: 1
+                  case_control_name: Case
+                  sample_id: 1
+                  project_sample_id: 1
+                  sequence_count: 253684
+                  project_sample_note: null
+                  sra_run_id: SRR654169
+                  sample_name: SRS388604
+                  subject_age: null
+                  sample_subject_id: 1
+                  dna_id: 1
+                  dna_type: cDNA
+                  sample_source_id: 1
+                  sample_source_name: PBMCs
+                  lab_cell_subset_name: B cell memory
+                  ireceptor_cell_subset_name: Memory B Cell
+                  marker_1: IgG+
+                  marker_2: CD19+
+                  marker_3: sIgG+
+                  marker_4: ' negative depletion to CD3'
+                  marker_5: ' CD14'
+                  marker_6: ' CD16, IgM, IgA, IgD '
+                  sequences: 167793
               sequences:
-                seq_id: 2
-                seq_name: SRR654169.17_G912ZWU01EPN4E_length=379
-                project_sample_id: 1
-                id: 37
-                vgene_string: Homsap IGHV1-24*01 F
-                vgene_family: IGHV1
-                vgene_gene: IGHV1-24
-                vgene_allele: ' IGHV1-24*01 '
-                jgene_string: Homsap IGHJ3*02 F
-                jgene_family: IGHJ3
-                jgene_gene: IGHJ3
-                jgene_allele: ' IGHJ3*02 '
-                dgene_string: Homsap IGHD3-22*01 F
-                dgene_family: IGHD3
-                dgene_gene: IGHD3-22
-                dgene_allele: ' IGHD3-22*01 '
-                functionality: productive
-                vgene_score: 1417
-                vgene_probablity: null
-                dregion_reading_frame: '3'
-                cdr1_length: 8
-                cdr2_length: 8
-                cdr3_length: 17
-                vdjregion_sequence_nt: >-
-                  caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaagtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgatggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                vjregion_sequence_nt: ''
-                djregion_sequence_nt: >-
-                  gatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                vregion_sequence_nt: >-
-                  caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
-                jregion_sequence_nt: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                dregion_sequence_nt: gatagttgtgattat
-                fr1region_sequence_nt: >-
-                  caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
-              fr2region_sequence_nt: atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
-              fr3region_sequence_nt: >-
-                atctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
-              fr4region_sequence_nt: tggggccaagggacaatggtcaccgtctcttcag
-              cdr1region_sequence_nt: ggatacaccctcactgaattatcc
-              cdr2region_sequence_nt: tttgatcctgaagatggtgaaaca
-              cdr3region_sequence_nt: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
-              junction_sequence_nt: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
-              vdjregion_sequence_nt_gapped: >-
-                caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                vjregion_sequence_nt_gapped: '' djregion_sequence_nt_gapped:
-                null vregion_sequence_nt_gapped: >-
-                  caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
-                jregion_sequence_nt_gapped:  
-                gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                dregion_sequence_nt_gapped:
-                gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
-                fr1region_sequence_nt_gapped: >-
-                  caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
-                fr2region_sequence_nt_gapped:
-                atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
-                fr3region_sequence_nt_gapped: >-
-                  atctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
-                fr4region_sequence_nt_gapped: tggggccaagggacaatggtcaccgtctcttcag
-                cdr1region_sequence_nt_gapped:
-                ggatacaccctc............actgaattatcc
-                cdr2region_sequence_nt_gapped: tttgatcctgaa......gatggtgaaaca
-                cdr3region_sequence_nt_gapped:
-                gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
-                junction_sequence_nt_gapped:
-                tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
-                vdjregion_sequence_aa: >-
-                  QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
-                vjregion_sequence_aa: '' djregion_sequence_aa: null
-                vregion_sequence_aa: >-
-                  QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
-                jregion_sequence_aa: DGFDIWGQGTMVTVSS dregion_sequence_aa: null
-                fr1region_sequence_aa: QVQLVESGAEVKKPGASVKVSCKVS
-                fr2region_sequence_aa: MHWVRQAPGKGLEWMGG fr3region_sequence_aa:
-                IYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYC fr4region_sequence_aa:
-                WGQGTMVTVSS cdr1region_sequence_aa: GYTLTELS
-                cdr2region_sequence_aa: FDPEDGET cdr3region_sequence_aa:
-                ATRSPPIVVIMDDGFDI junction_sequence_aa: CATRSPPIVVIMDDGFDIW
-                vdjregion_sequence_aa_gapped: >-
-                  QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
-                vjregion_sequence_aa_gapped: '' djregion_sequence_aa_gapped:
-                null vregion_sequence_aa_gapped: >-
-                  QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
-                jregion_sequence_aa_gapped: DGFDIWGQGTMVTVSS
-                dregion_sequence_aa_gapped: null fr1region_sequence_aa_gapped:
-                QVQLVESGA.EVKKPGASVKVSCKVS fr2region_sequence_aa_gapped:
-                MHWVRQAPGKGLEWMGG fr3region_sequence_aa_gapped:
-                IYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYC
-                fr4region_sequence_aa_gapped: WGQGTMVTVSS
-                cdr1region_sequence_aa_gapped: GYTL....TELS
-                cdr2region_sequence_aa_gapped: FDPE..DGET
-                cdr3region_sequence_aa_gapped: ATRSPPIVVIMDDGFDI
-                junction_sequence_aa_gapped: CATRSPPIVVIMDDGFDIW
-                vdjregion_start: 2 vdjregion_end: 374 vjregion_start: null
-                vjregion_end: null vregion_start: 2 vregion_end: 295
-                jregion_start: 326 jregion_end: 374 dregion_start: 307
-                dregion_end: 374 fr1region_start: 2 fr1region_end: 76
-                fr2region_start: 101 fr2region_end: 151 fr3region_start: 176
-                fr3region_end: 289 fr4region_start: 341 fr4region_end: 374
-                cdr1region_start: 77 cdr1region_end: 100 cdr2region_start: 152
-                cdr2region_end: 175 cdr3region_start: 290 cdr3region_end: 340
-                junction_start: 287 junction_end: 343 vregion_mutation_string:
-                'c16>g,Q6>E(++ -)|g226>a,V76>I(+ - +)|'
-                fr1region_mutation_string: 'c16>g,Q6>E(+ + -)|'
-                fr2region_mutation_string: '' fr3region_mutation_string:
-                'g226>a,V76>I(+ - +)|' cdr1region_mutation_string: ''
-                cdr2region_mutation_string: '' cdr3region_mutation_string:
-                g319>a|a320>g| vgene_probability: '99' djregion_start: 307
-                djregion_end: 374 annotation_tool: VQuest
+                - seq_id: 2
+                  seq_name: SRR654169.17_G912ZWU01EPN4E_length=379
+                  project_sample_id: 1
+                  id: 37
+                  vgene_string: Homsap IGHV1-24*01 F
+                  vgene_family: IGHV1
+                  vgene_gene: IGHV1-24
+                  vgene_allele: ' IGHV1-24*01 '
+                  jgene_string: Homsap IGHJ3*02 F
+                  jgene_family: IGHJ3
+                  jgene_gene: IGHJ3
+                  jgene_allele: ' IGHJ3*02 '
+                  dgene_string: Homsap IGHD3-22*01 F
+                  dgene_family: IGHD3
+                  dgene_gene: IGHD3-22
+                  dgene_allele: ' IGHD3-22*01 '
+                  functionality: productive
+                  vgene_score: 1417
+                  vgene_probablity: null
+                  dregion_reading_frame: '3'
+                  cdr1_length: 8
+                  cdr2_length: 8
+                  cdr3_length: 17
+                  vdjregion_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaagtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgatggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vjregion_sequence_nt: ''
+                  djregion_sequence_nt: >-
+                    gatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vregion_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
+                  jregion_sequence_nt: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  dregion_sequence_nt: gatagttgtgattat
+                  fr1region_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
+                  fr2region_sequence_nt: atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
+                  fr3region_sequence_nt: >-
+                    atctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
+                  fr4region_sequence_nt: tggggccaagggacaatggtcaccgtctcttcag
+                  cdr1region_sequence_nt: ggatacaccctcactgaattatcc
+                  cdr2region_sequence_nt: tttgatcctgaagatggtgaaaca
+                  cdr3region_sequence_nt: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
+                  junction_sequence_nt: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
+                  vdjregion_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vjregion_sequence_nt_gapped: ''
+                  djregion_sequence_nt_gapped: null
+                  vregion_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
+                  jregion_sequence_nt_gapped: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  dregion_sequence_nt_gapped: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  fr1region_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct  
+                    ...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
+                  fr2region_sequence_nt_gapped: atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
+                  fr3region_sequence_nt_gapped: >-
+                    atctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
+                  fr4region_sequence_nt_gapped: tggggccaagggacaatggtcaccgtctcttcag
+                  cdr1region_sequence_nt_gapped: ggatacaccctc............actgaattatcc
+                  cdr2region_sequence_nt_gapped: tttgatcctgaa......gatggtgaaaca
+                  cdr3region_sequence_nt_gapped: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
+                  junction_sequence_nt_gapped: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
+                  vdjregion_sequence_aa: >-
+                    QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGR
+                    ITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
+                  vjregion_sequence_aa: ''
+                  djregion_sequence_aa: null
+                  vregion_sequence_aa: >-
+                    QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
+                  jregion_sequence_aa: DGFDIWGQGTMVTVSS
+                  dregion_sequence_aa: null
+                  fr1region_sequence_aa: QVQLVESGAEVKKPGASVKVSCKVS
+                  fr2region_sequence_aa: MHWVRQAPGKGLEWMGG
+                  fr3region_sequence_aa: IYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYC
+                  fr4region_sequence_aa: WGQGTMVTVSS
+                  cdr1region_sequence_aa: GYTLTELS
+                  cdr2region_sequence_aa: FDPEDGET
+                  cdr3region_sequence_aa: ATRSPPIVVIMDDGFDI
+                  junction_sequence_aa: CATRSPPIVVIMDDGFDIW
+                  vdjregion_sequence_aa_gapped: >-
+                    QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
+                  vjregion_sequence_aa_gapped: ''
+                  djregion_sequence_aa_gapped: null
+                  vregion_sequence_aa_gapped: >-
+                    QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
+                  jregion_sequence_aa_gapped: DGFDIWGQGTMVTVSS
+                  dregion_sequence_aa_gapped: null
+                  fr1region_sequence_aa_gapped: QVQLVESGA.EVKKPGASVKVSCKVS
+                  fr2region_sequence_aa_gapped: MHWVRQAPGKGLEWMGG
+                  fr3region_sequence_aa_gapped: IYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYC
+                  fr4region_sequence_aa_gapped: WGQGTMVTVSS
+                  cdr1region_sequence_aa_gapped: GYTL....TELS
+                  cdr2region_sequence_aa_gapped: FDPE..DGET
+                  cdr3region_sequence_aa_gapped: ATRSPPIVVIMDDGFDI
+                  junction_sequence_aa_gapped: CATRSPPIVVIMDDGFDIW
+                  vdjregion_start: 2
+                  vdjregion_end: 374
+                  vjregion_start: null
+                  vjregion_end: null
+                  vregion_start: 2
+                  vregion_end: 295
+                  jregion_start: 326
+                  jregion_end: 374
+                  dregion_start: 307
+                  dregion_end: 374
+                  fr1region_start: 2
+                  fr1region_end: 76
+                  fr2region_start: 101
+                  fr2region_end: 151
+                  fr3region_start: 176
+                  fr3region_end: 289
+                  fr4region_start: 341
+                  fr4region_end: 374
+                  cdr1region_start: 77
+                  cdr1region_end: 100
+                  cdr2region_start: 152
+                  cdr2region_end: 175
+                  cdr3region_start: 290
+                  cdr3region_end: 340
+                  junction_start: 287
+                  junction_end: 343
+                  vregion_mutation_string: 'c16>g,Q6>E(++ -)|g226>a,V76>I(+ - +)|'
+                  fr1region_mutation_string: 'c16>g,Q6>E(+ + -)|'
+                  fr2region_mutation_string: ''
+                  fr3region_mutation_string: 'g226>a,V76>I(+ - +)|'
+                  cdr1region_mutation_string: ''
+                  cdr2region_mutation_string: ''
+                  cdr3region_mutation_string: g319>a|a320>g|
+                  vgene_probability: '99'
+                  djregion_start: 307
+                  djregion_end: 374
+                  annotation_tool: VQuest
         '400':
           description: malformed request
         '401':
