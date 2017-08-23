@@ -4,9 +4,9 @@ Defintions of the iReceptor API
 YAML files are compatible with the online Swagger Editor. In order to view
 one of the APIs in the Swagger Editor do the following:
 - Copy a raw URL for one of the YAML files
--- Navigate to one of the YAML files
--- Click on the "Raw" button to generate a "Raw" URL for the file
--- Copy the URL
+  - Navigate to one of the YAML files
+  - Click on the "Raw" button to generate a "Raw" URL for the file
+  - Copy the URL
 - Go to the swagger editor at: http://editor.swagger.io/
 - Go to th File -> Import URL menu item
 - Enter the URL you got above for the YAML file.
