@@ -495,7 +495,7 @@
     },
     "/clones": {
       "get": {
-        "description": "This service returns two arrays. One contains sample information for all the samples which have clones that match the provided filter. Sample information is identical to the one in /samples call, with additional attribute 'clones' which shows the number of clones that match the filter originating in that sample. Second array returns information about clones matching the filter. \n",
+        "description": "This service returns two arrays. One contains sample information for all the samples which have clones that match the provided filter. Sample information is identical to the one in /samples call, with additional attribute 'clones' which shows the number of clones that match the filter originating in that working sample. Second array returns information about clones matching the filter. \n",
         "tags": [
           "clones"
         ],
