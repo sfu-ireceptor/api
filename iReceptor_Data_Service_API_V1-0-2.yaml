@@ -423,8 +423,11 @@ paths:
   /clones:
     get:
       description: >
-        This service returns a summary of sequence clones that match the GET
-        provided filter. "username" parameter refers to external_users table.
+        This service returns two arrays. One contains sample information for all the 
+        samples which have clones that match the provided filter. Sample information is 
+        identical to the one in /samples call, with additional attribute 'clones' which
+        shows the number of clones that match the filter originating in that sample.
+        Second array returns information about clones matching the filter. 
       tags:
         - clones
       parameters:
@@ -470,9 +473,11 @@ paths:
       responses:
         '200':
           description: >
-            A successful call returns an summary of sequence data as an array of
-            'category' = count pairs in which the 'category' are string tags of
-            parameters of interest from a controlled vocabulary term set.
+            A successful call returns a summary of sample-level data for clones matching 
+            the filter, with the aggregate number of clones, as well as information about
+            clones themselves. The 'output' parameter determines whether the information is
+            sent as a JSON representation of two arrays (samples and limited number
+            of clones), or as a CSV  containing all the clone data.
           schema:
             type: object
             properties:
