@@ -167,10 +167,14 @@ paths:
                   type: integer
                   description: |
                     e.g. 0
-                project_name:
+                study_title:
                   type: string
                   description: |
-                    e.g. First Project
+                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                study_type:
+                  type: string
+                  description: |
+                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
                 project_parent_id:
                   type: integer
                   description: |
@@ -182,7 +186,7 @@ paths:
                 lab_name:
                   type: string
                   description: |
-                    e.g. First Lab
+                    Name of the Laboratory running the study (AIRR)
                 case_control_id:
                   type: integer
                   description: |
@@ -264,7 +268,8 @@ paths:
                 subject_ethnicity: Caucasian
                 subject_species: Human
                 project_id: 0
-                project_name: First Project
+                study_title: First Project
+                study_type: Cancer
                 project_parent_id: null
                 lab_id: 0
                 lab_name: First Lab
@@ -422,10 +427,14 @@ paths:
                   type: integer
                   description: |
                     e.g. 0
-                project_name:
+                study_title:
                   type: string
                   description: |
-                    e.g. First Project
+                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                study_type:
+                  type: string
+                  description: |
+                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
                 project_parent_id:
                   type: integer
                   description: |
@@ -437,7 +446,7 @@ paths:
                 lab_name:
                   type: string
                   description: |
-                    e.g. First Lab
+                    Name of the Laboratory running the study (AIRR)
                 case_control_id:
                   type: integer
                   description: |
@@ -523,7 +532,8 @@ paths:
                 subject_ethnicity: Caucasian
                 subject_species: Human
                 project_id: 0
-                project_name: First Project
+                study_title: First Project
+                study_type: Cancer
                 project_parent_id: null
                 lab_id: 0
                 lab_name: First Lab
@@ -635,22 +645,22 @@ paths:
                       type: integer
                       description: |
                         e.g. 0
-                    project_name:
+                    study_title:
                       type: string
                       description: |
-                        e.g. First Project
+                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                    study_type:
+                      type: string
+                      description: |
+                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
                     project_parent_id:
                       type: integer
                       description: |
                         e.g. null
-                    project_type:
+                    study:
                       type: string
                       description: |
-                        e.g. null
-                    sra_accession:
-                      type: string
-                      description: |
-                        e.g. null
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                     lab_id:
                       type: integer
                       description: |
@@ -658,7 +668,7 @@ paths:
                     lab_name:
                       type: string
                       description: |
-                        e.g. First Lab
+                        Name of the Laboratory running the study (AIRR)
                     disease_state_id:
                       type: integer
                       description: |
@@ -1235,13 +1245,13 @@ paths:
                   subject_ethnicity: NA
                   subject_species: Homo Sapiens
                   project_id: 1
-                  project_name: >-
+                  study_title: >-
                     Mining the antibodyome for HIV-1 neutralizing antibodies
                     with next generation sequencing and phylogenetic pairing of
                     heavy/light chains
+                  study_type: HIV
                   project_parent_id: -1
-                  project_type: null
-                  sra_accession: SRP018335
+                  study: SRP018335
                   lab_id: 1
                   lab_name: National Institute of Allergy and Infectious -DiseaseVaccine
                   Research Center: Kwong Lab
