@@ -1,0 +1,845 @@
+swagger: '2.0'
+info:
+  title: iReceptor Data Source API
+  version: 1.0.3
+  contact:
+    url: 'http://ireceptor.irmacs.sfu.ca/'
+    email: breden@sfu.ca
+  description: >
+    Documentation of the iReceptor Acquired Immunity Receptor Repertoire data
+    source web service application programming interface (API). Learn more about
+    [iReceptor](http://ireceptor.irmacs.sfu.ca/)
+host: data.ireceptor.bio
+basePath: /v1
+schemes:
+  - http
+produces:
+  - application/json
+tags:
+  - name: info
+    description: Service information
+  - name: metadata
+    description: Queries for metadata
+  - name: samples
+    description: Queries for samples
+  - name: sequences
+    description: Queries for sequences
+  - name: clones
+    description: Queries for clone data
+paths:
+  /:
+    x-swagger-router-controller: status
+    get:
+      description: |
+        Service heartbeat.
+      operationId: getStatus
+      responses:
+        '200':
+          description: |
+            Success.
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+  /info:
+    x-swagger-router-controller: status
+    get:
+      description: |
+        Service information.
+      tags:
+        - info
+      operationId: getInfo
+      responses:
+        '200':
+          description: |
+            Success.
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+  /swagger:
+    x-swagger-pipe: swagger_raw
+  /metadata:
+    x-swagger-router-controller: metadata
+    post:
+      description: >
+        This service returns the list of Labs and corresponding projects in an
+        iReceptor node,and lists of lab-specific metadata related to subjects
+        (ethnicity, gender,case/control) and samples (possible sample sources,
+        possible cell subset types and DNA types)
+      tags:
+        - metadata
+      parameters:
+        - name: username
+          in: body
+          description: >
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+      operationId: postMetadata
+      responses:
+        '201':
+          description: >
+            Successful response returns the identifier of a newly initiated
+            query session
+          schema:
+            type: object
+            properties:
+              labs_projects:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    projects:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+              ethnicity:
+                type: array
+                items:
+                  type: string
+              casecontrol:
+                type: array
+                items:
+                  type: string
+              dnainfo:
+                type: array
+                items:
+                  type: string
+              source:
+                type: array
+                items:
+                  type: string
+              gender:
+                type: array
+                items:
+                  type: string
+              cellsubsettypes:
+                type: array
+                items:
+                  type: string
+          examples:
+            application/json:
+              labs_projects:
+                - id: 0
+                  name: First Lab
+                  projects:
+                    - id: 0
+                      name: some project
+                - id: 1
+                  name: Jamie Scott
+                  projects:
+                    - id: 3
+                      name: HIV Samples IgH sequencing
+                    - id: 4
+                      name: Healthy controls for HIV
+              ethnicity:
+                - Eth1
+                - Eth2
+                - ''
+              casecontrol:
+                - Control
+                - Case
+              dnainfo:
+                - cDNA
+                - gDNA
+              source:
+                - Bone Marrow
+                - Blood (PBMC)
+                - Spleen
+              gender:
+                - Male
+                - Female
+              cellsubsettypes:
+                - Naive B
+                - Memory B
+                - Mature B
+  /samples:
+    x-swagger-router-controller: samples
+    post:
+      description: >
+        This service returns data about samples that match the search parameters
+        provided. Input parameters are column names referencing the
+        sample_query_view view in iReceptor DB,which is a join of project-,
+        subject- and sample-related tables. username parameter refers to
+        external_users table
+      tags:
+        - samples
+      parameters:
+        - name: username
+          in: body
+          description: >
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          schema:
+            type: object
+            properties:
+              lab_id:
+                type: integer
+                description: |
+                  e.g. 1
+              subject_code:
+                type: string
+                description: |
+                  e.g. test
+              subject_gender:
+                type: string
+                description: |
+                  e.g. Male
+              subject_ethnicity:
+                type: string
+                description: |
+                  e.g. White
+              subject_age_min:
+                type: integer
+                description: |
+                  e.g. 10
+              subject_age_max:
+                type: integer
+                description: |
+                  e.g. 12
+              case_control_name:
+                type: string
+                description: |
+                  e.g. Control
+              sample_name:
+                type: string
+                description: |
+                  e.g. test2
+              sample_source_name:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. Blood (PBMC)
+              ireceptor_cell_subset_name:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. NaiveB
+              dna_type:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. cDNA
+              username:
+                type: string
+                description: |
+                  e.g. jerome
+              project_id:
+                type: array
+                items:
+                  type: integer
+                description: |
+                  e.g. 1
+      operationId: postSamples
+      responses:
+        '201':
+          description: |
+            A successful call returns an array of sample data
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                subject_code:
+                  type: string
+                  description: |
+                    e.g. Subject One
+                subject_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                subject_gender:
+                  type: string
+                  description: |
+                    e.g. Male
+                subject_ethnicity:
+                  type: string
+                  description: |
+                    e.g. Eth1
+                subject_age:
+                  type: integer
+                  description: |
+                    e.g. 1
+                project_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_name:
+                  type: string
+                  description: |
+                    e.g. First Project
+                project_parent_id:
+                  type: integer
+                  description: |
+                    e.g. null
+                lab_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                lab_name:
+                  type: string
+                  description: |
+                    e.g. First Lab
+                case_control_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                case_control_name:
+                  type: string
+                  description: |
+                    e.g. Control
+                sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_name:
+                  type: string
+                  description: |
+                    e.g. Blood Sample 01
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_subject_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sequence_count:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_type:
+                  type: string
+                  description: |
+                    e.g. cDNA
+                sample_source_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_source_name:
+                  type: string
+                  description: |
+                    e.g. Blood (PBMC)
+                lab_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B Alpha
+                ireceptor_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B
+                marker_1:
+                  type: string
+                  description: |
+                    e.g. CR19
+                marker_2:
+                  type: string
+                  description: |
+                    e.g. CR20
+                marker_3:
+                  type: string
+                  description: |
+                    e.g. CR21
+                marker_4:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_5:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_6:
+                  type: string
+                  description: |
+                    e.g. null
+          examples:
+            application/json:
+              - subject_code: Subject One
+                subject_id: 1
+                subject_gender: Male
+                subject_ethnicity: Eth1
+                project_id: 0
+                project_name: First Project
+                project_parent_id: null
+                lab_id: 0
+                lab_name: First Lab
+                case_control_id: 0
+                case_control_name: Control
+                sample_id: 1
+                project_sample_id: 1
+                sequence_count: 0
+                sample_name: Blood Sample 01
+                subject_age: 22
+                sample_subject_id: 1
+                dna_id: 1
+                dna_type: cDNA
+                sample_source_id: 2
+                sample_source_name: Blood (PBMC)
+                lab_cell_subset_name: Naive B Alpha
+                ireceptor_cell_subset_name: Naive B
+                marker_1: CR19
+                marker_2: CR20
+                marker_3: CR21
+                marker_4: null
+                marker_5: null
+                marker_6: null
+  /sequences:
+    x-swagger-router-controller: sequences
+    get:
+      description: >
+        This service returns the annotation data that matches the provided
+        filter. "username" parameter refers to external_users table, and it
+        requires the array of "project_sample_id", which limits which samples
+        the sequences will be taken from. Other parameters are optional, and
+        refer to the sequence_md_view view in iReceptor database. A full list of
+        possible parameters is in the iReceptorAPI-sequenceMetadata file
+      tags:
+        - sequences
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+        - name: cdr3_length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+      operationId: getSequences
+      responses:
+        '201':
+          description: >
+            A successful call returns an array of sequence data. Optional
+            "output" parameter determines the output format. Default is a JSON
+            response, limited to top 50 results. If "output" is set to "csv", it
+            will return all the matching sequence annotations, in addition to
+            sample information and annotation tool information, in a
+            comma-separated format. 
+  /clones:
+    x-swagger-router-controller: clones
+    get:
+      description: >
+        This service returns two arrays. One contains sample information for all
+        the  samples which have clones that match the provided filter. Sample
+        information is  identical to the one in /samples call, with additional
+        attribute 'clones' which shows the number of clones that match the
+        filter originating in that sample. Second array returns information
+        about clones matching the filter. 
+      tags:
+        - clones
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+        - name: length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+        - name: feature_name
+          in: query
+          required: false
+          type: string
+          description: name of gene feature (e.g. CDR3)
+        - name: aa_sequence
+          in: query
+          required: false
+          type: string
+          description: 'aminoacid sequence string to search on       '
+      operationId: getCloneSummary
+      responses:
+        '200':
+          description: >
+            A successful call returns a summary of sample-level data for clones
+            matching  the filter, with the aggregate number of clones, as well
+            as information about clones themselves. The 'output' parameter
+            determines whether the information is sent as a JSON representation
+            of two arrays (samples and limited number of clones), or as a CSV 
+            containing all the clone data.
+          schema:
+            type: object
+            properties:
+              aggregation_summary:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    subject_code:
+                      type: string
+                      description: |
+                        e.g. Subject One
+                    subject_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    subject_gender:
+                      type: string
+                      description: |
+                        e.g. Male
+                    subject_species:
+                      type: string
+                      description: |
+                        e.g. Mouse
+                    subject_ethnicity:
+                      type: string
+                      description: |
+                        e.g. Eth1
+                    subject_age:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    project_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    project_name:
+                      type: string
+                      description: |
+                        e.g. First Project
+                    project_parent_id:
+                      type: integer
+                      description: |
+                        e.g. null
+                    project_type:
+                      type: string
+                      description: |
+                        e.g. null
+                    sra_accession:
+                      type: string
+                      description: |
+                        e.g. null
+                    lab_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    lab_name:
+                      type: string
+                      description: |
+                        e.g. First Lab
+                    disease_state_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    disease_state_name:
+                      type: string
+                      description: |
+                        e.g. HIV-1 infected
+                    case_control_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    case_control_name:
+                      type: string
+                      description: |
+                        e.g. Control
+                    sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_name:
+                      type: string
+                      description: |
+                        e.g. Blood Sample 01
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_subject_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sequence_count:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_type:
+                      type: string
+                      description: |
+                        e.g. cDNA
+                    sample_source_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_source_name:
+                      type: string
+                      description: |
+                        e.g. Blood (PBMC)
+                    lab_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B Alpha
+                    ireceptor_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B
+                    marker_1:
+                      type: string
+                      description: |
+                        e.g. CR19
+                    marker_2:
+                      type: string
+                      description: |
+                        e.g. CR20
+                    marker_3:
+                      type: string
+                      description: |
+                        e.g. CR21
+                    marker_4:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_5:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_6:
+                      type: string
+                      description: |
+                        e.g. null
+                    clones:
+                      type: integer
+                      description: |
+                        e.g. 167793
+              clones:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cd_analysis_id:
+                      type: integer
+                      description: |
+                        foreign key into analysis table, e.g. 1
+                    vgene_family:
+                      type: string
+                      description: |
+                        family part of V-gene, e.g. TRBV20
+                    vgene_gene:
+                      type: string
+                      description: |
+                        gene part of V-gene, e.g. TRBV20-1
+                    vgene_allele:
+                      type: string
+                      description: |
+                        allele part of V-gene, e.g. TRBV20-1*01
+                    jgene_family:
+                      type: string
+                      description: |
+                        family part of J-gene, e.g. TRBJ2
+                    jgene_gene:
+                      type: string
+                      description: |
+                        gene part of J-gene, e.g. TRBJ2-1
+                    jgene_allele:
+                      type: string
+                      description: |
+                        allele part of J-gene, e.g. TRBJ2-1*01
+                    dgene_family:
+                      type: string
+                      description: |
+                        family part of D-gene, e.g. TRBD1
+                    dgene_gene:
+                      type: string
+                      description: |
+                        gene part of D-gene, e.g. TRBD1
+                    dgene_allele:
+                      type: string
+                      description: |
+                        allele part of D-gene, e.g. TRBD1*01
+                    clone_count:
+                      type: integer
+                      description: |
+                        e.g. 14210
+                    clone_fraction:
+                      type: number
+                      description: |
+                        e.g. 0.00511834
+                    num_targets:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    v_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 323.7
+                    d_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 55
+                    j_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 124.6
+                    c_allele:
+                      type: string
+                      description: |
+                        e.g. ""
+                    c_allele_scores:
+                      type: number
+                      description: |
+                        e.g. null
+                    v_alignments:
+                      type: string
+                      description: |
+                        e.g. 279|292|312|0|13||65.0
+                    d_alignments:
+                      type: string
+                      description: |
+                        e.g. 10|21|33|17|28||55.0
+                    j_alignments:
+                      type: string
+                      description: |
+                        e.g. 25|39|66|52|66||70.0
+                    cdr3_begin:
+                      type: integer
+                      description: |
+                        e.g. 0                    
+                    v_end:
+                      type: integer
+                      description: |
+                        e.g. 13                  
+                    d_begin:
+                      type: integer
+                      description: |
+                        e.g. 17                    
+                    d_end:
+                      type: integer
+                      description: |
+                        e.g. 28
+                    j_begin:
+                      type: integer
+                      description: |
+                        e.g. 52
+                    cdr3_end:
+                      type: integer
+                      description: |
+                        e.g. 66
+                    vd_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dj_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    vj_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    gene_feature_id:
+                      type: integer
+                      description: |
+                        e.g. 4
+                    feature_name:
+                      type: string
+                      description: |
+                        name of gene feature, e.g. CDR3
+                    nt_sequence:
+                      type: string
+                      description: |
+                        nucleotide sequence of the feature
+                    nt_sequence_quality:
+                      type: string
+                      description: |
+                        quality of the NT sequence
+                    aa_sequence:
+                      type: string
+                      description: |
+                        aminoacid sequence of the feature
+                    avg_quality:
+                      type: string
+                      description: |
+                        quality of the AA sequence
+                    min_quality:
+                      type: integer
+                      description: |
+                        e.g. null                   
+                    length:
+                      type: integer
+                      description: |
+                        e.g. 22
+                    psa_id:
+                      type: integer
+                      description: >
+                        foreign key to working sample/sequencing run, e.g.
+                        1                 
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+
