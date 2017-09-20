@@ -1,0 +1,3177 @@
+swagger: '2.0'
+info:
+  title: iReceptor Data Source API
+  version: 2.0.3
+  contact:
+    name: iReceptor Project
+    url: 'http://ireceptor.irmacs.sfu.ca/'
+    email: breden@sfu.ca
+  description: >
+    Documentation of (2017) Major Version 2 iReceptor Acquired Immunity Receptor
+    Repertoire data source web service application programming interface (API).
+    Learn more about [iReceptor](http://ireceptor.irmacs.sfu.ca/)
+host: api.ireceptor.bio
+basePath: /v2
+schemes:
+  - http
+produces:
+  - application/json
+tags:
+  - name: samples
+    description: Queries for samples
+  - name: sequences
+    description: Queries for sequences
+  - name: clones
+    description: Queries for clones
+  - name: sequences_summary
+    description: Queries for sequences which include summary sample information
+paths:
+  /samples:
+    get:
+      description: >
+        This service returns data about samples that match the search parameters
+        provided. Input parameters are column names referencing the
+        sample_query_view view in iReceptor DB,which is a join of project-,
+        subject- and sample-related tables. username parameter refers to
+        external_users table
+      tags:
+        - samples
+      parameters:
+        - name: username
+          in: query
+          description: >
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: lab_id
+          in: query
+          description: |
+            e.g. 1
+          required: false
+          type: integer
+        - name: project_id
+          in: query
+          description: |
+            e.g. 1
+          required: false
+          type: array
+          items:
+            type: integer
+        - name: subject_code
+          in: query
+          description: |
+            e.g. test
+          required: false
+          type: string
+        - name: subject_gender
+          in: query
+          description: |
+            e.g. Male or Female
+          required: false
+          type: string
+        - name: subject_ethnicity
+          in: query
+          description: |
+            e.g. Caucasian
+          required: false
+          type: string
+        - name: subject_age_min
+          in: query
+          description: |
+            e.g. 10
+          required: false
+          type: integer
+        - name: subject_age_max
+          in: query
+          description: |
+            e.g. 12
+          required: false
+          type: integer
+        - name: case_control_name
+          in: query
+          description: |
+            e.g. Control
+          required: false
+          type: string
+        - name: sample_name
+          in: query
+          description: |
+            e.g. test2
+          required: false
+          type: string
+        - name: sample_source_name
+          in: query
+          description: |
+            e.g. Blood (PBMC)
+          required: false
+          type: string
+        - name: ireceptor_cell_subset_name
+          in: query
+          description: |
+            e.g. NaiveB
+          required: false
+          type: string
+        - name: dna_type
+          in: query
+          description: |
+            e.g. cDNA, gDNA
+          required: false
+          type: string
+      operationId: getSamples
+      responses:
+        '200':
+          description: |
+            A successful call returns an array of sample data
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                subject_code:
+                  type: string
+                  description: |
+                    e.g. Subject One
+                subject_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                subject_gender:
+                  type: string
+                  description: |
+                    e.g. Male
+                subject_ethnicity:
+                  type: string
+                  description: |
+                    e.g. Eth1
+                subject_age:
+                  type: integer
+                  description: |
+                    e.g. 1
+                project_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_name:
+                  type: string
+                  description: |
+                    e.g. First Project
+                project_parent_id:
+                  type: integer
+                  description: |
+                    e.g. null
+                lab_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                lab_name:
+                  type: string
+                  description: |
+                    e.g. First Lab
+                case_control_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                case_control_name:
+                  type: string
+                  description: |
+                    e.g. Control
+                sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_name:
+                  type: string
+                  description: |
+                    e.g. Blood Sample 01
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_subject_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sequence_count:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_type:
+                  type: string
+                  description: |
+                    e.g. cDNA
+                sample_source_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_source_name:
+                  type: string
+                  description: |
+                    e.g. Blood (PBMC)
+                lab_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B Alpha
+                ireceptor_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B
+                marker_1:
+                  type: string
+                  description: |
+                    e.g. CR19
+                marker_2:
+                  type: string
+                  description: |
+                    e.g. CR20
+                marker_3:
+                  type: string
+                  description: |
+                    e.g. CR21
+                marker_4:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_5:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_6:
+                  type: string
+                  description: |
+                    e.g. null
+          examples:
+            application/json:
+              - subject_code: Subject One
+                subject_id: 1
+                subject_gender: Male
+                subject_ethnicity: Eth1
+                project_id: 0
+                project_name: First Project
+                project_parent_id: null
+                lab_id: 0
+                lab_name: First Lab
+                case_control_id: 0
+                case_control_name: Control
+                sample_id: 1
+                project_sample_id: 1
+                sequence_count: 0
+                sample_name: Blood Sample 01
+                subject_age: 22
+                sample_subject_id: 1
+                dna_id: 1
+                dna_type: cDNA
+                sample_source_id: 2
+                sample_source_name: Blood (PBMC)
+                lab_cell_subset_name: Naive B Alpha
+                ireceptor_cell_subset_name: Naive B
+                marker_1: CR19
+                marker_2: CR20
+                marker_3: CR21
+                marker_4: null
+                marker_5: null
+                marker_6: null
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+    post:
+      description: >
+        This service returns data about samples that match the search parameters
+        provided. Input parameters are column names referencing the
+        sample_query_view view in iReceptor DB,which is a join of project-,
+        subject- and sample-related tables. username parameter refers to
+        external_users table
+      tags:
+        - samples
+      parameters:
+        - name: query
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - username
+            properties:
+              username:
+                type: string
+                description: >
+                  iReceptor username that has been granted access to the node,
+                  through external_users table
+              lab_id:
+                type: integer
+                description: |
+                  e.g. 1
+              project_id:
+                type: array
+                items:
+                  type: integer
+                description: |
+                  e.g. 1
+              subject_code:
+                type: string
+                description: |
+                  e.g. test
+              subject_gender:
+                type: string
+                description: |
+                  e.g. Male
+              subject_ethnicity:
+                type: string
+                description: |
+                  e.g. White
+              subject_age_min:
+                type: integer
+                description: |
+                  e.g. 10
+              subject_age_max:
+                type: integer
+                description: |
+                  e.g. 12
+              case_control_name:
+                type: string
+                description: |
+                  e.g. Control
+              sample_name:
+                type: string
+                description: |
+                  e.g. test2
+              sample_source_name:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. Blood (PBMC)
+              ireceptor_cell_subset_name:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. NaiveB
+              dna_type:
+                type: array
+                items:
+                  type: string
+                description: |
+                  e.g. cDNA
+      operationId: postSamples
+      responses:
+        '200':
+          description: |
+            A successful call returns an array of sample data
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                subject_code:
+                  type: string
+                  description: |
+                    e.g. Subject One
+                subject_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                subject_gender:
+                  type: string
+                  description: |
+                    e.g. Male
+                subject_ethnicity:
+                  type: string
+                  description: |
+                    e.g. Eth1
+                subject_age:
+                  type: integer
+                  description: |
+                    e.g. 1
+                project_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_name:
+                  type: string
+                  description: |
+                    e.g. First Project
+                project_parent_id:
+                  type: integer
+                  description: |
+                    e.g. null
+                lab_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                lab_name:
+                  type: string
+                  description: |
+                    e.g. First Lab
+                case_control_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                case_control_name:
+                  type: string
+                  description: |
+                    e.g. Control
+                sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_name:
+                  type: string
+                  description: |
+                    e.g. Blood Sample 01
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_subject_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sequence_count:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_type:
+                  type: string
+                  description: |
+                    e.g. cDNA
+                sample_source_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_source_name:
+                  type: string
+                  description: |
+                    e.g. Blood (PBMC)
+                lab_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B Alpha
+                ireceptor_cell_subset_name:
+                  type: string
+                  description: |
+                    e.g. Naive B
+                marker_1:
+                  type: string
+                  description: |
+                    e.g. CR19
+                marker_2:
+                  type: string
+                  description: |
+                    e.g. CR20
+                marker_3:
+                  type: string
+                  description: |
+                    e.g. CR21
+                marker_4:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_5:
+                  type: string
+                  description: |
+                    e.g. null
+                marker_6:
+                  type: string
+                  description: |
+                    e.g. null
+          examples:
+            application/json:
+              - subject_code: Subject One
+                subject_id: 1
+                subject_gender: Male
+                subject_ethnicity: Eth1
+                project_id: 0
+                project_name: First Project
+                project_parent_id: null
+                lab_id: 0
+                lab_name: First Lab
+                case_control_id: 0
+                case_control_name: Control
+                sample_id: 1
+                project_sample_id: 1
+                sequence_count: 0
+                sample_name: Blood Sample 01
+                subject_age: 22
+                sample_subject_id: 1
+                dna_id: 1
+                dna_type: cDNA
+                sample_source_id: 2
+                sample_source_name: Blood (PBMC)
+                lab_cell_subset_name: Naive B Alpha
+                ireceptor_cell_subset_name: Naive B
+                marker_1: CR19
+                marker_2: CR20
+                marker_3: CR21
+                marker_4: null
+                marker_5: null
+                marker_6: null
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+  /sequences_summary:
+    get:
+      description: >
+        This service returns a summary of sequences that matches the GET
+        provided filter. "username" parameter refers to external_users table.
+      tags:
+        - sequences_summary
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+        - name: cdr3_length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+      operationId: getSequenceSummary
+      responses:
+        '200':
+          description: >
+            A successful call returns an summary of sequence data as an array of
+            'category' = count pairs in which the 'category' are string tags of
+            parameters of interest from a controlled vocabulary term set.
+          schema:
+            type: object
+            properties:
+              aggregation_summary:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    subject_code:
+                      type: string
+                      description: |
+                        e.g. Subject One
+                    subject_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    subject_gender:
+                      type: string
+                      description: |
+                        e.g. Male
+                    subject_species:
+                      type: string
+                      description: |
+                        e.g. Mouse
+                    subject_ethnicity:
+                      type: string
+                      description: |
+                        e.g. Eth1
+                    subject_age:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    project_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    project_name:
+                      type: string
+                      description: |
+                        e.g. First Project
+                    project_parent_id:
+                      type: integer
+                      description: |
+                        e.g. null
+                    project_type:
+                      type: string
+                      description: |
+                        e.g. null
+                    sra_accession:
+                      type: string
+                      description: |
+                        e.g. null
+                    lab_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    lab_name:
+                      type: string
+                      description: |
+                        e.g. First Lab
+                    disease_state_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    disease_state_name:
+                      type: string
+                      description: |
+                        e.g. HIV-1 infected
+                    case_control_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    case_control_name:
+                      type: string
+                      description: |
+                        e.g. Control
+                    sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_name:
+                      type: string
+                      description: |
+                        e.g. Blood Sample 01
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_subject_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sequence_count:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_type:
+                      type: string
+                      description: |
+                        e.g. cDNA
+                    sample_source_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_source_name:
+                      type: string
+                      description: |
+                        e.g. Blood (PBMC)
+                    lab_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B Alpha
+                    ireceptor_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B
+                    marker_1:
+                      type: string
+                      description: |
+                        e.g. CR19
+                    marker_2:
+                      type: string
+                      description: |
+                        e.g. CR20
+                    marker_3:
+                      type: string
+                      description: |
+                        e.g. CR21
+                    marker_4:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_5:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_6:
+                      type: string
+                      description: |
+                        e.g. null
+                    sequences:
+                      type: integer
+                      description: |
+                        e.g. 167793
+              sequences:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    seq_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    seq_name:
+                      type: string
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 6
+                    id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    sequence_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    vgene_string:
+                      type: string
+                      description: |
+                        e.g IGHV4-59*01 or  IGHV4-59*07
+                    vgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHV4
+                    vgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHV4-59
+                    vgene_allele:
+                      type: string
+                      description: |
+                        e.g. IGHV4-59*01 or  IGHV4-59*07
+                    dgene_string:
+                      type: string
+                      description: |
+                        e.g. Homsap IGHD3-10*01 F
+                    dgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHD3
+                    dgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHD3-10
+                    dgene_allele:
+                      type: string
+                      description: |
+                        e.g. IGHD3-10*01
+                    jgene_string:
+                      type: string
+                      description: |
+                        e.g. Homsap IGHJ4*02 F
+                    jgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHJ4
+                    jgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHJ4
+                    jgene_allele:
+                      type: string
+                      description: |
+                        e.g. IGHJ4*02
+                    functionality:
+                      type: string
+                      description: |
+                        e.g. productive
+                    functionality_comment:
+                      type: string
+                      description: |
+                        e.g. ""
+                    orientation:
+                      type: string
+                      description: |
+                        e.g. +
+                    vgene_score:
+                      type: integer
+                      description: |
+                        e.g. 1127
+                    vgene_probability:
+                      type: integer
+                      description: |
+                        e.g. 95
+                    dregion_reading_frame:
+                      type: integer
+                      description: |
+                        e.g. 2
+                    cdr1_length:
+                      type: integer
+                      description: |
+                        e.g. 8
+                    cdr2_length:
+                      type: integer
+                      description: |
+                        e.g. 7
+                    cdr3_length:
+                      type: integer
+                      description: |
+                        e.g. 13
+                    vdjregion_sequence_nt:
+                      type: string
+                      description: |
+                        vdj region nucleotide sequence
+                    vjregion_sequence_nt:
+                      type: string
+                      description: |
+                        vj region nucleotide sequence
+                    djregion_sequence_nt:
+                      type: string
+                      description: |
+                        dj region nucleotide sequence
+                    vregion_sequence_nt:
+                      type: string
+                      description: |
+                        v region nucleotide sequence
+                    dregion_sequence_nt:
+                      type: string
+                      description: |
+                        d region nucleotide sequence
+                    jregion_sequence_nt:
+                      type: string
+                      description: |
+                        j region nucleotide sequence
+                    fr1region_sequence_nt:
+                      type: string
+                      description: |
+                        fr1 region nucleotide sequence
+                    fr2region_sequence_nt:
+                      type: string
+                      description: |
+                        fr2 region nucleotide sequence
+                    fr3region_sequence_nt:
+                      type: string
+                      description: |
+                        fr3 region nucleotide sequence
+                    fr4region_sequence_nt:
+                      type: string
+                      description: |
+                        fr4 region nucleotide sequence
+                    cdr1region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr1 region nucleotide sequence
+                    cdr2region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr2 region nucleotide sequence
+                    cdr3region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr3 region nucleotide sequence
+                    junction_sequence_nt:
+                      type: string
+                      description: |
+                        junction nucleotide sequence
+                    vdjregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped vdj region nucleotide sequence
+                    vjregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped vj region nucleotide sequence
+                    djregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped dj region nucleotide sequence
+                    vregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped v region nucleotide sequence
+                    dregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped d region nucleotide sequence
+                    jregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped j region nucleotide sequence
+                    fr1region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr1 region nucleotide sequence
+                    fr2region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr2 region nucleotide sequence
+                    fr3region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr3 region nucleotide sequence
+                    fr4region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr4 region nucleotide sequence
+                    cdr1region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr1 region nucleotide sequence
+                    cdr2region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr2 region nucleotide sequence
+                    cdr3region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr3 region nucleotide sequence
+                    junction_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped junction nucleotide sequence
+                    vdjregion_sequence_aa:
+                      type: string
+                      description: |
+                        vdj region amino acid sequence
+                    vjregion_sequence_aa:
+                      type: string
+                      description: |
+                        vj region amino acid sequence
+                    djregion_sequence_aa:
+                      type: string
+                      description: |
+                        dj region amino acid sequence
+                    vregion_sequence_aa:
+                      type: string
+                      description: |
+                        v region amino acid sequence
+                    dregion_sequence_aa:
+                      type: string
+                      description: |
+                        d region amino acid sequence
+                    jregion_sequence_aa:
+                      type: string
+                      description: |
+                        j region amino acid sequence
+                    fr1region_sequence_aa:
+                      type: string
+                      description: |
+                        fr1 region amino acid sequence
+                    fr2region_sequence_aa:
+                      type: string
+                      description: |
+                        fr2 region amino acid sequence
+                    fr3region_sequence_aa:
+                      type: string
+                      description: |
+                        fr3 region amino acid sequence
+                    fr4region_sequence_aa:
+                      type: string
+                      description: |
+                        fr4 region amino acid sequence
+                    cdr1region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr1 region amino acid sequence
+                    cdr2region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr2 region amino acid sequence
+                    cdr3region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr3 region amino acid sequence
+                    junction_sequence_aa:
+                      type: string
+                      description: |
+                        junction amino acid sequence
+                    vdjregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped vdj region amino acid sequence
+                    vjregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped vj region amino acid sequence
+                    djregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped dj region amino acid sequence
+                    vregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped v region amino acid sequence
+                    dregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped d region amino acid sequence
+                    jregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped j region amino acid sequence
+                    fr1region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr1 region amino acid sequence
+                    fr2region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr2 region amino acid sequence
+                    fr3region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr3 region amino acid sequence
+                    fr4region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr4 region amino acid sequence
+                    cdr1region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr1 region amino acid sequence
+                    cdr2region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr2 region amino acid sequence
+                    cdr3region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr3 region amino acid sequence
+                    junction_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped junction amino acid sequence
+                    vdjregion_start:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    vdjregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    vjregion_start:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    vjregion_end:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    djregion_start:
+                      type: integer
+                      description: |
+                        e.g. 254
+                    djregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    vregion_start:
+                      type: integer
+                      description: |
+                        e.g. 286
+                    vregion_end:
+                      type: integer
+                      description: |
+                        e.g. 252
+                    dregion_start:
+                      type: integer
+                      description: |
+                        e.g. 254
+                    dregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    jregion_start:
+                      type: integer
+                      description: |
+                        e.g. 286
+                    jregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    fr1region_start:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    fr1region_end:
+                      type: integer
+                      description: |
+                        e.g. 38
+                    fr2region_start:
+                      type: integer
+                      description: |
+                        e.g. 63
+                    fr2region_end:
+                      type: integer
+                      description: |
+                        e.g. 113
+                    fr3region_start:
+                      type: integer
+                      description: |
+                        e.g. 135
+                    fr3region_end:
+                      type: integer
+                      description: |
+                        e.g. 248
+                    fr4region_start:
+                      type: integer
+                      description: |
+                        e.g. 288
+                    fr4region_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    cdr1region_start:
+                      type: integer
+                      description: |
+                        e.g. 39
+                    cdr1region_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    cdr2region_start:
+                      type: integer
+                      description: |
+                        e.g. 62
+                    cdr2region_end:
+                      type: integer
+                      description: |
+                        e.g. 134
+                    cdr3region_start:
+                      type: integer
+                      description: |
+                        e.g. 249
+                    cdr3region_end:
+                      type: integer
+                      description: |
+                        e.g. 287
+                    junction_start:
+                      type: integer
+                      description: |
+                        e.g. 246
+                    junction_end:
+                      type: integer
+                      description: |
+                        e.g. 290
+                    vregion_mutation_string:
+                      type: string
+                      description: >
+                        e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                        +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                        -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                        -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+                    fr1region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+                    fr2region_mutation_string:
+                      type: string
+                      description: |
+                        e.g.             
+                    fr3region_mutation_string:
+                      type: string
+                      description: >
+                        e.g.  c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                        -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|"
+                    cdr1region_mutation_string:
+                      type: string
+                      description: |
+                        e.g.
+                    cdr2region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+                    cdr3region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+                    annotation_tool:
+                      type: string
+                      description: |
+                        e.g. VQuest
+          examples:
+            application/json:
+              aggregation_summary:
+                - subject_code: IAVI 84
+                  subject_id: 1
+                  subject_gender: null
+                  subject_ethnicity: NA
+                  subject_species: Homo Sapiens
+                  project_id: 1
+                  project_name: >-
+                    Mining the antibodyome for HIV-1 neutralizing antibodies
+                    with next generation sequencing and phylogenetic pairing of
+                    heavy/light chains
+                  project_parent_id: -1
+                  project_type: null
+                  sra_accession: SRP018335
+                  lab_id: 1
+                  lab_name: National Institute of Allergy and Infectious -DiseaseVaccine
+                  Research Center: Kwong Lab
+                  disease_state_id: 7
+                  disease_state_name: >-
+                    HIV-1 infected for at least 3 years, not receiving
+                    antiretroviral treatment
+                  case_control_id: 1
+                  case_control_name: Case
+                  sample_id: 1
+                  project_sample_id: 1
+                  sequence_count: 253684
+                  project_sample_note: null
+                  sra_run_id: SRR654169
+                  sample_name: SRS388604
+                  subject_age: null
+                  sample_subject_id: 1
+                  dna_id: 1
+                  dna_type: cDNA
+                  sample_source_id: 1
+                  sample_source_name: PBMCs
+                  lab_cell_subset_name: B cell memory
+                  ireceptor_cell_subset_name: Memory B Cell
+                  marker_1: IgG+
+                  marker_2: CD19+
+                  marker_3: sIgG+
+                  marker_4: ' negative depletion to CD3'
+                  marker_5: ' CD14'
+                  marker_6: ' CD16, IgM, IgA, IgD '
+                  sequences: 167793
+              sequences:
+                - seq_id: 2
+                  seq_name: SRR654169.17_G912ZWU01EPN4E_length=379
+                  project_sample_id: 1
+                  id: 37
+                  vgene_string: Homsap IGHV1-24*01 F
+                  vgene_family: IGHV1
+                  vgene_gene: IGHV1-24
+                  vgene_allele: ' IGHV1-24*01 '
+                  jgene_string: Homsap IGHJ3*02 F
+                  jgene_family: IGHJ3
+                  jgene_gene: IGHJ3
+                  jgene_allele: ' IGHJ3*02 '
+                  dgene_string: Homsap IGHD3-22*01 F
+                  dgene_family: IGHD3
+                  dgene_gene: IGHD3-22
+                  dgene_allele: ' IGHD3-22*01 '
+                  functionality: productive
+                  vgene_score: 1417
+                  vgene_probablity: null
+                  dregion_reading_frame: '3'
+                  cdr1_length: 8
+                  cdr2_length: 8
+                  cdr3_length: 17
+                  vdjregion_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaagtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgatggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vjregion_sequence_nt: ''
+                  djregion_sequence_nt: >-
+                    gatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vregion_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctcactgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaagatggtgaaacaatctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
+                  jregion_sequence_nt: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  dregion_sequence_nt: gatagttgtgattat
+                  fr1region_sequence_nt: >-
+                    caggtccagctggtagagtctggggctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
+                  fr2region_sequence_nt: atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
+                  fr3region_sequence_nt: >-
+                    atctacgcacagaagttccagggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
+                  fr4region_sequence_nt: tggggccaagggacaatggtcaccgtctcttcag
+                  cdr1region_sequence_nt: ggatacaccctcactgaattatcc
+                  cdr2region_sequence_nt: tttgatcctgaagatggtgaaaca
+                  cdr3region_sequence_nt: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
+                  junction_sequence_nt: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
+                  vdjregion_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  vjregion_sequence_nt_gapped: ''
+                  djregion_sequence_nt_gapped: null
+                  vregion_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaaca
+                  jregion_sequence_nt_gapped: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  dregion_sequence_nt_gapped: gatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
+                  fr1region_sequence_nt_gapped: >-
+                    caggtccagctggtagagtctggggct  
+                    ...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttcc
+                  fr2region_sequence_nt_gapped: atgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggt
+                  fr3region_sequence_nt_gapped: >-
+                    atctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgt
+                  fr4region_sequence_nt_gapped: tggggccaagggacaatggtcaccgtctcttcag
+                  cdr1region_sequence_nt_gapped: ggatacaccctc............actgaattatcc
+                  cdr2region_sequence_nt_gapped: tttgatcctgaa......gatggtgaaaca
+                  cdr3region_sequence_nt_gapped: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
+                  junction_sequence_nt_gapped: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
+                  vdjregion_sequence_aa: >-
+                    QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGR
+                    ITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
+                  vjregion_sequence_aa: ''
+                  djregion_sequence_aa: null
+                  vregion_sequence_aa: >-
+                    QVQLVESGAEVKKPGASVKVSCKVSGYTLTELSMHWVRQAPGKGLEWMGGFDPEDGETIYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
+                  jregion_sequence_aa: DGFDIWGQGTMVTVSS
+                  dregion_sequence_aa: null
+                  fr1region_sequence_aa: QVQLVESGAEVKKPGASVKVSCKVS
+                  fr2region_sequence_aa: MHWVRQAPGKGLEWMGG
+                  fr3region_sequence_aa: IYAQKFQGRITMTEDTSTDTAYMELSSLRSEDTAVYYC
+                  fr4region_sequence_aa: WGQGTMVTVSS
+                  cdr1region_sequence_aa: GYTLTELS
+                  cdr2region_sequence_aa: FDPEDGET
+                  cdr3region_sequence_aa: ATRSPPIVVIMDDGFDI
+                  junction_sequence_aa: CATRSPPIVVIMDDGFDIW
+                  vdjregion_sequence_aa_gapped: >-
+                    QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
+                  vjregion_sequence_aa_gapped: ''
+                  djregion_sequence_aa_gapped: null
+                  vregion_sequence_aa_gapped: >-
+                    QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCAT
+                  jregion_sequence_aa_gapped: DGFDIWGQGTMVTVSS
+                  dregion_sequence_aa_gapped: null
+                  fr1region_sequence_aa_gapped: QVQLVESGA.EVKKPGASVKVSCKVS
+                  fr2region_sequence_aa_gapped: MHWVRQAPGKGLEWMGG
+                  fr3region_sequence_aa_gapped: IYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYC
+                  fr4region_sequence_aa_gapped: WGQGTMVTVSS
+                  cdr1region_sequence_aa_gapped: GYTL....TELS
+                  cdr2region_sequence_aa_gapped: FDPE..DGET
+                  cdr3region_sequence_aa_gapped: ATRSPPIVVIMDDGFDI
+                  junction_sequence_aa_gapped: CATRSPPIVVIMDDGFDIW
+                  vdjregion_start: 2
+                  vdjregion_end: 374
+                  vjregion_start: null
+                  vjregion_end: null
+                  vregion_start: 2
+                  vregion_end: 295
+                  jregion_start: 326
+                  jregion_end: 374
+                  dregion_start: 307
+                  dregion_end: 374
+                  fr1region_start: 2
+                  fr1region_end: 76
+                  fr2region_start: 101
+                  fr2region_end: 151
+                  fr3region_start: 176
+                  fr3region_end: 289
+                  fr4region_start: 341
+                  fr4region_end: 374
+                  cdr1region_start: 77
+                  cdr1region_end: 100
+                  cdr2region_start: 152
+                  cdr2region_end: 175
+                  cdr3region_start: 290
+                  cdr3region_end: 340
+                  junction_start: 287
+                  junction_end: 343
+                  vregion_mutation_string: 'c16>g,Q6>E(++ -)|g226>a,V76>I(+ - +)|'
+                  fr1region_mutation_string: 'c16>g,Q6>E(+ + -)|'
+                  fr2region_mutation_string: ''
+                  fr3region_mutation_string: 'g226>a,V76>I(+ - +)|'
+                  cdr1region_mutation_string: ''
+                  cdr2region_mutation_string: ''
+                  cdr3region_mutation_string: g319>a|a320>g|
+                  vgene_probability: '99'
+                  djregion_start: 307
+                  djregion_end: 374
+                  annotation_tool: VQuest
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+  /sequence_data:
+    get:
+      description: >
+        This service returns the annotation data that matches the GET provided
+        filter. "username" parameter refers to external_users table, and it
+        requires the array of "project_sample_id", which limits which samples
+        the sequences will be taken from. Other parameters are optional, and
+        refer to the sequence_md_view view in iReceptor database.
+      tags:
+        - sequences
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+        - name: cdr3_length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+        - name: format
+          in: query
+          description: >-
+            'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as
+            per /v1 with tab delimiters instead of commas); 'airr' - AIRR
+            Formats rearrangements TSV (as per AIRR formats rearrangements spec)
+          required: false
+          type: string
+      operationId: getSequenceData
+      responses:
+        '200':
+          description: >
+            A successful call returns an array of sequence data. Optional
+            "format" parameter determines the output format. Default is a JSON
+            response, limited to top 50 results. If "format" is set to "csv", it
+            will return all the matching sequence annotations, in addition to
+            sample information and annotation tool information, in a
+            comma-separated format; "tsv" returns a tab-delimited outputs; 
+            "airr" returns AIRR minimal standards encoded tab-delimited outputs.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                seq_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                seq_name:
+                  type: string
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 6
+                id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                sequence_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vgene_string:
+                  type: string
+                vgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHV4
+                vgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHV4-59
+                vgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHV4-59*01 or  IGHV4-59*07
+                dgene_string:
+                  type: string
+                  description: |
+                    e.g. Homsap IGHD3-10*01 F
+                dgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHD3
+                dgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHD3-10
+                dgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHD3-10*01
+                jgene_string:
+                  type: string
+                  description: |
+                    e.g. Homsap IGHJ4*02 F
+                jgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHJ4
+                jgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHJ4
+                jgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHJ4*02
+                functionality:
+                  type: string
+                  description: |
+                    e.g. productive
+                functionality_comment:
+                  type: string
+                  description: |
+                    e.g. ""
+                orientation:
+                  type: string
+                  description: |
+                    e.g. +
+                vgene_score:
+                  type: integer
+                  description: |
+                    e.g. 1127
+                vgene_probability:
+                  type: integer
+                  description: |
+                    e.g. 95
+                dregion_reading_frame:
+                  type: integer
+                  description: |
+                    e.g. 2
+                cdr1_length:
+                  type: integer
+                  description: |
+                    e.g. 8
+                cdr2_length:
+                  type: integer
+                  description: |
+                    e.g. 7
+                cdr3_length:
+                  type: integer
+                  description: |
+                    e.g. 13
+                vdjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vdj region nucleotide sequence
+                vjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vj region nucleotide sequence
+                djregion_sequence_nt:
+                  type: string
+                  description: |
+                    dj region nucleotide sequence
+                vregion_sequence_nt:
+                  type: string
+                  description: |
+                    v region nucleotide sequence
+                dregion_sequence_nt:
+                  type: string
+                  description: |
+                    d region nucleotide sequence
+                jregion_sequence_nt:
+                  type: string
+                  description: |
+                    j region nucleotide sequence
+                fr1region_sequence_nt:
+                  type: string
+                  description: |
+                    fr1 region nucleotide sequence
+                fr2region_sequence_nt:
+                  type: string
+                  description: |
+                    fr2 region nucleotide sequence
+                fr3region_sequence_nt:
+                  type: string
+                  description: |
+                    fr3 region nucleotide sequence
+                fr4region_sequence_nt:
+                  type: string
+                  description: |
+                    fr4 region nucleotide sequence
+                cdr1region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr1 region nucleotide sequence
+                cdr2region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr2 region nucleotide sequence
+                cdr3region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr3 region nucleotide sequence
+                junction_sequence_nt:
+                  type: string
+                  description: |
+                    junction nucleotide sequence
+                vdjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region nucleotide sequence
+                vjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vj region nucleotide sequence
+                djregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped dj region nucleotide sequence
+                vregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped v region nucleotide sequence
+                dregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped d region nucleotide sequence
+                jregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped j region nucleotide sequence
+                fr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region nucleotide sequence
+                fr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region nucleotide sequence
+                fr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region nucleotide sequence
+                fr4region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region nucleotide sequence
+                cdr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region nucleotide sequence
+                cdr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region nucleotide sequence
+                cdr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region nucleotide sequence
+                junction_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped junction nucleotide sequence
+                vdjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vdj region amino acid sequence
+                vjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vj region amino acid sequence
+                djregion_sequence_aa:
+                  type: string
+                  description: |
+                    dj region amino acid sequence
+                vregion_sequence_aa:
+                  type: string
+                  description: |
+                    v region amino acid sequence
+                dregion_sequence_aa:
+                  type: string
+                  description: |
+                    d region amino acid sequence
+                jregion_sequence_aa:
+                  type: string
+                  description: |
+                    j region amino acid sequence
+                fr1region_sequence_aa:
+                  type: string
+                  description: |
+                    fr1 region amino acid sequence
+                fr2region_sequence_aa:
+                  type: string
+                  description: |
+                    fr2 region amino acid sequence
+                fr3region_sequence_aa:
+                  type: string
+                  description: |
+                    fr3 region amino acid sequence
+                fr4region_sequence_aa:
+                  type: string
+                  description: |
+                    fr4 region amino acid sequence
+                cdr1region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr1 region amino acid sequence
+                cdr2region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr2 region amino acid sequence
+                cdr3region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr3 region amino acid sequence
+                junction_sequence_aa:
+                  type: string
+                  description: |
+                    junction amino acid sequence
+                vdjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region amino acid sequence
+                vjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vj region amino acid sequence
+                djregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped dj region amino acid sequence
+                vregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped v region amino acid sequence
+                dregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped d region amino acid sequence
+                jregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped j region amino acid sequence
+                fr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region amino acid sequence
+                fr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region amino acid sequence
+                fr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region amino acid sequence
+                fr4region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region amino acid sequence
+                cdr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region amino acid sequence
+                cdr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region amino acid sequence
+                cdr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region amino acid sequence
+                junction_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped junction amino acid sequence
+                vdjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vdjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 0
+                vjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 0
+                djregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                djregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                vregion_end:
+                  type: integer
+                  description: |
+                    e.g. 252
+                dregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                dregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                jregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                jregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                fr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                fr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 38
+                fr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 63
+                fr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 113
+                fr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 135
+                fr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 248
+                fr4region_start:
+                  type: integer
+                  description: |
+                    e.g. 288
+                fr4region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 39
+                cdr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 62
+                cdr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 134
+                cdr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 249
+                cdr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 287
+                junction_start:
+                  type: integer
+                  description: |
+                    e.g. 246
+                junction_end:
+                  type: integer
+                  description: |
+                    e.g. 290
+                vregion_mutation_string:
+                  type: string
+                  description: >
+                    e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                    +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                    -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                    -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+                fr1region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+                fr2region_mutation_string:
+                  type: string
+                  description: |
+                    e.g.             
+                fr3region_mutation_string:
+                  type: string
+                  description: >
+                    e.g.  c198>g,N66>K(+ - -)|a220>g,S74>G(+ + -)|a229>t,T77>S(+
+                    - +)|g275>c,S92>T(+ - +)|t279>c|"
+                cdr1region_mutation_string:
+                  type: string
+                  description: |
+                    e.g.
+                cdr2region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+                cdr3region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+                citation:
+                  type: object
+                  properties:
+                    doi:
+                      type: string
+                    title:
+                      type: string
+          examples:
+            application/json:
+              seq_name: |
+                M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
+              vgene_gene: |
+                IGHV4-59
+              vgene_allele: |
+                IGHV4-59*01 or  IGHV4-59*07
+              dgene_string: |
+                Homsap IGHD3-10*01 F
+              dgene_family: |
+                IGHD3
+              dgene_gene: |
+                IGHD3-10
+              dgene_allele: |
+                IGHD3-10*01
+              jgene_string: |
+                Homsap IGHJ4*02 F
+              jgene_family: |
+                IGHJ4
+              jgene_gene: |
+                IGHJ4
+              jgene_allele: |
+                IGHJ4*02
+              functionality: |
+                productive
+              vregion_mutation_string: |
+                a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+              fr1region_mutation_string: |
+                e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+              fr3region_mutation_string: |
+                c198>g,N66>K(+ - -)|a220>g,S74>G(+ + -)|a229>t,T77>S(+
+                - +)|g275>c,S92>T(+ - +)|t279>c|"
+              cdr2region_mutation_string: |
+                a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+              cdr3region_mutation_string: |
+                g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+              citation:
+                doi: 10.1093/cid/ciw767
+                title: >
+                  RNA-Seq Analysis of Gene Expression, Viral Pathogen, and
+                  B-Cell/T-Cell Receptor Signatures in Complex Chronic Disease.
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+    post:
+      description: >
+        This service returns the annotation data that matches the POST provided
+        filter. "username" parameter refers to external_users table, and it
+        requires the array of "project_sample_id", which limits which samples
+        the sequences will be taken from. Other parameters are optional, and
+        refer to the sequence_md_view view in iReceptor database. A full list of
+        possible parameters is in the iReceptorAPI-sequenceMetadata file
+      tags:
+        - sequences
+      parameters:
+        - name: query
+          in: body
+          schema:
+            type: object
+            required:
+              - username
+            properties:
+              username:
+                type: string
+                description: >
+                  iReceptor username that has been granted access to the node,
+                  through external_users tabl
+              project_sample_id_list:
+                type: array
+                items:
+                  type: integer
+              cdr3_length:
+                description: >
+                  length of complementarity determining region in nucleotide
+                  base pairs
+                type: integer
+              vgene_string:
+                type: string
+              jgene_string:
+                type: string
+              format:
+                description: >-
+                  'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based
+                  TSV (as per /v1 with tab delimiters instead of commas); 'airr'
+                  - AIRR Formats rearrangements TSV (as per AIRR formats
+                  rearrangements spec)
+      operationId: postSequenceData
+      responses:
+        '200':
+          description: >
+            A successful call returns an array of sequence data. Optional
+            "format" parameter determines the output format. Default is a JSON
+            response, limited to top 50 results. If "format" is set to "csv", it
+            will return all the matching sequence annotations, in addition to
+            sample information and annotation tool information, in a
+            comma-separated format; "tsv" returns a tab-delimited outputs; 
+            "airr" returns AIRR minimal standards encoded tab-delimited outputs.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                seq_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                seq_name:
+                  type: string
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 6
+                id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                sequence_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vgene_string:
+                  type: string
+                vgene_family:
+                  type: string
+                vgene_gene:
+                  type: string
+                vgene_allele:
+                  type: string
+                dgene_string:
+                  type: string
+                dgene_family:
+                  type: string
+                dgene_gene:
+                  type: string
+                dgene_allele:
+                  type: string
+                jgene_string:
+                  type: string
+                jgene_family:
+                  type: string
+                jgene_gene:
+                  type: string
+                jgene_allele:
+                  type: string
+                functionality:
+                  type: string
+                functionality_comment:
+                  type: string
+                  description: |
+                    e.g. ""
+                orientation:
+                  type: string
+                  description: |
+                    e.g. +
+                vgene_score:
+                  type: integer
+                  description: |
+                    e.g. 1127
+                vgene_probability:
+                  type: integer
+                  description: |
+                    e.g. 95
+                dregion_reading_frame:
+                  type: integer
+                  description: |
+                    e.g. 2
+                cdr1_length:
+                  type: integer
+                  description: |
+                    e.g. 8
+                cdr2_length:
+                  type: integer
+                  description: |
+                    e.g. 7
+                cdr3_length:
+                  type: integer
+                  description: |
+                    e.g. 13
+                vdjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vdj region nucleotide sequence
+                vjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vj region nucleotide sequence
+                djregion_sequence_nt:
+                  type: string
+                  description: |
+                    dj region nucleotide sequence
+                vregion_sequence_nt:
+                  type: string
+                  description: |
+                    v region nucleotide sequence
+                dregion_sequence_nt:
+                  type: string
+                  description: |
+                    d region nucleotide sequence
+                jregion_sequence_nt:
+                  type: string
+                  description: |
+                    j region nucleotide sequence
+                fr1region_sequence_nt:
+                  type: string
+                  description: |
+                    fr1 region nucleotide sequence
+                fr2region_sequence_nt:
+                  type: string
+                  description: |
+                    fr2 region nucleotide sequence
+                fr3region_sequence_nt:
+                  type: string
+                  description: |
+                    fr3 region nucleotide sequence
+                fr4region_sequence_nt:
+                  type: string
+                  description: |
+                    fr4 region nucleotide sequence
+                cdr1region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr1 region nucleotide sequence
+                cdr2region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr2 region nucleotide sequence
+                cdr3region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr3 region nucleotide sequence
+                junction_sequence_nt:
+                  type: string
+                  description: |
+                    junction nucleotide sequence
+                vdjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region nucleotide sequence
+                vjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vj region nucleotide sequence
+                djregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped dj region nucleotide sequence
+                vregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped v region nucleotide sequence
+                dregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped d region nucleotide sequence
+                jregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped j region nucleotide sequence
+                fr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region nucleotide sequence
+                fr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region nucleotide sequence
+                fr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region nucleotide sequence
+                fr4region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region nucleotide sequence
+                cdr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region nucleotide sequence
+                cdr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region nucleotide sequence
+                cdr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region nucleotide sequence
+                junction_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped junction nucleotide sequence
+                vdjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vdj region amino acid sequence
+                vjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vj region amino acid sequence
+                djregion_sequence_aa:
+                  type: string
+                  description: |
+                    dj region amino acid sequence
+                vregion_sequence_aa:
+                  type: string
+                  description: |
+                    v region amino acid sequence
+                dregion_sequence_aa:
+                  type: string
+                  description: |
+                    d region amino acid sequence
+                jregion_sequence_aa:
+                  type: string
+                  description: |
+                    j region amino acid sequence
+                fr1region_sequence_aa:
+                  type: string
+                  description: |
+                    fr1 region amino acid sequence
+                fr2region_sequence_aa:
+                  type: string
+                  description: |
+                    fr2 region amino acid sequence
+                fr3region_sequence_aa:
+                  type: string
+                  description: |
+                    fr3 region amino acid sequence
+                fr4region_sequence_aa:
+                  type: string
+                  description: |
+                    fr4 region amino acid sequence
+                cdr1region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr1 region amino acid sequence
+                cdr2region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr2 region amino acid sequence
+                cdr3region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr3 region amino acid sequence
+                junction_sequence_aa:
+                  type: string
+                  description: |
+                    junction amino acid sequence
+                vdjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region amino acid sequence
+                vjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vj region amino acid sequence
+                djregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped dj region amino acid sequence
+                vregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped v region amino acid sequence
+                dregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped d region amino acid sequence
+                jregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped j region amino acid sequence
+                fr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region amino acid sequence
+                fr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region amino acid sequence
+                fr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region amino acid sequence
+                fr4region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region amino acid sequence
+                cdr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region amino acid sequence
+                cdr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region amino acid sequence
+                cdr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region amino acid sequence
+                junction_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped junction amino acid sequence
+                vdjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vdjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 0
+                vjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 0
+                djregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                djregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                vregion_end:
+                  type: integer
+                  description: |
+                    e.g. 252
+                dregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                dregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                jregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                jregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                fr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                fr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 38
+                fr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 63
+                fr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 113
+                fr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 135
+                fr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 248
+                fr4region_start:
+                  type: integer
+                  description: |
+                    e.g. 288
+                fr4region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 39
+                cdr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 62
+                cdr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 134
+                cdr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 249
+                cdr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 287
+                junction_start:
+                  type: integer
+                  description: |
+                    e.g. 246
+                junction_end:
+                  type: integer
+                  description: |
+                    e.g. 290
+                vregion_mutation_string:
+                  type: string
+                fr1region_mutation_string:
+                  type: string
+                fr2region_mutation_string:
+                  type: string
+                fr3region_mutation_string:
+                  type: string
+                cdr1region_mutation_string:
+                  type: string
+                cdr2region_mutation_string:
+                  type: string
+                cdr3region_mutation_string:
+                  type: string
+                citation:
+                  type: object
+                  properties:
+                    doi:
+                      type: string
+                    title:
+                      type: string
+          examples:
+            application/json:
+              seq_name: |
+                M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
+              vgene_gene: |
+                IGHV4-59
+              vgene_allele: |
+                IGHV4-59*01 or  IGHV4-59*07
+              dgene_string: |
+                Homsap IGHD3-10*01 F
+              dgene_family: |
+                IGHD3
+              dgene_gene: |
+                IGHD3-10
+              dgene_allele: |
+                IGHD3-10*01
+              jgene_string: |
+                Homsap IGHJ4*02 F
+              jgene_family: |
+                IGHJ4
+              jgene_gene: |
+                IGHJ4
+              jgene_allele: |
+                IGHJ4*02
+              functionality: |
+                productive
+              vregion_mutation_string: |
+                a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+              fr1region_mutation_string: |
+                e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+              fr3region_mutation_string: |
+                c198>g,N66>K(+ - -)|a220>g,S74>G(+ + -)|a229>t,T77>S(+
+                - +)|g275>c,S92>T(+ - +)|t279>c|"
+              cdr2region_mutation_string: |
+                a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+              cdr3region_mutation_string: |
+                g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+              citation:
+                doi: 10.1093/cid/ciw767
+                title: >
+                  RNA-Seq Analysis of Gene Expression, Viral Pathogen, and
+                  B-Cell/T-Cell Receptor Signatures in Complex Chronic Disease.
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+  /clones_summary:
+    get:
+      description: >
+        This service returns a summary of sequence clones that match the GET
+        provided filter. "username" parameter refers to external_users table.
+      tags:
+        - clones
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+        - name: cdr3_length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+      operationId: getCloneSummary
+      responses:
+        '200':
+          description: >
+            A successful call returns an summary of clone data as an array of
+            'category' = count pairs in which the 'category' are string tags of
+            parameters of interest from a controlled vocabulary term set.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: |
+                    e.g. samples
+                count:
+                  type: integer
+                  description: |
+                    e.g. 100
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+  /clones_data:
+    get:
+      description: >
+        This service returns a list of clones that matches the GET provided
+        filter. "username" parameter refers to external_users table.
+      tags:
+        - clones
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+        - name: cdr3_length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+      operationId: getCloneData
+      responses:
+        '200':
+          description: >
+            A successful call returns an array of sequence data. Optional
+            "output" parameter determines the output format. Default is a JSON
+            response, limited to top 50 results. If "output" is set to "csv", it
+            will return all the matching sequence annotations, in addition to
+            sample information and annotation tool information, in a
+            comma-separated format. 
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                seq_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                seq_name:
+                  type: string
+                project_sample_id:
+                  type: integer
+                  description: |
+                    e.g. 6
+                id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                sequence_id:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vgene_string:
+                  type: string
+                vgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHV4
+                vgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHV4-59
+                vgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHV4-59*01 or  IGHV4-59*07
+                dgene_string:
+                  type: string
+                  description: |
+                    e.g. Homsap IGHD3-10*01 F
+                dgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHD3
+                dgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHD3-10
+                dgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHD3-10*01
+                jgene_string:
+                  type: string
+                  description: |
+                    e.g. Homsap IGHJ4*02 F
+                jgene_family:
+                  type: string
+                  description: |
+                    e.g. IGHJ4
+                jgene_gene:
+                  type: string
+                  description: |
+                    e.g. IGHJ4
+                jgene_allele:
+                  type: string
+                  description: |
+                    e.g. IGHJ4*02
+                functionality:
+                  type: string
+                  description: |
+                    e.g. productive
+                functionality_comment:
+                  type: string
+                  description: |
+                    e.g. ""
+                orientation:
+                  type: string
+                  description: |
+                    e.g. +
+                vgene_score:
+                  type: integer
+                  description: |
+                    e.g. 1127
+                vgene_probability:
+                  type: integer
+                  description: |
+                    e.g. 95
+                dregion_reading_frame:
+                  type: integer
+                  description: |
+                    e.g. 2
+                cdr1_length:
+                  type: integer
+                  description: |
+                    e.g. 8
+                cdr2_length:
+                  type: integer
+                  description: |
+                    e.g. 7
+                cdr3_length:
+                  type: integer
+                  description: |
+                    e.g. 13
+                vdjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vdj region nucleotide sequence
+                vjregion_sequence_nt:
+                  type: string
+                  description: |
+                    vj region nucleotide sequence
+                djregion_sequence_nt:
+                  type: string
+                  description: |
+                    dj region nucleotide sequence
+                vregion_sequence_nt:
+                  type: string
+                  description: |
+                    v region nucleotide sequence
+                dregion_sequence_nt:
+                  type: string
+                  description: |
+                    d region nucleotide sequence
+                jregion_sequence_nt:
+                  type: string
+                  description: |
+                    j region nucleotide sequence
+                fr1region_sequence_nt:
+                  type: string
+                  description: |
+                    fr1 region nucleotide sequence
+                fr2region_sequence_nt:
+                  type: string
+                  description: |
+                    fr2 region nucleotide sequence
+                fr3region_sequence_nt:
+                  type: string
+                  description: |
+                    fr3 region nucleotide sequence
+                fr4region_sequence_nt:
+                  type: string
+                  description: |
+                    fr4 region nucleotide sequence
+                cdr1region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr1 region nucleotide sequence
+                cdr2region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr2 region nucleotide sequence
+                cdr3region_sequence_nt:
+                  type: string
+                  description: |
+                    cdr3 region nucleotide sequence
+                junction_sequence_nt:
+                  type: string
+                  description: |
+                    junction nucleotide sequence
+                vdjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region nucleotide sequence
+                vjregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped vj region nucleotide sequence
+                djregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped dj region nucleotide sequence
+                vregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped v region nucleotide sequence
+                dregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped d region nucleotide sequence
+                jregion_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped j region nucleotide sequence
+                fr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region nucleotide sequence
+                fr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region nucleotide sequence
+                fr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region nucleotide sequence
+                fr4region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region nucleotide sequence
+                cdr1region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region nucleotide sequence
+                cdr2region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region nucleotide sequence
+                cdr3region_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region nucleotide sequence
+                junction_sequence_nt_gapped:
+                  type: string
+                  description: |
+                    gapped junction nucleotide sequence
+                vdjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vdj region amino acid sequence
+                vjregion_sequence_aa:
+                  type: string
+                  description: |
+                    vj region amino acid sequence
+                djregion_sequence_aa:
+                  type: string
+                  description: |
+                    dj region amino acid sequence
+                vregion_sequence_aa:
+                  type: string
+                  description: |
+                    v region amino acid sequence
+                dregion_sequence_aa:
+                  type: string
+                  description: |
+                    d region amino acid sequence
+                jregion_sequence_aa:
+                  type: string
+                  description: |
+                    j region amino acid sequence
+                fr1region_sequence_aa:
+                  type: string
+                  description: |
+                    fr1 region amino acid sequence
+                fr2region_sequence_aa:
+                  type: string
+                  description: |
+                    fr2 region amino acid sequence
+                fr3region_sequence_aa:
+                  type: string
+                  description: |
+                    fr3 region amino acid sequence
+                fr4region_sequence_aa:
+                  type: string
+                  description: |
+                    fr4 region amino acid sequence
+                cdr1region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr1 region amino acid sequence
+                cdr2region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr2 region amino acid sequence
+                cdr3region_sequence_aa:
+                  type: string
+                  description: |
+                    cdr3 region amino acid sequence
+                junction_sequence_aa:
+                  type: string
+                  description: |
+                    junction amino acid sequence
+                vdjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vdj region amino acid sequence
+                vjregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped vj region amino acid sequence
+                djregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped dj region amino acid sequence
+                vregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped v region amino acid sequence
+                dregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped d region amino acid sequence
+                jregion_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped j region amino acid sequence
+                fr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr1 region amino acid sequence
+                fr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr2 region amino acid sequence
+                fr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr3 region amino acid sequence
+                fr4region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped fr4 region amino acid sequence
+                cdr1region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr1 region amino acid sequence
+                cdr2region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr2 region amino acid sequence
+                cdr3region_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped cdr3 region amino acid sequence
+                junction_sequence_aa_gapped:
+                  type: string
+                  description: |
+                    gapped junction amino acid sequence
+                vdjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                vdjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vjregion_start:
+                  type: integer
+                  description: |
+                    e.g. 0
+                vjregion_end:
+                  type: integer
+                  description: |
+                    e.g. 0
+                djregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                djregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                vregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                vregion_end:
+                  type: integer
+                  description: |
+                    e.g. 252
+                dregion_start:
+                  type: integer
+                  description: |
+                    e.g. 254
+                dregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                jregion_start:
+                  type: integer
+                  description: |
+                    e.g. 286
+                jregion_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                fr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 1
+                fr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 38
+                fr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 63
+                fr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 113
+                fr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 135
+                fr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 248
+                fr4region_start:
+                  type: integer
+                  description: |
+                    e.g. 288
+                fr4region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr1region_start:
+                  type: integer
+                  description: |
+                    e.g. 39
+                cdr1region_end:
+                  type: integer
+                  description: |
+                    e.g. 321
+                cdr2region_start:
+                  type: integer
+                  description: |
+                    e.g. 62
+                cdr2region_end:
+                  type: integer
+                  description: |
+                    e.g. 134
+                cdr3region_start:
+                  type: integer
+                  description: |
+                    e.g. 249
+                cdr3region_end:
+                  type: integer
+                  description: |
+                    e.g. 287
+                junction_start:
+                  type: integer
+                  description: |
+                    e.g. 246
+                junction_end:
+                  type: integer
+                  description: |
+                    e.g. 290
+                vregion_mutation_string:
+                  type: string
+                  description: >
+                    e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                    +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                    -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                    -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+                fr1region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+                fr2region_mutation_string:
+                  type: string
+                  description: |
+                    e.g.             
+                fr3region_mutation_string:
+                  type: string
+                  description: >
+                    e.g.  c198>g,N66>K(+ - -)|a220>g,S74>G(+ + -)|a229>t,T77>S(+
+                    - +)|g275>c,S92>T(+ - +)|t279>c|"
+                cdr1region_mutation_string:
+                  type: string
+                  description: |
+                    e.g.
+                cdr2region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+                cdr3region_mutation_string:
+                  type: string
+                  description: |
+                    e.g. g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+                citation:
+                  type: object
+                  properties:
+                    doi:
+                      type: string
+                    title:
+                      type: string
+          examples:
+            application/json:
+              seq_name: |
+                M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
+              vgene_gene: |
+                IGHV4-59
+              vgene_allele: |
+                IGHV4-59*01 or  IGHV4-59*07
+              dgene_string: |
+                Homsap IGHD3-10*01 F
+              dgene_family: |
+                IGHD3
+              dgene_gene: |
+                IGHD3-10
+              dgene_allele: |
+                IGHD3-10*01
+              jgene_string: |
+                Homsap IGHJ4*02 F
+              jgene_family: |
+                IGHJ4
+              jgene_gene: |
+                IGHJ4
+              jgene_allele: |
+                IGHJ4*02
+              functionality: |
+                productive
+              vregion_mutation_string: |
+                a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+              fr1region_mutation_string: |
+                e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+              fr3region_mutation_string: |
+                c198>g,N66>K(+ - -)|a220>g,S74>G(+ + -)|a229>t,T77>S(+
+                - +)|g275>c,S92>T(+ - +)|t279>c|"
+              cdr2region_mutation_string: |
+                a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+              cdr3region_mutation_string: |
+                g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+              citation:
+                doi: 10.1093/cid/ciw767
+                title: >
+                  RNA-Seq Analysis of Gene Expression, Viral Pathogen, and
+                  B-Cell/T-Cell Receptor Signatures in Complex Chronic Disease.
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
