@@ -2,18 +2,19 @@
   "swagger": "2.0",
   "info": {
     "title": "iReceptor Data Source API",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "contact": {
       "name": "iReceptor Project",
-      "url": "http://ireceptor.irmacs.sfu.ca/",
+      "url": "http://www.ireceptor.org/",
       "email": "breden@sfu.ca"
     },
-    "description": "Documentation of (2017) Major Version 2 iReceptor Acquired Immunity Receptor Repertoire data source web service application programming interface (API). Learn more about [iReceptor](http://ireceptor.irmacs.sfu.ca/)\n"
+    "description": "Documentation of Major Version 2 of the iReceptor Adaptive Immune Receptor Repertoire (AIRR) data source web service application programming interface (API). V2 of the API implements an increased level of compliance with the [Minimal Information for AIRR (MiAIRR) standard](https://github.com/airr-community/airr-standards). Learn more about [iReceptor](http://www.ireceptor.org/)\n"
   },
-  "host": "api.ireceptor.bio",
+  "host": "ipa.ireceptor.org",
   "basePath": "/v2",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "produces": [
     "application/json"
@@ -30,16 +31,12 @@
     {
       "name": "clones",
       "description": "Queries for clones"
-    },
-    {
-      "name": "sequences_summary",
-      "description": "Queries for sequences which include summary sample information"
     }
   ],
   "paths": {
     "/samples": {
       "get": {
-        "description": "This service returns data about samples that match the search parameters provided. Input parameters are column names referencing the sample_query_view view in iReceptor DB,which is a join of project-, subject- and sample-related tables. username parameter refers to external_users table\n",
+        "description": "This service returns metadata about samples, including higher-level meta-data around the study, subject, diagnosis, and sample processing (data relevant to MiAIRR data classes 1 through 3). The data returned is filtered based on the parameters provided.\nA successful call returns a json list with a sample level summary of each sample including a summary count of the number of sequences found for that sample.\n",
         "tags": [
           "samples"
         ],
@@ -47,7 +44,7 @@
           {
             "name": "username",
             "in": "query",
-            "description": "iReceptor username that has been granted access to the node, through external_users table\n",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
             "required": true,
             "type": "string"
           },
@@ -79,6 +76,13 @@
             "name": "subject_gender",
             "in": "query",
             "description": "e.g. Male or Female\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_species",
+            "in": "query",
+            "description": "e.g. Human\n",
             "required": false,
             "type": "string"
           },
@@ -142,12 +146,16 @@
         "operationId": "getSamples",
         "responses": {
           "200": {
-            "description": "A successful call returns an array of sample data\n",
+            "description": "A successful call returns the metadata for each sample, including\nthe number of sequences found for that sample.\n",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "properties": {
+                  "sequence_count": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
                   "subject_code": {
                     "type": "string",
                     "description": "e.g. Subject One\n"
@@ -172,9 +180,13 @@
                     "type": "integer",
                     "description": "e.g. 0\n"
                   },
-                  "project_name": {
+                  "study_title": {
                     "type": "string",
-                    "description": "e.g. First Project\n"
+                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
+                  },
+                  "study_type": {
+                    "type": "string",
+                    "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
                   },
                   "project_parent_id": {
                     "type": "integer",
@@ -186,7 +198,7 @@
                   },
                   "lab_name": {
                     "type": "string",
-                    "description": "e.g. First Lab\n"
+                    "description": "Name of the Laboratory running the study (AIRR)\n"
                   },
                   "case_control_id": {
                     "type": "integer",
@@ -209,10 +221,6 @@
                     "description": "e.g. 0\n"
                   },
                   "sample_subject_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sequence_count": {
                     "type": "integer",
                     "description": "e.g. 0\n"
                   },
@@ -270,12 +278,15 @@
             "examples": {
               "application/json": [
                 {
+                  "sequence_count": 1234567,
                   "subject_code": "Subject One",
                   "subject_id": 1,
                   "subject_gender": "Male",
-                  "subject_ethnicity": "Eth1",
+                  "subject_ethnicity": "Caucasian",
+                  "subject_species": "Human",
                   "project_id": 0,
-                  "project_name": "First Project",
+                  "study_title": "First Project",
+                  "study_type": "Cancer",
                   "project_parent_id": null,
                   "lab_id": 0,
                   "lab_name": "First Lab",
@@ -283,7 +294,6 @@
                   "case_control_name": "Control",
                   "sample_id": 1,
                   "project_sample_id": 1,
-                  "sequence_count": 0,
                   "sample_name": "Blood Sample 01",
                   "subject_age": 22,
                   "sample_subject_id": 1,
@@ -321,7 +331,7 @@
         }
       },
       "post": {
-        "description": "This service returns data about samples that match the search parameters provided. Input parameters are column names referencing the sample_query_view view in iReceptor DB,which is a join of project-, subject- and sample-related tables. username parameter refers to external_users table\n",
+        "description": "This service returns metadata about samples, including higher-level meta-data around the study, subject, diagnosis, and sample processing (data relevant to MiAIRR data classes 1 through 3). The data returned is filtered based on the parameters provided.\nA successful call returns a json list with a sample level summary of each sample including a summary count of the number of sequences found for that sample.\n",
         "tags": [
           "samples"
         ],
@@ -338,7 +348,7 @@
               "properties": {
                 "username": {
                   "type": "string",
-                  "description": "iReceptor username that has been granted access to the node, through external_users table\n"
+                  "description": "Username of the individual requesting access to the iReceptor repository node.\n"
                 },
                 "lab_id": {
                   "type": "integer",
@@ -361,7 +371,11 @@
                 },
                 "subject_ethnicity": {
                   "type": "string",
-                  "description": "e.g. White\n"
+                  "description": "e.g. Caucasian\n"
+                },
+                "subject_species": {
+                  "type": "string",
+                  "description": "e.g. Human\n"
                 },
                 "subject_age_min": {
                   "type": "integer",
@@ -407,7 +421,7 @@
         "operationId": "postSamples",
         "responses": {
           "200": {
-            "description": "A successful call returns an array of sample data\n",
+            "description": "A successful call returns the metadata for each sample, including\nthe number of sequences found for that sample.\n",
             "schema": {
               "type": "array",
               "items": {
@@ -427,7 +441,11 @@
                   },
                   "subject_ethnicity": {
                     "type": "string",
-                    "description": "e.g. Eth1\n"
+                    "description": "e.g. Caucasian\n"
+                  },
+                  "subject_species": {
+                    "type": "string",
+                    "description": "e.g. Human\n"
                   },
                   "subject_age": {
                     "type": "integer",
@@ -437,9 +455,13 @@
                     "type": "integer",
                     "description": "e.g. 0\n"
                   },
-                  "project_name": {
+                  "study_title": {
                     "type": "string",
-                    "description": "e.g. First Project\n"
+                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
+                  },
+                  "study_type": {
+                    "type": "string",
+                    "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
                   },
                   "project_parent_id": {
                     "type": "integer",
@@ -451,7 +473,7 @@
                   },
                   "lab_name": {
                     "type": "string",
-                    "description": "e.g. First Lab\n"
+                    "description": "Name of the Laboratory running the study (AIRR)\n"
                   },
                   "case_control_id": {
                     "type": "integer",
@@ -535,12 +557,15 @@
             "examples": {
               "application/json": [
                 {
+                  "sequence_count": 1234567,
                   "subject_code": "Subject One",
                   "subject_id": 1,
                   "subject_gender": "Male",
-                  "subject_ethnicity": "Eth1",
+                  "subject_ethnicity": "Caucasian",
+                  "subject_species": "Human",
                   "project_id": 0,
-                  "project_name": "First Project",
+                  "study_title": "First Project",
+                  "study_type": "Cancer",
                   "project_parent_id": null,
                   "lab_id": 0,
                   "lab_name": "First Lab",
@@ -548,7 +573,6 @@
                   "case_control_name": "Control",
                   "sample_id": 1,
                   "project_sample_id": 1,
-                  "sequence_count": 0,
                   "sample_name": "Blood Sample 01",
                   "subject_age": 22,
                   "sample_subject_id": 1,
@@ -590,13 +614,13 @@
       "get": {
         "description": "This service returns a summary of sequences that matches the GET provided filter. \"username\" parameter refers to external_users table.\n",
         "tags": [
-          "sequences_summary"
+          "sequences"
         ],
         "parameters": [
           {
             "name": "username",
             "in": "query",
-            "description": "iReceptor username that has been granted access to the node, through\nexternal_users table\n",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
             "required": true,
             "type": "string"
           },
@@ -669,21 +693,21 @@
                         "type": "integer",
                         "description": "e.g. 0\n"
                       },
-                      "project_name": {
+                      "study_title": {
                         "type": "string",
-                        "description": "e.g. First Project\n"
+                        "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
+                      },
+                      "study_type": {
+                        "type": "string",
+                        "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
                       },
                       "project_parent_id": {
                         "type": "integer",
                         "description": "e.g. null\n"
                       },
-                      "project_type": {
+                      "study": {
                         "type": "string",
-                        "description": "e.g. null\n"
-                      },
-                      "sra_accession": {
-                        "type": "string",
-                        "description": "e.g. null\n"
+                        "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)\n"
                       },
                       "lab_id": {
                         "type": "integer",
@@ -691,7 +715,7 @@
                       },
                       "lab_name": {
                         "type": "string",
-                        "description": "e.g. First Lab\n"
+                        "description": "Name of the Laboratory running the study (AIRR)\n"
                       },
                       "disease_state_id": {
                         "type": "integer",
@@ -1275,10 +1299,10 @@
                     "subject_ethnicity": "NA",
                     "subject_species": "Homo Sapiens",
                     "project_id": 1,
-                    "project_name": "Mining the antibodyome for HIV-1 neutralizing antibodies with next generation sequencing and phylogenetic pairing of heavy/light chains",
+                    "study_title": "Mining the antibodyome for HIV-1 neutralizing antibodies with next generation sequencing and phylogenetic pairing of heavy/light chains",
+                    "study_type": "HIV",
                     "project_parent_id": -1,
-                    "project_type": null,
-                    "sra_accession": "SRP018335",
+                    "study": "SRP018335",
                     "lab_id": 1,
                     "lab_name": "National Institute of Allergy and Infectious -DiseaseVaccine",
                     "Research Center": "Kwong Lab",
@@ -1460,7 +1484,7 @@
           {
             "name": "username",
             "in": "query",
-            "description": "iReceptor username that has been granted access to the node, through\nexternal_users table\n",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
             "required": true,
             "type": "string"
           },
@@ -2049,7 +2073,7 @@
               "properties": {
                 "username": {
                   "type": "string",
-                  "description": "iReceptor username that has been granted access to the node, through external_users tabl\n"
+                  "description": "Username of the individual requesting access to the iReceptor repository node.\n"
                 },
                 "project_sample_id_list": {
                   "type": "array",
@@ -2598,7 +2622,7 @@
           {
             "name": "username",
             "in": "query",
-            "description": "iReceptor username that has been granted access to the node, through\nexternal_users table\n",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
             "required": true,
             "type": "string"
           },
@@ -2680,7 +2704,7 @@
           {
             "name": "username",
             "in": "query",
-            "description": "iReceptor username that has been granted access to the node, through\nexternal_users table\n",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
             "required": true,
             "type": "string"
           },
