@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "iReceptor Data Source API",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "contact": {
       "url": "http://ireceptor.irmacs.sfu.ca/",
       "email": "breden@sfu.ca"
@@ -10,7 +10,7 @@
     "description": "Documentation of the iReceptor Acquired Immunity Receptor Repertoire data source web service application programming interface (API). Learn more about [iReceptor](http://ireceptor.irmacs.sfu.ca/)\n"
   },
   "host": "data.ireceptor.bio",
-  "basePath": "/api",
+  "basePath": "/v1",
   "schemes": [
     "http"
   ],
@@ -18,6 +18,10 @@
     "application/json"
   ],
   "tags": [
+    {
+      "name": "info",
+      "description": "Service information"
+    },
     {
       "name": "metadata",
       "description": "Queries for metadata"
@@ -36,7 +40,57 @@
     }
   ],
   "paths": {
+    "/": {
+      "x-swagger-router-controller": "status",
+      "get": {
+        "description": "Service heartbeat.\n",
+        "operationId": "getStatus",
+        "responses": {
+          "200": {
+            "description": "Success.\n",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info": {
+      "x-swagger-router-controller": "status",
+      "get": {
+        "description": "Service information.\n",
+        "tags": [
+          "info"
+        ],
+        "operationId": "getInfo",
+        "responses": {
+          "200": {
+            "description": "Success.\n",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    },
     "/metadata": {
+      "x-swagger-router-controller": "metadata",
       "post": {
         "description": "This service returns the list of Labs and corresponding projects in an iReceptor node,and lists of lab-specific metadata related to subjects (ethnicity, gender,case/control) and samples (possible sample sources, possible cell subset types and DNA types)\n",
         "tags": [
@@ -193,6 +247,7 @@
       }
     },
     "/samples": {
+      "x-swagger-router-controller": "samples",
       "post": {
         "description": "This service returns data about samples that match the search parameters provided. Input parameters are column names referencing the sample_query_view view in iReceptor DB,which is a join of project-, subject- and sample-related tables. username parameter refers to external_users table\n",
         "tags": [
@@ -443,6 +498,7 @@
       }
     },
     "/sequences": {
+      "x-swagger-router-controller": "sequences",
       "get": {
         "description": "This service returns the annotation data that matches the provided filter. \"username\" parameter refers to external_users table, and it requires the array of \"project_sample_id\", which limits which samples the sequences will be taken from. Other parameters are optional, and refer to the sequence_md_view view in iReceptor database. A full list of possible parameters is in the iReceptorAPI-sequenceMetadata file\n",
         "tags": [
@@ -494,8 +550,9 @@
       }
     },
     "/clones": {
+      "x-swagger-router-controller": "clones",
       "get": {
-        "description": "This service returns two arrays. One contains sample information for all the samples which have clones that match the provided filter. Sample information is identical to the one in /samples call, with additional attribute 'clones' which shows the number of clones that match the filter originating in that working sample. Second array returns information about clones matching the filter. \n",
+        "description": "This service returns two arrays. One contains sample information for all the  samples which have clones that match the provided filter. Sample information is  identical to the one in /samples call, with additional attribute 'clones' which shows the number of clones that match the filter originating in that sample. Second array returns information about clones matching the filter. \n",
         "tags": [
           "clones"
         ],
@@ -553,7 +610,7 @@
         "operationId": "getCloneSummary",
         "responses": {
           "200": {
-            "description": "A successful call returns a summary of sample-level data for clones matching the filter, with the aggregate number of clones, as well as information about clones themselves. The 'output' parameter determines whether the information is sent as a JSON representation of two arrays (samples and limited number of clones), or as a CSV  containing all the clone data.\n",
+            "description": "A successful call returns a summary of sample-level data for clones matching  the filter, with the aggregate number of clones, as well as information about clones themselves. The 'output' parameter determines whether the information is sent as a JSON representation of two arrays (samples and limited number of clones), or as a CSV  containing all the clone data.\n",
             "schema": {
               "type": "object",
               "properties": {
