@@ -1,12 +1,14 @@
 swagger: '2.0'
 info:
   title: iReceptor Data Source API
-  version: 1.0.1
+  version: 1.0.2
   contact:
     url: 'http://ireceptor.irmacs.sfu.ca/'
     email: breden@sfu.ca
   description: >
-    Documentation of the iReceptor Acquired Immunity Receptor Repertoire data source web service application programming interface (API). Learn more about [iReceptor](http://ireceptor.irmacs.sfu.ca/)
+    Documentation of the iReceptor Acquired Immunity Receptor Repertoire data
+    source web service application programming interface (API). Learn more about
+    [iReceptor](http://ireceptor.irmacs.sfu.ca/)
 host: data.ireceptor.bio
 basePath: /api
 schemes:
@@ -20,6 +22,8 @@ tags:
     description: Queries for samples
   - name: sequences
     description: Queries for sequences
+  - name: clones
+    description: Queries for clone data
 paths:
   /metadata:
     post:
@@ -369,7 +373,12 @@ paths:
   /sequences:
     get:
       description: >
-        This service returns the annotation data that matches the provided filter. "username" parameter refers to external_users table, and it requires the array of "project_sample_id", which limits which samples the sequences will be taken from. Other parameters are optional, and refer to the sequence_md_view view in iReceptor database. A full list of possible parameters is in the iReceptorAPI-sequenceMetadata file
+        This service returns the annotation data that matches the provided
+        filter. "username" parameter refers to external_users table, and it
+        requires the array of "project_sample_id", which limits which samples
+        the sequences will be taken from. Other parameters are optional, and
+        refer to the sequence_md_view view in iReceptor database. A full list of
+        possible parameters is in the iReceptorAPI-sequenceMetadata file
       tags:
         - sequences
       parameters:
@@ -388,7 +397,9 @@ paths:
             type: integer
         - name: cdr3_length
           in: query
-          description: length of complementarity determining region in nucleotide base pairs
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
           required: false
           type: integer
         - name: vgene_string
@@ -404,4 +415,386 @@ paths:
         '201':
           description: >
             A successful call returns an array of sequence data. Optional
-            "output" parameter determines the output format. Default is a JSON response, limited to top 50 results. If "output" is set to "csv", it will return all the matching sequence annotations, in addition to sample information and annotation tool information, in a comma-separated format. 
+            "output" parameter determines the output format. Default is a JSON
+            response, limited to top 50 results. If "output" is set to "csv", it
+            will return all the matching sequence annotations, in addition to
+            sample information and annotation tool information, in a
+            comma-separated format. 
+  /clones:
+    get:
+      description: >
+        This service returns two arrays. One contains sample information for all the 
+        samples which have clones that match the provided filter. Sample information is 
+        identical to the one in /samples call, with additional attribute 'clones' which
+        shows the number of clones that match the filter originating in that sample.
+        Second array returns information about clones matching the filter. 
+      tags:
+        - clones
+      parameters:
+        - name: username
+          in: query
+          description: |
+            iReceptor username that has been granted access to the node, through
+            external_users table
+          required: true
+          type: string
+        - name: project_sample_id_list
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+        - name: length
+          in: query
+          description: >-
+            length of complementarity determining region in nucleotide base
+            pairs
+          required: false
+          type: integer
+        - name: vgene_string
+          in: query
+          required: false
+          type: string
+        - name: jgene_string
+          in: query
+          required: false
+          type: string
+        - name: feature_name
+          in: query
+          required: false
+          type: string
+          description: name of gene feature (e.g. CDR3)
+        - name: aa_sequence
+          in: query
+          required: false
+          type: string
+          description: 'aminoacid sequence string to search on       '
+      operationId: getCloneSummary
+      responses:
+        '200':
+          description: >
+            A successful call returns a summary of sample-level data for clones matching 
+            the filter, with the aggregate number of clones, as well as information about
+            clones themselves. The 'output' parameter determines whether the information is
+            sent as a JSON representation of two arrays (samples and limited number
+            of clones), or as a CSV  containing all the clone data.
+          schema:
+            type: object
+            properties:
+              aggregation_summary:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    subject_code:
+                      type: string
+                      description: |
+                        e.g. Subject One
+                    subject_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    subject_gender:
+                      type: string
+                      description: |
+                        e.g. Male
+                    subject_species:
+                      type: string
+                      description: |
+                        e.g. Mouse
+                    subject_ethnicity:
+                      type: string
+                      description: |
+                        e.g. Eth1
+                    subject_age:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    project_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    project_name:
+                      type: string
+                      description: |
+                        e.g. First Project
+                    project_parent_id:
+                      type: integer
+                      description: |
+                        e.g. null
+                    project_type:
+                      type: string
+                      description: |
+                        e.g. null
+                    sra_accession:
+                      type: string
+                      description: |
+                        e.g. null
+                    lab_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    lab_name:
+                      type: string
+                      description: |
+                        e.g. First Lab
+                    disease_state_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    disease_state_name:
+                      type: string
+                      description: |
+                        e.g. HIV-1 infected
+                    case_control_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    case_control_name:
+                      type: string
+                      description: |
+                        e.g. Control
+                    sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_name:
+                      type: string
+                      description: |
+                        e.g. Blood Sample 01
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_subject_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sequence_count:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dna_type:
+                      type: string
+                      description: |
+                        e.g. cDNA
+                    sample_source_id:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    sample_source_name:
+                      type: string
+                      description: |
+                        e.g. Blood (PBMC)
+                    lab_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B Alpha
+                    ireceptor_cell_subset_name:
+                      type: string
+                      description: |
+                        e.g. Naive B
+                    marker_1:
+                      type: string
+                      description: |
+                        e.g. CR19
+                    marker_2:
+                      type: string
+                      description: |
+                        e.g. CR20
+                    marker_3:
+                      type: string
+                      description: |
+                        e.g. CR21
+                    marker_4:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_5:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_6:
+                      type: string
+                      description: |
+                        e.g. null
+                    clones:
+                      type: integer
+                      description: |
+                        e.g. 167793
+              clones:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cd_analysis_id:
+                      type: integer
+                      description: |
+                        foreign key into analysis table, e.g. 1
+                    vgene_family:
+                      type: string
+                      description: |
+                        family part of V-gene, e.g. TRBV20
+                    vgene_gene:
+                      type: string
+                      description: |
+                        gene part of V-gene, e.g. TRBV20-1
+                    vgene_allele:
+                      type: string
+                      description: |
+                        allele part of V-gene, e.g. TRBV20-1*01
+                    jgene_family:
+                      type: string
+                      description: |
+                        family part of J-gene, e.g. TRBJ2
+                    jgene_gene:
+                      type: string
+                      description: |
+                        gene part of J-gene, e.g. TRBJ2-1
+                    jgene_allele:
+                      type: string
+                      description: |
+                        allele part of J-gene, e.g. TRBJ2-1*01
+                    dgene_family:
+                      type: string
+                      description: |
+                        family part of D-gene, e.g. TRBD1
+                    dgene_gene:
+                      type: string
+                      description: |
+                        gene part of D-gene, e.g. TRBD1
+                    dgene_allele:
+                      type: string
+                      description: |
+                        allele part of D-gene, e.g. TRBD1*01
+                    clone_count:
+                      type: integer
+                      description: |
+                        e.g. 14210
+                    clone_fraction:
+                      type: number
+                      description: |
+                        e.g. 0.00511834
+                    num_targets:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    v_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 323.7
+                    d_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 55
+                    j_allele_scores:
+                      type: number
+                      description: |
+                        e.g. 124.6
+                    c_allele:
+                      type: string
+                      description: |
+                        e.g. ""
+                    c_allele_scores:
+                      type: number
+                      description: |
+                        e.g. null
+                    v_alignments:
+                      type: string
+                      description: |
+                        e.g. 279|292|312|0|13||65.0
+                    d_alignments:
+                      type: string
+                      description: |
+                        e.g. 10|21|33|17|28||55.0
+                    j_alignments:
+                      type: string
+                      description: |
+                        e.g. 25|39|66|52|66||70.0
+                    cdr3_begin:
+                      type: integer
+                      description: |
+                        e.g. 0                    
+                    v_end:
+                      type: integer
+                      description: |
+                        e.g. 13                  
+                    d_begin:
+                      type: integer
+                      description: |
+                        e.g. 17                    
+                    d_end:
+                      type: integer
+                      description: |
+                        e.g. 28
+                    j_begin:
+                      type: integer
+                      description: |
+                        e.g. 52
+                    cdr3_end:
+                      type: integer
+                      description: |
+                        e.g. 66
+                    vd_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    dj_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    vj_insertions:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    gene_feature_id:
+                      type: integer
+                      description: |
+                        e.g. 4
+                    feature_name:
+                      type: string
+                      description: |
+                        name of gene feature, e.g. CDR3
+                    nt_sequence:
+                      type: string
+                      description: |
+                        nucleotide sequence of the feature
+                    nt_sequence_quality:
+                      type: string
+                      description: |
+                        quality of the NT sequence
+                    aa_sequence:
+                      type: string
+                      description: |
+                        aminoacid sequence of the feature
+                    avg_quality:
+                      type: string
+                      description: |
+                        quality of the AA sequence
+                    min_quality:
+                      type: integer
+                      description: |
+                        e.g. null                   
+                    length:
+                      type: integer
+                      description: |
+                        e.g. 22
+                    psa_id:
+                      type: integer
+                      description: >
+                        foreign key to working sample/sequencing run, e.g.
+                        1                 
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
