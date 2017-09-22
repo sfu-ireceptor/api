@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
   title: iReceptor Data Source API
   version: 2.0.4
@@ -12,13 +12,12 @@ info:
     V2 of the API implements an increased level of compliance with the [Minimal
     Information for AIRR (MiAIRR) standard](https://github.com/airr-community/airr-standards).
     Learn more about [iReceptor](http://www.ireceptor.org/)
-host: ipa.ireceptor.org
-basePath: /v2
-schemes:
-  - http
-  - https
-produces:
-  - application/json
+servers:
+  - url: https://ipa.ireceptor.org
+    description: iReceptor Public Archive (Production)
+    variables:
+      basePath:
+        default: /v2
 tags:
   - name: samples
     description: Queries for samples
@@ -26,115 +25,9 @@ tags:
     description: Queries for sequences
   - name: clones
     description: Queries for clones
-paths:
-  /samples:
-    get:
-      description: >
-        This service returns metadata about samples, including higher-level
-        meta-data around the study, subject, diagnosis, and sample processing
-        (data relevant to MiAIRR data classes 1 through 3). The data
-        returned is filtered based on the parameters provided.
-
-        A successful call returns a json list with a sample level summary of
-        each sample including a summary count of the number of sequences found for
-        that sample.
-      tags:
-        - samples
-      parameters:
-        - name: username
-          in: query
-          description: >
-            Username of the individual requesting access to the iReceptor
-            repository node.
-          required: true
-          type: string
-        - name: lab_id
-          in: query
-          description: |
-            e.g. 1
-          required: false
-          type: integer
-        - name: project_id
-          in: query
-          description: |
-            e.g. 1
-          required: false
-          type: array
-          items:
-            type: integer
-        - name: subject_code
-          in: query
-          description: |
-            e.g. test
-          required: false
-          type: string
-        - name: subject_gender
-          in: query
-          description: |
-            e.g. Male or Female
-          required: false
-          type: string
-        - name: subject_species
-          in: query
-          description: |
-            e.g. Human
-          required: false
-          type: string
-        - name: subject_ethnicity
-          in: query
-          description: |
-            e.g. Caucasian
-          required: false
-          type: string
-        - name: subject_age_min
-          in: query
-          description: |
-            e.g. 10
-          required: false
-          type: integer
-        - name: subject_age_max
-          in: query
-          description: |
-            e.g. 12
-          required: false
-          type: integer
-        - name: case_control_name
-          in: query
-          description: |
-            e.g. Control
-          required: false
-          type: string
-        - name: sample_name
-          in: query
-          description: |
-            e.g. test2
-          required: false
-          type: string
-        - name: sample_source_name
-          in: query
-          description: |
-            e.g. Blood (PBMC)
-          required: false
-          type: string
-        - name: ireceptor_cell_subset_name
-          in: query
-          description: |
-            e.g. NaiveB
-          required: false
-          type: string
-        - name: dna_type
-          in: query
-          description: |
-            e.g. cDNA, gDNA
-          required: false
-          type: string
-      operationId: getSamples
-      responses:
-        '200':
-          description: |
-            A successful call returns the metadata for each sample, including
-            the number of sequences found for that sample.
-          schema:
+components:
+  schemas:
+    SampleResponse:
             type: array
             items:
               type: object
@@ -142,7 +35,19 @@ paths:
                 sequence_count:
                   type: integer
                   description: |
-                    e.g. 0
+                    The number of sequences from this sample that meet the filter criteria
+                study_title:
+                  type: string
+                  description: |
+                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                study_description:
+                  type: string
+                  description: |
+                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+                study_id:
+                  type: string
+                  description: |
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                 subject_code:
                   type: string
                   description: |
@@ -167,14 +72,6 @@ paths:
                   type: integer
                   description: |
                     e.g. 0
-                study_title:
-                  type: string
-                  description: |
-                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                study_type:
-                  type: string
-                  description: |
-                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
                 project_parent_id:
                   type: integer
                   description: |
@@ -259,39 +156,177 @@ paths:
                   type: string
                   description: |
                     e.g. null
-          examples:
+  examples:
+    sequence_count:
+      value: 1234567
+    study_title:
+      value: First Project
+    study_description:
+      value: Cancer  
+  parameters:
+    username:
+      name: username
+      in: query
+      description: >
+        Username of the individual requesting access to the iReceptor
+        repository node.
+      required: true
+      schema:
+        type: string
+    airr_subject_gender:
+      name: subject_gender
+      in: query
+      description: |
+        e.g. Male or Female
+      required: false
+      schema:
+        type: string
+    lab_id:
+      name: lab_id
+      in: query
+      description: |
+        e.g. 1
+      required: false
+      schema:
+        type: integer
+    project_id:
+      name: project_id
+      in: query
+      description: |
+        e.g. 1
+      required: false
+      schema:
+        type: array
+        items:
+          type: integer
+    subject_code:
+      name: subject_code
+      in: query
+      description: |
+        e.g. test
+      required: false
+      schema:
+        type: string
+    subject_gender:
+      name: subject_gender
+      in: query
+      description: |
+        e.g. Male or Female
+      required: false
+      schema:
+        type: string
+    subject_species:
+      name: subject_species
+      in: query
+      description: |
+        e.g. Human
+      required: false
+      schema:
+        type: string
+    subject_ethnicity:
+      name: subject_ethnicity
+      in: query
+      description: |
+        e.g. Caucasian
+      required: false
+      schema:
+        type: string
+    subject_age_min:
+      name: subject_age_min
+      in: query
+      description: |
+        e.g. 10
+      required: false
+      schema:
+        type: integer
+    subject_age_max:
+      name: subject_age_max
+      in: query
+      description: |
+        e.g. 12
+      required: false
+      schema:
+        type: integer
+    case_control_name:
+      name: case_control_name
+      in: query
+      description: |
+        e.g. Control
+      required: false
+      schema:
+        type: string
+    sample_name:
+      name: sample_name
+      in: query
+      description: |
+        e.g. test2
+      required: false
+      schema:
+          type: string
+    sample_source_name:
+      name: sample_source_name
+      in: query
+      description: |
+        e.g. Blood (PBMC)
+      required: false
+      schema:
+        type: string
+    ireceptor_cell_subset_name:
+      name: ireceptor_cell_subset_name
+      in: query
+      description: |
+        e.g. NaiveB
+      required: false
+      schema:
+        type: string
+    dna_type:
+      name: dna_type
+      in: query
+      description: |
+        e.g. cDNA, gDNA
+      required: false
+      schema:
+        type: string
+
+paths:
+  /samples:
+    get:
+      description: >
+        This service returns metadata about samples, including higher-level
+        meta-data around the study, subject, diagnosis, and sample processing
+        (data relevant to MiAIRR data classes 1 through 3). The data
+        returned is filtered based on the parameters provided.
+
+        A successful call returns a json list with a sample level summary of
+        each sample including a summary count of the number of sequences found for
+        that sample.
+      tags:
+        - samples
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/lab_id'
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/subject_code'
+        - $ref: '#/components/parameters/subject_gender'
+        - $ref: '#/components/parameters/subject_species'
+        - $ref: '#/components/parameters/subject_ethnicity'
+        - $ref: '#/components/parameters/subject_age_min'
+        - $ref: '#/components/parameters/subject_age_max'
+        - $ref: '#/components/parameters/case_control_name'
+        - $ref: '#/components/parameters/sample_name'
+        - $ref: '#/components/parameters/sample_source_name'
+        - $ref: '#/components/parameters/ireceptor_cell_subset_name'
+        - $ref: '#/components/parameters/dna_type'
+      operationId: getSamples
+      responses:
+        '200':
+          description: |
+            A successful call returns the metadata for each sample, including
+            the number of sequences found for that sample.
+          content:
             application/json:
-              - sequence_count: 1234567
-                subject_code: Subject One
-                subject_id: 1
-                subject_gender: Male
-                subject_ethnicity: Caucasian
-                subject_species: Human
-                project_id: 0
-                study_title: First Project
-                study_type: Cancer
-                project_parent_id: null
-                lab_id: 0
-                lab_name: First Lab
-                case_control_id: 0
-                case_control_name: Control
-                sample_id: 1
-                project_sample_id: 1
-                sample_name: Blood Sample 01
-                subject_age: 22
-                sample_subject_id: 1
-                dna_id: 1
-                dna_type: cDNA
-                sample_source_id: 2
-                sample_source_name: Blood (PBMC)
-                lab_cell_subset_name: Naive B Alpha
-                ireceptor_cell_subset_name: Naive B
-                marker_1: CR19
-                marker_2: CR20
-                marker_3: CR21
-                marker_4: null
-                marker_5: null
-                marker_6: null
+              schema:
+                $ref: '#/components/schemas/SampleResponse'
         '400':
           description: malformed request
         '401':
@@ -394,11 +429,27 @@ paths:
           description: |
             A successful call returns the metadata for each sample, including
             the number of sequences found for that sample.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleResponse'
           schema:
             type: array
             items:
               type: object
               properties:
+                study_title:
+                  type: string
+                  description: |
+                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                study_description:
+                  type: string
+                  description: |
+                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+                study_id:
+                  type: string
+                  description: |
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                 subject_code:
                   type: string
                   description: |
@@ -427,14 +478,6 @@ paths:
                   type: integer
                   description: |
                     e.g. 0
-                study_title:
-                  type: string
-                  description: |
-                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                study_type:
-                  type: string
-                  description: |
-                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
                 project_parent_id:
                   type: integer
                   description: |
@@ -526,14 +569,15 @@ paths:
           examples:
             application/json:
               - sequence_count: 1234567
+                study_title: First Project
+                study_description: Cancer
+                study_id: NCBIID
                 subject_code: Subject One
                 subject_id: 1
                 subject_gender: Male
                 subject_ethnicity: Caucasian
                 subject_species: Human
                 project_id: 0
-                study_title: First Project
-                study_type: Cancer
                 project_parent_id: null
                 lab_id: 0
                 lab_name: First Lab
@@ -617,6 +661,18 @@ paths:
                 items:
                   type: object
                   properties:
+                    study_title:
+                      type: string
+                      description: |
+                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                    study_description:
+                      type: string
+                      description: |
+                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+                    study_id:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                     subject_code:
                       type: string
                       description: |
@@ -645,22 +701,11 @@ paths:
                       type: integer
                       description: |
                         e.g. 0
-                    study_title:
-                      type: string
-                      description: |
-                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                    study_type:
-                      type: string
-                      description: |
-                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+
                     project_parent_id:
                       type: integer
                       description: |
                         e.g. null
-                    study:
-                      type: string
-                      description: |
-                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                     lab_id:
                       type: integer
                       description: |
@@ -1239,22 +1284,24 @@ paths:
           examples:
             application/json:
               aggregation_summary:
-                - subject_code: IAVI 84
+                - 
+                  study_title: >-
+                    Mining the antibodyome for HIV-1 neutralizing antibodies
+                    with next generation sequencing and phylogenetic pairing of
+                    heavy/light chains
+                  study_description: HIV
+                  study_id: SRP018335
+                  subject_code: IAVI 84
                   subject_id: 1
                   subject_gender: null
                   subject_ethnicity: NA
                   subject_species: Homo Sapiens
                   project_id: 1
-                  study_title: >-
-                    Mining the antibodyome for HIV-1 neutralizing antibodies
-                    with next generation sequencing and phylogenetic pairing of
-                    heavy/light chains
-                  study_type: HIV
                   project_parent_id: -1
-                  study: SRP018335
                   lab_id: 1
-                  lab_name: National Institute of Allergy and Infectious -DiseaseVaccine
-                  Research Center: Kwong Lab
+                  lab_name: >-
+                    National Institute of Allergy and Infectious - Disease Vaccine
+                    Research Center (Kwong Lab)
                   disease_state_id: 7
                   disease_state_name: >-
                     HIV-1 infected for at least 3 years, not receiving
