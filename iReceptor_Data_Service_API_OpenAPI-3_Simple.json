@@ -1,0 +1,417 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "iReceptor Data Source API",
+    "version": "2.0.4",
+    "contact": {
+      "name": "iReceptor Project",
+      "url": "http://www.ireceptor.org/",
+      "email": "breden@sfu.ca"
+    },
+    "description": "Documentation of Major Version 2 of the iReceptor Adaptive Immune Receptor Repertoire (AIRR) data source web service application programming interface (API). V2 of the API implements an increased level of compliance with the [Minimal Information for AIRR (MiAIRR) standard](https://github.com/airr-community/airr-standards). Learn more about [iReceptor](http://www.ireceptor.org/)\n"
+  },
+  "servers": [
+    {
+      "url": "https://ipa.ireceptor.org",
+      "description": "iReceptor Public Archive (Production)",
+      "variables": {
+        "basePath": {
+          "default": "/v2"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "samples",
+      "description": "Queries for samples"
+    },
+    {
+      "name": "sequences",
+      "description": "Queries for sequences"
+    },
+    {
+      "name": "clones",
+      "description": "Queries for clones"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SampleResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sequence_count": {
+              "type": "integer",
+              "description": "The number of sequences from this sample that meet the filter criteria\n"
+            },
+            "study_title": {
+              "type": "string",
+              "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
+            },
+            "study_description": {
+              "type": "string",
+              "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
+            },
+            "study_id": {
+              "type": "string",
+              "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)\n"
+            },
+            "subject_code": {
+              "type": "string",
+              "description": "e.g. Subject One\n"
+            },
+            "subject_id": {
+              "type": "integer",
+              "description": "e.g. 1\n"
+            },
+            "subject_gender": {
+              "type": "string",
+              "description": "e.g. Male\n"
+            },
+            "subject_ethnicity": {
+              "type": "string",
+              "description": "e.g. Eth1\n"
+            },
+            "subject_age": {
+              "type": "integer",
+              "description": "e.g. 1\n"
+            },
+            "project_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "project_parent_id": {
+              "type": "integer",
+              "description": "e.g. null\n"
+            },
+            "lab_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "lab_name": {
+              "type": "string",
+              "description": "Name of the Laboratory running the study (AIRR)\n"
+            },
+            "case_control_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "case_control_name": {
+              "type": "string",
+              "description": "e.g. Control\n"
+            },
+            "sample_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "sample_name": {
+              "type": "string",
+              "description": "e.g. Blood Sample 01\n"
+            },
+            "project_sample_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "sample_subject_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "dna_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "dna_type": {
+              "type": "string",
+              "description": "e.g. cDNA\n"
+            },
+            "sample_source_id": {
+              "type": "integer",
+              "description": "e.g. 0\n"
+            },
+            "sample_source_name": {
+              "type": "string",
+              "description": "e.g. Blood (PBMC)\n"
+            },
+            "lab_cell_subset_name": {
+              "type": "string",
+              "description": "e.g. Naive B Alpha\n"
+            },
+            "ireceptor_cell_subset_name": {
+              "type": "string",
+              "description": "e.g. Naive B\n"
+            },
+            "marker_1": {
+              "type": "string",
+              "description": "e.g. CR19\n"
+            },
+            "marker_2": {
+              "type": "string",
+              "description": "e.g. CR20\n"
+            },
+            "marker_3": {
+              "type": "string",
+              "description": "e.g. CR21\n"
+            },
+            "marker_4": {
+              "type": "string",
+              "description": "e.g. null\n"
+            },
+            "marker_5": {
+              "type": "string",
+              "description": "e.g. null\n"
+            },
+            "marker_6": {
+              "type": "string",
+              "description": "e.g. null\n"
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "sequence_count": {
+        "value": 1234567
+      },
+      "study_title": {
+        "value": "First Project"
+      },
+      "study_description": {
+        "value": "Cancer"
+      }
+    },
+    "parameters": {
+      "username": {
+        "name": "username",
+        "in": "query",
+        "description": "Username of the individual requesting access to the iReceptor repository node.\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subject_gender": {
+        "name": "subject_gender",
+        "in": "query",
+        "description": "e.g. Male or Female\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/samples": {
+      "get": {
+        "description": "This service returns metadata about samples, including higher-level meta-data around the study, subject, diagnosis, and sample processing (data relevant to MiAIRR data classes 1 through 3). The data returned is filtered based on the parameters provided.\nA successful call returns a json list with a sample level summary of each sample including a summary count of the number of sequences found for that sample.\n",
+        "tags": [
+          "samples"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          },
+          {
+            "name": "username2",
+            "in": "query",
+            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lab_id",
+            "in": "query",
+            "description": "e.g. 1\n",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "project_id",
+            "in": "query",
+            "description": "e.g. 1\n",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "subject_code",
+            "in": "query",
+            "description": "e.g. test\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subject_gender",
+            "in": "query",
+            "description": "e.g. Male or Female\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subject_species",
+            "in": "query",
+            "description": "e.g. Human\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subject_ethnicity",
+            "in": "query",
+            "description": "e.g. Caucasian\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subject_age_min",
+            "in": "query",
+            "description": "e.g. 10\n",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "subject_age_max",
+            "in": "query",
+            "description": "e.g. 12\n",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "case_control_name",
+            "in": "query",
+            "description": "e.g. Control\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sample_name",
+            "in": "query",
+            "description": "e.g. test2\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sample_source_name",
+            "in": "query",
+            "description": "e.g. Blood (PBMC)\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ireceptor_cell_subset_name",
+            "in": "query",
+            "description": "e.g. NaiveB\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dna_type",
+            "in": "query",
+            "description": "e.g. cDNA, gDNA\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getSamples",
+        "responses": {
+          "200": {
+            "description": "A successful call returns the metadata for each sample, including\nthe number of sequences found for that sample.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SampleResponse"
+                },
+                "example": [
+                  {
+                    "subject_code": "IAVI 84",
+                    "subject_id": 1,
+                    "subject_gender": null,
+                    "subject_species": "Homo Sapiens",
+                    "subject_ethnicity": "NA",
+                    "project_id": 1,
+                    "project_name": "Mining the antibodyome for HIV-1 neutralizing antibodies with next generation sequencing and phylogenetic pairing of heavy/light chains",
+                    "project_parent_id": -1,
+                    "sra_accession": "SRP018335",
+                    "project_type": "HIV+ study",
+                    "lab_id": 1,
+                    "lab_name": "National Institute of Allergy and Infectious Disease-Vaccine Research Center: Kwong Lab",
+                    "disease_state_id": 7,
+                    "disease_state_name": "HIV-1 infected for at least 3 years, not receiving antiretroviral treatment",
+                    "case_control_id": 1,
+                    "case_control_name": "Case",
+                    "sample_id": 1,
+                    "project_sample_id": 1,
+                    "sequence_count": 253684,
+                    "project_sample_note": null,
+                    "sra_run_id": "SRR654169",
+                    "sample_name": "SRS388604",
+                    "subject_age": null,
+                    "sample_subject_id": 1,
+                    "dna_id": 1,
+                    "dna_type": "cDNA",
+                    "sample_source_id": 1,
+                    "sample_source_name": "PBMCs",
+                    "lab_cell_subset_name": "B cell memory",
+                    "ireceptor_cell_subset_name": "Memory B Cell",
+                    "marker_1": "IgG+",
+                    "marker_2": " CD19+",
+                    "marker_3": " sIgG+",
+                    "marker_4": " negative depletion to CD3",
+                    "marker_5": " CD14",
+                    "marker_6": " CD16, IgM, IgA, IgD "
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "malformed request"
+          },
+          "401": {
+            "description": "authentication error"
+          },
+          "403": {
+            "description": "authorization error"
+          },
+          "404": {
+            "description": "data not found"
+          },
+          "405": {
+            "description": "method not allowed"
+          }
+        }
+      }
+    }
+  }
+}
