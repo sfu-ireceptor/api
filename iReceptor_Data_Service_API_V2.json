@@ -317,43 +317,43 @@
                   },
                   "subject_db_id": {
                     "type": "integer",
-                    "description": "Identifier used by repository to identify a subject.\n"
+                    "description": "Identifier used internally by the repository to identify a subject.\n"
                   },
                   "project_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a project.\n"
                   },
                   "project_parent_db_id": {
                     "type": "integer",
-                    "description": "e.g. null\n"
+                    "description": "Identifier used internally by the repository to identify a parent/child\nrelationship between this project and its parent project.\n"
                   },
                   "lab_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a lab.\n"
                   },
                   "case_control_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify an element in the case_control table.\n"
                   },
                   "sample_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "project_sample_db_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_subject_db_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a sample.\n"
                   },
                   "dna_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a DNA type.\n"
+                  },
+                  "project_sample_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used internally by the repository to identify an association\na project with a sample.\n"
+                  },
+                  "sample_subject_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used internally by the repository to identify an association\nbetween a sample and a subject.\n"
                   },
                   "sample_source_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify an association\nbetween a sample and a sample source.\n"
                   }
                 }
               }
@@ -639,43 +639,43 @@
                   },
                   "subject_db_id": {
                     "type": "integer",
-                    "description": "Identifier used by repository to identify a subject.\n"
+                    "description": "Identifier used internally by the repository to identify a subject.\n"
                   },
                   "project_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a project.\n"
                   },
                   "project_parent_db_id": {
                     "type": "integer",
-                    "description": "e.g. null\n"
+                    "description": "Identifier used internally by the repository to identify a parent/child\nrelationship between this project and its parent project.\n"
                   },
                   "lab_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a lab.\n"
                   },
                   "case_control_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify an element in the case_control table.\n"
                   },
                   "sample_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "project_sample_db_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_subject_db_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a sample.\n"
                   },
                   "dna_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify a DNA type.\n"
+                  },
+                  "project_sample_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used internally by the repository to identify an association\na project with a sample.\n"
+                  },
+                  "sample_subject_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used internally by the repository to identify an association\nbetween a sample and a subject.\n"
                   },
                   "sample_source_db_id": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "Identifier used internally by the repository to identify an association\nbetween a sample and a sample source.\n"
                   }
                 }
               }

@@ -305,43 +305,47 @@ paths:
                 subject_db_id:
                   type: integer
                   description: |
-                    Identifier used by repository to identify a subject.
+                    Identifier used internally by the repository to identify a subject.
                 project_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a project.
                 project_parent_db_id:
                   type: integer
                   description: |
-                    e.g. null
+                    Identifier used internally by the repository to identify a parent/child
+                    relationship between this project and its parent project.
                 lab_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a lab.
                 case_control_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify an element in the case_control table.
                 sample_db_id:
                   type: integer
                   description: |
-                    e.g. 0
-                project_sample_db_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_subject_db_id:
-                  type: integer
-                  description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a sample.
                 dna_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a DNA type.
+                project_sample_db_id:
+                  type: integer
+                  description: |
+                    Identifier used internally by the repository to identify an association
+                    a project with a sample.
+                sample_subject_db_id:
+                  type: integer
+                  description: |
+                    Identifier used internally by the repository to identify an association
+                    between a sample and a subject.
                 sample_source_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify an association
+                    between a sample and a sample source.
         '400':
           description: malformed request
         '401':
@@ -616,43 +620,47 @@ paths:
                 subject_db_id:
                   type: integer
                   description: |
-                    Identifier used by repository to identify a subject.
+                    Identifier used internally by the repository to identify a subject.
                 project_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a project.
                 project_parent_db_id:
                   type: integer
                   description: |
-                    e.g. null
+                    Identifier used internally by the repository to identify a parent/child
+                    relationship between this project and its parent project.
                 lab_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a lab.
                 case_control_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify an element in the case_control table.
                 sample_db_id:
                   type: integer
                   description: |
-                    e.g. 0
-                project_sample_db_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_subject_db_id:
-                  type: integer
-                  description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a sample.
                 dna_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify a DNA type.
+                project_sample_db_id:
+                  type: integer
+                  description: |
+                    Identifier used internally by the repository to identify an association
+                    a project with a sample.
+                sample_subject_db_id:
+                  type: integer
+                  description: |
+                    Identifier used internally by the repository to identify an association
+                    between a sample and a subject.
                 sample_source_db_id:
                   type: integer
                   description: |
-                    e.g. 0
+                    Identifier used internally by the repository to identify an association
+                    between a sample and a sample source.
         '400':
           description: malformed request
         '401':
