@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: iReceptor Data Source API
-  version: 2.0.4
+  version: 2.0.5
   contact:
     name: iReceptor Project
     url: 'http://www.ireceptor.org/'
@@ -15,7 +15,6 @@ info:
 host: ipa.ireceptor.org
 basePath: /v2
 schemes:
-  - http
   - https
 produces:
   - application/json
@@ -142,99 +141,143 @@ paths:
                 sequence_count:
                   type: integer
                   description: |
-                    e.g. 0
-                subject_code:
+                    The number of sequences that match the filter for this sample.
+                study_id:
                   type: string
                   description: |
-                    e.g. Subject One
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
+                study_title:
+                  type: string
+                  description: |
+                    Publication or Protocol Title (e.g. My Study) (AIRR)
+                study_type:
+                  type: string
+                  description: |
+                    Type of project/study (e.g. Cancer) (AIRR)
+                inclusion_exclusion_criteria:
+                  type: string
+                  description: |
+                    Study inclusion/exclusion criteria (AIRR)
+                grants:
+                  type: string
+                  description: |
+                    Grant funding agency (AIRR)
+                lab_name:
+                  type: string
+                  description: |
+                    Lab name (AIRR)                    
+                collected_by:
+                  type: string
+                  description: |
+                    Contact information (data collection) (AIRR)
+                uploaded_by:
+                  type: string
+                  description: |
+                    Contact information (data deposition) (AIRR)
+                lab_address:
+                  type: string
+                  description: |
+                    Lab address (AIRR)
+                pubs_ids:
+                  type: string
+                  description: |
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
                 subject_id:
-                  type: integer
-                  description: |
-                    e.g. 1
-                subject_gender:
                   type: string
                   description: |
-                    e.g. Male
-                subject_ethnicity:
+                    UID assigned by submitter (e.g. SUB856413) (AIRR)
+                organism:
                   type: string
                   description: |
-                    e.g. Eth1
+                    Organism-based (human, mouse) or synthetic (AIRR)
+                sex:
+                  type: string
+                  description: |
+                    Sex (e.g. M/F) (AIRR)
+                age:
+                  type: string
+                  description: |
+                    Age - Time duration and unit (e.g. 200 days) (AIRR)
+                age_event:
+                  type: string
+                  description: |
+                    Age event (e.g. Enrollment) (AIRR)
+                ancestry_population:
+                  type: string
+                  description: |
+                    Ancestry population (AIRR)
+                ethnicity:
+                  type: string
+                  description: |
+                    Ethnicity (e.g. Tamil) (AIRR)
+                race:
+                  type: string
+                  description: |
+                    Race (e.g. South Indian) (AIRR)
+                species_name:
+                  type: string
+                  description: |
+                    Species name (e.g. Homo Sapiens) (AIRR)
+                strain_name:
+                  type: string
+                  description: |
+                    Strain name (e.g. C57BL/6J) (AIRR)
+                linked_subjects:
+                  type: string
+                  description: |
+                    Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                link_type:
+                  type: string
+                  description: |
+                     Relation type (.e.g  sister, father, daughter) (AIRR)
+                sample_id:
+                  type: string
+                  description: |
+                    Biological sample ID - UID assigned by submitter (AIRR)
+                sample_type:
+                  type: string
+                  description: |
+                    Sample type (e.g. Tissue, body fluid) (AIRR)
+                tissue:
+                  type: string
+                  description: |
+                    Anatomic site (e.g. spleen) (AIRR)
+                disease_state_sample:
+                  type: string
+                  description: |
+                    Disease state of sample (e.g. tumor vs margin) (AIRR)
+                collection_date:
+                  type: string
+                  description: |
+                    Sample collection time  (e.g. 10 days) (AIRR)
+                collection_time_event:
+                  type: string
+                  description: |
+                    Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                source_commercial:
+                  type: string
+                  description: |
+                    Commercial source of sample (e.g. XYZ Pharma) (AIRR)
+                cell_subset:
+                  type: string
+                  description: |
+                    Cell subset (Controlled vocabulary) (AIRR)
+                cell_phenotype:
+                  type: string
+                  description: |
+                    Cell subset phenotype (lab specific description) (AIRR)
+                study_group_description:
+                  type: string
+                  description: |
+                    Study group description (e.g. Case vs. Control) (AIRR)
+                library_source:
+                  type: string
+                  description: |
+                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
                 subject_age:
                   type: integer
                   description: |
                     e.g. 1
-                project_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                study_title:
-                  type: string
-                  description: |
-                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                study_type:
-                  type: string
-                  description: |
-                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
-                project_parent_id:
-                  type: integer
-                  description: |
-                    e.g. null
-                lab_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                lab_name:
-                  type: string
-                  description: |
-                    Name of the Laboratory running the study (AIRR)
-                case_control_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                case_control_name:
-                  type: string
-                  description: |
-                    e.g. Control
-                sample_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_name:
-                  type: string
-                  description: |
-                    e.g. Blood Sample 01
-                project_sample_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_subject_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                dna_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                dna_type:
-                  type: string
-                  description: |
-                    e.g. cDNA
-                sample_source_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_source_name:
-                  type: string
-                  description: |
-                    e.g. Blood (PBMC)
-                lab_cell_subset_name:
-                  type: string
-                  description: |
-                    e.g. Naive B Alpha
-                ireceptor_cell_subset_name:
-                  type: string
-                  description: |
-                    e.g. Naive B
                 marker_1:
                   type: string
                   description: |
@@ -259,39 +302,46 @@ paths:
                   type: string
                   description: |
                     e.g. null
-          examples:
-            application/json:
-              - sequence_count: 1234567
-                subject_code: Subject One
-                subject_id: 1
-                subject_gender: Male
-                subject_ethnicity: Caucasian
-                subject_species: Human
-                project_id: 0
-                study_title: First Project
-                study_type: Cancer
-                project_parent_id: null
-                lab_id: 0
-                lab_name: First Lab
-                case_control_id: 0
-                case_control_name: Control
-                sample_id: 1
-                project_sample_id: 1
-                sample_name: Blood Sample 01
-                subject_age: 22
-                sample_subject_id: 1
-                dna_id: 1
-                dna_type: cDNA
-                sample_source_id: 2
-                sample_source_name: Blood (PBMC)
-                lab_cell_subset_name: Naive B Alpha
-                ireceptor_cell_subset_name: Naive B
-                marker_1: CR19
-                marker_2: CR20
-                marker_3: CR21
-                marker_4: null
-                marker_5: null
-                marker_6: null
+                subject_db_id:
+                  type: integer
+                  description: |
+                    Identifier used by repository to identify a subject.
+                project_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_parent_db_id:
+                  type: integer
+                  description: |
+                    e.g. null
+                lab_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                case_control_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_sample_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_subject_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_source_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
         '400':
           description: malformed request
         '401':
@@ -399,106 +449,146 @@ paths:
             items:
               type: object
               properties:
-                subject_code:
-                  type: string
-                  description: |
-                    e.g. Subject One
-                subject_id:
+                sequence_count:
                   type: integer
                   description: |
-                    e.g. 1
-                subject_gender:
+                    The number of sequences that match the filter for this sample.
+                study_id:
                   type: string
                   description: |
-                    e.g. Male
-                subject_ethnicity:
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
+                study_title:
                   type: string
                   description: |
-                    e.g. Caucasian
-                subject_species:
+                    Publication or Protocol Title (e.g. My Study) (AIRR)
+                study_type:
                   type: string
                   description: |
-                    e.g. Human
+                    Type of project/study (e.g. Cancer) (AIRR)
+                inclusion_exclusion_criteria:
+                  type: string
+                  description: |
+                    Study inclusion/exclusion criteria (AIRR)
+                grants:
+                  type: string
+                  description: |
+                    Grant funding agency (AIRR)
+                lab_name:
+                  type: string
+                  description: |
+                    Lab name (AIRR)                    
+                collected_by:
+                  type: string
+                  description: |
+                    Contact information (data collection) (AIRR)
+                uploaded_by:
+                  type: string
+                  description: |
+                    Contact information (data deposition) (AIRR)
+                lab_address:
+                  type: string
+                  description: |
+                    Lab address (AIRR)
+                pubs_ids:
+                  type: string
+                  description: |
+                    Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
+                subject_id:
+                  type: string
+                  description: |
+                    UID assigned by submitter (e.g. SUB856413) (AIRR)
+                organism:
+                  type: string
+                  description: |
+                    Organism-based (human, mouse) or synthetic (AIRR)
+                sex:
+                  type: string
+                  description: |
+                    Sex (e.g. M/F) (AIRR)
+                age:
+                  type: string
+                  description: |
+                    Age - Time duration and unit (e.g. 200 days) (AIRR)
+                age_event:
+                  type: string
+                  description: |
+                    Age event (e.g. Enrollment) (AIRR)
+                ancestry_population:
+                  type: string
+                  description: |
+                    Ancestry population (AIRR)
+                ethnicity:
+                  type: string
+                  description: |
+                    Ethnicity (e.g. Tamil) (AIRR)
+                race:
+                  type: string
+                  description: |
+                    Race (e.g. South Indian) (AIRR)
+                species_name:
+                  type: string
+                  description: |
+                    Species name (e.g. Homo Sapiens) (AIRR)
+                strain_name:
+                  type: string
+                  description: |
+                    Strain name (e.g. C57BL/6J) (AIRR)
+                linked_subjects:
+                  type: string
+                  description: |
+                    Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                link_type:
+                  type: string
+                  description: |
+                     Relation type (.e.g  sister, father, daughter) (AIRR)
+                sample_id:
+                  type: string
+                  description: |
+                    Biological sample ID - UID assigned by submitter (AIRR)
+                sample_type:
+                  type: string
+                  description: |
+                    Sample type (e.g. Tissue, body fluid) (AIRR)
+                tissue:
+                  type: string
+                  description: |
+                    Anatomic site (e.g. spleen) (AIRR)
+                disease_state_sample:
+                  type: string
+                  description: |
+                    Disease state of sample (e.g. tumor vs margin) (AIRR)
+                collection_date:
+                  type: string
+                  description: |
+                    Sample collection time  (e.g. 10 days) (AIRR)
+                collection_time_event:
+                  type: string
+                  description: |
+                    Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                source_commercial:
+                  type: string
+                  description: |
+                    Commercial source of sample (e.g. XYZ Pharma) (AIRR)
+                cell_subset:
+                  type: string
+                  description: |
+                    Cell subset (Controlled vocabulary) (AIRR)
+                cell_phenotype:
+                  type: string
+                  description: |
+                    Cell subset phenotype (lab specific description) (AIRR)
+                study_group_description:
+                  type: string
+                  description: |
+                    Study group description (e.g. Case vs. Control) (AIRR)
+                library_source:
+                  type: string
+                  description: |
+                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
                 subject_age:
                   type: integer
                   description: |
                     e.g. 1
-                project_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                study_title:
-                  type: string
-                  description: |
-                    Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                study_type:
-                  type: string
-                  description: |
-                    Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
-                project_parent_id:
-                  type: integer
-                  description: |
-                    e.g. null
-                lab_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                lab_name:
-                  type: string
-                  description: |
-                    Name of the Laboratory running the study (AIRR)
-                case_control_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                case_control_name:
-                  type: string
-                  description: |
-                    e.g. Control
-                sample_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_name:
-                  type: string
-                  description: |
-                    e.g. Blood Sample 01
-                project_sample_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_subject_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sequence_count:
-                  type: integer
-                  description: |
-                    e.g. 0
-                dna_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                dna_type:
-                  type: string
-                  description: |
-                    e.g. cDNA
-                sample_source_id:
-                  type: integer
-                  description: |
-                    e.g. 0
-                sample_source_name:
-                  type: string
-                  description: |
-                    e.g. Blood (PBMC)
-                lab_cell_subset_name:
-                  type: string
-                  description: |
-                    e.g. Naive B Alpha
-                ireceptor_cell_subset_name:
-                  type: string
-                  description: |
-                    e.g. Naive B
                 marker_1:
                   type: string
                   description: |
@@ -523,39 +613,46 @@ paths:
                   type: string
                   description: |
                     e.g. null
-          examples:
-            application/json:
-              - sequence_count: 1234567
-                subject_code: Subject One
-                subject_id: 1
-                subject_gender: Male
-                subject_ethnicity: Caucasian
-                subject_species: Human
-                project_id: 0
-                study_title: First Project
-                study_type: Cancer
-                project_parent_id: null
-                lab_id: 0
-                lab_name: First Lab
-                case_control_id: 0
-                case_control_name: Control
-                sample_id: 1
-                project_sample_id: 1
-                sample_name: Blood Sample 01
-                subject_age: 22
-                sample_subject_id: 1
-                dna_id: 1
-                dna_type: cDNA
-                sample_source_id: 2
-                sample_source_name: Blood (PBMC)
-                lab_cell_subset_name: Naive B Alpha
-                ireceptor_cell_subset_name: Naive B
-                marker_1: CR19
-                marker_2: CR20
-                marker_3: CR21
-                marker_4: null
-                marker_5: null
-                marker_6: null
+                subject_db_id:
+                  type: integer
+                  description: |
+                    Identifier used by repository to identify a subject.
+                project_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_parent_db_id:
+                  type: integer
+                  description: |
+                    e.g. null
+                lab_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                case_control_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                project_sample_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_subject_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                dna_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
+                sample_source_db_id:
+                  type: integer
+                  description: |
+                    e.g. 0
         '400':
           description: malformed request
         '401':
@@ -617,6 +714,22 @@ paths:
                 items:
                   type: object
                   properties:
+                    sequence_count:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    study_title:
+                      type: string
+                      description: |
+                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                    study_type:
+                      type: string
+                      description: |
+                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+                    study:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
                     subject_code:
                       type: string
                       description: |
@@ -645,22 +758,12 @@ paths:
                       type: integer
                       description: |
                         e.g. 0
-                    study_title:
-                      type: string
-                      description: |
-                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
-                    study_type:
-                      type: string
-                      description: |
-                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
+
                     project_parent_id:
                       type: integer
                       description: |
                         e.g. null
-                    study:
-                      type: string
-                      description: |
-                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
+
                     lab_id:
                       type: integer
                       description: |
@@ -701,10 +804,7 @@ paths:
                       type: integer
                       description: |
                         e.g. 0
-                    sequence_count:
-                      type: integer
-                      description: |
-                        e.g. 0
+
                     dna_id:
                       type: integer
                       description: |

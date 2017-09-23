@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "iReceptor Data Source API",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "contact": {
       "name": "iReceptor Project",
       "url": "http://www.ireceptor.org/",
@@ -13,7 +13,6 @@
   "host": "ipa.ireceptor.org",
   "basePath": "/v2",
   "schemes": [
-    "http",
     "https"
   ],
   "produces": [
@@ -154,99 +153,143 @@
                 "properties": {
                   "sequence_count": {
                     "type": "integer",
-                    "description": "e.g. 0\n"
+                    "description": "The number of sequences that match the filter for this sample.\n"
                   },
-                  "subject_code": {
+                  "study_id": {
                     "type": "string",
-                    "description": "e.g. Subject One\n"
+                    "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)\n"
+                  },
+                  "study_title": {
+                    "type": "string",
+                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)\n"
+                  },
+                  "study_type": {
+                    "type": "string",
+                    "description": "Type of project/study (e.g. Cancer) (AIRR)\n"
+                  },
+                  "inclusion_exclusion_criteria": {
+                    "type": "string",
+                    "description": "Study inclusion/exclusion criteria (AIRR)\n"
+                  },
+                  "grants": {
+                    "type": "string",
+                    "description": "Grant funding agency (AIRR)\n"
+                  },
+                  "lab_name": {
+                    "type": "string",
+                    "description": "Lab name (AIRR)                    \n"
+                  },
+                  "collected_by": {
+                    "type": "string",
+                    "description": "Contact information (data collection) (AIRR)\n"
+                  },
+                  "uploaded_by": {
+                    "type": "string",
+                    "description": "Contact information (data deposition) (AIRR)\n"
+                  },
+                  "lab_address": {
+                    "type": "string",
+                    "description": "Lab address (AIRR)\n"
+                  },
+                  "pubs_ids": {
+                    "type": "string",
+                    "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)\n"
                   },
                   "subject_id": {
-                    "type": "integer",
-                    "description": "e.g. 1\n"
-                  },
-                  "subject_gender": {
                     "type": "string",
-                    "description": "e.g. Male\n"
+                    "description": "UID assigned by submitter (e.g. SUB856413) (AIRR)\n"
                   },
-                  "subject_ethnicity": {
+                  "organism": {
                     "type": "string",
-                    "description": "e.g. Eth1\n"
+                    "description": "Organism-based (human, mouse) or synthetic (AIRR)\n"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "description": "Sex (e.g. M/F) (AIRR)\n"
+                  },
+                  "age": {
+                    "type": "string",
+                    "description": "Age - Time duration and unit (e.g. 200 days) (AIRR)\n"
+                  },
+                  "age_event": {
+                    "type": "string",
+                    "description": "Age event (e.g. Enrollment) (AIRR)\n"
+                  },
+                  "ancestry_population": {
+                    "type": "string",
+                    "description": "Ancestry population (AIRR)\n"
+                  },
+                  "ethnicity": {
+                    "type": "string",
+                    "description": "Ethnicity (e.g. Tamil) (AIRR)\n"
+                  },
+                  "race": {
+                    "type": "string",
+                    "description": "Race (e.g. South Indian) (AIRR)\n"
+                  },
+                  "species_name": {
+                    "type": "string",
+                    "description": "Species name (e.g. Homo Sapiens) (AIRR)\n"
+                  },
+                  "strain_name": {
+                    "type": "string",
+                    "description": "Strain name (e.g. C57BL/6J) (AIRR)\n"
+                  },
+                  "linked_subjects": {
+                    "type": "string",
+                    "description": "Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)\n"
+                  },
+                  "link_type": {
+                    "type": "string",
+                    "description": "Relation type (.e.g  sister, father, daughter) (AIRR)\n"
+                  },
+                  "sample_id": {
+                    "type": "string",
+                    "description": "Biological sample ID - UID assigned by submitter (AIRR)\n"
+                  },
+                  "sample_type": {
+                    "type": "string",
+                    "description": "Sample type (e.g. Tissue, body fluid) (AIRR)\n"
+                  },
+                  "tissue": {
+                    "type": "string",
+                    "description": "Anatomic site (e.g. spleen) (AIRR)\n"
+                  },
+                  "disease_state_sample": {
+                    "type": "string",
+                    "description": "Disease state of sample (e.g. tumor vs margin) (AIRR)\n"
+                  },
+                  "collection_date": {
+                    "type": "string",
+                    "description": "Sample collection time  (e.g. 10 days) (AIRR)\n"
+                  },
+                  "collection_time_event": {
+                    "type": "string",
+                    "description": "Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)\n"
+                  },
+                  "source_commercial": {
+                    "type": "string",
+                    "description": "Commercial source of sample (e.g. XYZ Pharma) (AIRR)\n"
+                  },
+                  "cell_subset": {
+                    "type": "string",
+                    "description": "Cell subset (Controlled vocabulary) (AIRR)\n"
+                  },
+                  "cell_phenotype": {
+                    "type": "string",
+                    "description": "Cell subset phenotype (lab specific description) (AIRR)\n"
+                  },
+                  "study_group_description": {
+                    "type": "string",
+                    "description": "Study group description (e.g. Case vs. Control) (AIRR)\n"
+                  },
+                  "library_source": {
+                    "type": "string",
+                    "description": "Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)\n"
                   },
                   "subject_age": {
                     "type": "integer",
                     "description": "e.g. 1\n"
-                  },
-                  "project_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "study_title": {
-                    "type": "string",
-                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
-                  },
-                  "study_type": {
-                    "type": "string",
-                    "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
-                  },
-                  "project_parent_id": {
-                    "type": "integer",
-                    "description": "e.g. null\n"
-                  },
-                  "lab_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "lab_name": {
-                    "type": "string",
-                    "description": "Name of the Laboratory running the study (AIRR)\n"
-                  },
-                  "case_control_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "case_control_name": {
-                    "type": "string",
-                    "description": "e.g. Control\n"
-                  },
-                  "sample_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_name": {
-                    "type": "string",
-                    "description": "e.g. Blood Sample 01\n"
-                  },
-                  "project_sample_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_subject_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "dna_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "dna_type": {
-                    "type": "string",
-                    "description": "e.g. cDNA\n"
-                  },
-                  "sample_source_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_source_name": {
-                    "type": "string",
-                    "description": "e.g. Blood (PBMC)\n"
-                  },
-                  "lab_cell_subset_name": {
-                    "type": "string",
-                    "description": "e.g. Naive B Alpha\n"
-                  },
-                  "ireceptor_cell_subset_name": {
-                    "type": "string",
-                    "description": "e.g. Naive B\n"
                   },
                   "marker_1": {
                     "type": "string",
@@ -271,46 +314,49 @@
                   "marker_6": {
                     "type": "string",
                     "description": "e.g. null\n"
+                  },
+                  "subject_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used by repository to identify a subject.\n"
+                  },
+                  "project_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "project_parent_db_id": {
+                    "type": "integer",
+                    "description": "e.g. null\n"
+                  },
+                  "lab_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "case_control_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "project_sample_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_subject_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "dna_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_source_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
                   }
                 }
               }
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "sequence_count": 1234567,
-                  "subject_code": "Subject One",
-                  "subject_id": 1,
-                  "subject_gender": "Male",
-                  "subject_ethnicity": "Caucasian",
-                  "subject_species": "Human",
-                  "project_id": 0,
-                  "study_title": "First Project",
-                  "study_type": "Cancer",
-                  "project_parent_id": null,
-                  "lab_id": 0,
-                  "lab_name": "First Lab",
-                  "case_control_id": 0,
-                  "case_control_name": "Control",
-                  "sample_id": 1,
-                  "project_sample_id": 1,
-                  "sample_name": "Blood Sample 01",
-                  "subject_age": 22,
-                  "sample_subject_id": 1,
-                  "dna_id": 1,
-                  "dna_type": "cDNA",
-                  "sample_source_id": 2,
-                  "sample_source_name": "Blood (PBMC)",
-                  "lab_cell_subset_name": "Naive B Alpha",
-                  "ireceptor_cell_subset_name": "Naive B",
-                  "marker_1": "CR19",
-                  "marker_2": "CR20",
-                  "marker_3": "CR21",
-                  "marker_4": null,
-                  "marker_5": null,
-                  "marker_6": null
-                }
-              ]
             }
           },
           "400": {
@@ -427,105 +473,145 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "subject_code": {
+                  "sequence_count": {
+                    "type": "integer",
+                    "description": "The number of sequences that match the filter for this sample.\n"
+                  },
+                  "study_id": {
                     "type": "string",
-                    "description": "e.g. Subject One\n"
+                    "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)\n"
+                  },
+                  "study_title": {
+                    "type": "string",
+                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)\n"
+                  },
+                  "study_type": {
+                    "type": "string",
+                    "description": "Type of project/study (e.g. Cancer) (AIRR)\n"
+                  },
+                  "inclusion_exclusion_criteria": {
+                    "type": "string",
+                    "description": "Study inclusion/exclusion criteria (AIRR)\n"
+                  },
+                  "grants": {
+                    "type": "string",
+                    "description": "Grant funding agency (AIRR)\n"
+                  },
+                  "lab_name": {
+                    "type": "string",
+                    "description": "Lab name (AIRR)                    \n"
+                  },
+                  "collected_by": {
+                    "type": "string",
+                    "description": "Contact information (data collection) (AIRR)\n"
+                  },
+                  "uploaded_by": {
+                    "type": "string",
+                    "description": "Contact information (data deposition) (AIRR)\n"
+                  },
+                  "lab_address": {
+                    "type": "string",
+                    "description": "Lab address (AIRR)\n"
+                  },
+                  "pubs_ids": {
+                    "type": "string",
+                    "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)\n"
                   },
                   "subject_id": {
-                    "type": "integer",
-                    "description": "e.g. 1\n"
-                  },
-                  "subject_gender": {
                     "type": "string",
-                    "description": "e.g. Male\n"
+                    "description": "UID assigned by submitter (e.g. SUB856413) (AIRR)\n"
                   },
-                  "subject_ethnicity": {
+                  "organism": {
                     "type": "string",
-                    "description": "e.g. Caucasian\n"
+                    "description": "Organism-based (human, mouse) or synthetic (AIRR)\n"
                   },
-                  "subject_species": {
+                  "sex": {
                     "type": "string",
-                    "description": "e.g. Human\n"
+                    "description": "Sex (e.g. M/F) (AIRR)\n"
+                  },
+                  "age": {
+                    "type": "string",
+                    "description": "Age - Time duration and unit (e.g. 200 days) (AIRR)\n"
+                  },
+                  "age_event": {
+                    "type": "string",
+                    "description": "Age event (e.g. Enrollment) (AIRR)\n"
+                  },
+                  "ancestry_population": {
+                    "type": "string",
+                    "description": "Ancestry population (AIRR)\n"
+                  },
+                  "ethnicity": {
+                    "type": "string",
+                    "description": "Ethnicity (e.g. Tamil) (AIRR)\n"
+                  },
+                  "race": {
+                    "type": "string",
+                    "description": "Race (e.g. South Indian) (AIRR)\n"
+                  },
+                  "species_name": {
+                    "type": "string",
+                    "description": "Species name (e.g. Homo Sapiens) (AIRR)\n"
+                  },
+                  "strain_name": {
+                    "type": "string",
+                    "description": "Strain name (e.g. C57BL/6J) (AIRR)\n"
+                  },
+                  "linked_subjects": {
+                    "type": "string",
+                    "description": "Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)\n"
+                  },
+                  "link_type": {
+                    "type": "string",
+                    "description": "Relation type (.e.g  sister, father, daughter) (AIRR)\n"
+                  },
+                  "sample_id": {
+                    "type": "string",
+                    "description": "Biological sample ID - UID assigned by submitter (AIRR)\n"
+                  },
+                  "sample_type": {
+                    "type": "string",
+                    "description": "Sample type (e.g. Tissue, body fluid) (AIRR)\n"
+                  },
+                  "tissue": {
+                    "type": "string",
+                    "description": "Anatomic site (e.g. spleen) (AIRR)\n"
+                  },
+                  "disease_state_sample": {
+                    "type": "string",
+                    "description": "Disease state of sample (e.g. tumor vs margin) (AIRR)\n"
+                  },
+                  "collection_date": {
+                    "type": "string",
+                    "description": "Sample collection time  (e.g. 10 days) (AIRR)\n"
+                  },
+                  "collection_time_event": {
+                    "type": "string",
+                    "description": "Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)\n"
+                  },
+                  "source_commercial": {
+                    "type": "string",
+                    "description": "Commercial source of sample (e.g. XYZ Pharma) (AIRR)\n"
+                  },
+                  "cell_subset": {
+                    "type": "string",
+                    "description": "Cell subset (Controlled vocabulary) (AIRR)\n"
+                  },
+                  "cell_phenotype": {
+                    "type": "string",
+                    "description": "Cell subset phenotype (lab specific description) (AIRR)\n"
+                  },
+                  "study_group_description": {
+                    "type": "string",
+                    "description": "Study group description (e.g. Case vs. Control) (AIRR)\n"
+                  },
+                  "library_source": {
+                    "type": "string",
+                    "description": "Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)\n"
                   },
                   "subject_age": {
                     "type": "integer",
                     "description": "e.g. 1\n"
-                  },
-                  "project_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "study_title": {
-                    "type": "string",
-                    "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
-                  },
-                  "study_type": {
-                    "type": "string",
-                    "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
-                  },
-                  "project_parent_id": {
-                    "type": "integer",
-                    "description": "e.g. null\n"
-                  },
-                  "lab_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "lab_name": {
-                    "type": "string",
-                    "description": "Name of the Laboratory running the study (AIRR)\n"
-                  },
-                  "case_control_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "case_control_name": {
-                    "type": "string",
-                    "description": "e.g. Control\n"
-                  },
-                  "sample_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_name": {
-                    "type": "string",
-                    "description": "e.g. Blood Sample 01\n"
-                  },
-                  "project_sample_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_subject_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sequence_count": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "dna_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "dna_type": {
-                    "type": "string",
-                    "description": "e.g. cDNA\n"
-                  },
-                  "sample_source_id": {
-                    "type": "integer",
-                    "description": "e.g. 0\n"
-                  },
-                  "sample_source_name": {
-                    "type": "string",
-                    "description": "e.g. Blood (PBMC)\n"
-                  },
-                  "lab_cell_subset_name": {
-                    "type": "string",
-                    "description": "e.g. Naive B Alpha\n"
-                  },
-                  "ireceptor_cell_subset_name": {
-                    "type": "string",
-                    "description": "e.g. Naive B\n"
                   },
                   "marker_1": {
                     "type": "string",
@@ -550,46 +636,49 @@
                   "marker_6": {
                     "type": "string",
                     "description": "e.g. null\n"
+                  },
+                  "subject_db_id": {
+                    "type": "integer",
+                    "description": "Identifier used by repository to identify a subject.\n"
+                  },
+                  "project_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "project_parent_db_id": {
+                    "type": "integer",
+                    "description": "e.g. null\n"
+                  },
+                  "lab_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "case_control_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "project_sample_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_subject_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "dna_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
+                  },
+                  "sample_source_db_id": {
+                    "type": "integer",
+                    "description": "e.g. 0\n"
                   }
                 }
               }
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "sequence_count": 1234567,
-                  "subject_code": "Subject One",
-                  "subject_id": 1,
-                  "subject_gender": "Male",
-                  "subject_ethnicity": "Caucasian",
-                  "subject_species": "Human",
-                  "project_id": 0,
-                  "study_title": "First Project",
-                  "study_type": "Cancer",
-                  "project_parent_id": null,
-                  "lab_id": 0,
-                  "lab_name": "First Lab",
-                  "case_control_id": 0,
-                  "case_control_name": "Control",
-                  "sample_id": 1,
-                  "project_sample_id": 1,
-                  "sample_name": "Blood Sample 01",
-                  "subject_age": 22,
-                  "sample_subject_id": 1,
-                  "dna_id": 1,
-                  "dna_type": "cDNA",
-                  "sample_source_id": 2,
-                  "sample_source_name": "Blood (PBMC)",
-                  "lab_cell_subset_name": "Naive B Alpha",
-                  "ireceptor_cell_subset_name": "Naive B",
-                  "marker_1": "CR19",
-                  "marker_2": "CR20",
-                  "marker_3": "CR21",
-                  "marker_4": null,
-                  "marker_5": null,
-                  "marker_6": null
-                }
-              ]
             }
           },
           "400": {
@@ -665,6 +754,22 @@
                   "items": {
                     "type": "object",
                     "properties": {
+                      "sequence_count": {
+                        "type": "integer",
+                        "description": "e.g. 0\n"
+                      },
+                      "study_title": {
+                        "type": "string",
+                        "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
+                      },
+                      "study_type": {
+                        "type": "string",
+                        "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
+                      },
+                      "study": {
+                        "type": "string",
+                        "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)\n"
+                      },
                       "subject_code": {
                         "type": "string",
                         "description": "e.g. Subject One\n"
@@ -693,21 +798,9 @@
                         "type": "integer",
                         "description": "e.g. 0\n"
                       },
-                      "study_title": {
-                        "type": "string",
-                        "description": "Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)\n"
-                      },
-                      "study_type": {
-                        "type": "string",
-                        "description": "Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)\n"
-                      },
                       "project_parent_id": {
                         "type": "integer",
                         "description": "e.g. null\n"
-                      },
-                      "study": {
-                        "type": "string",
-                        "description": "Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)\n"
                       },
                       "lab_id": {
                         "type": "integer",
@@ -746,10 +839,6 @@
                         "description": "e.g. 0\n"
                       },
                       "sample_subject_id": {
-                        "type": "integer",
-                        "description": "e.g. 0\n"
-                      },
-                      "sequence_count": {
                         "type": "integer",
                         "description": "e.g. 0\n"
                       },
