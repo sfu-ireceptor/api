@@ -20,6 +20,10 @@
   ],
   "tags": [
     {
+      "name": "info",
+      "description": "Service information"
+    },
+    {
       "name": "samples",
       "description": "Queries for samples"
     },
@@ -33,7 +37,57 @@
     }
   ],
   "paths": {
+    "/": {
+      "x-swagger-router-controller": "status",
+      "get": {
+        "description": "Service heartbeat.\n",
+        "operationId": "getStatus",
+        "responses": {
+          "200": {
+            "description": "Success.\n",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info": {
+      "x-swagger-router-controller": "status",
+      "get": {
+        "description": "Service information.\n",
+        "tags": [
+          "info"
+        ],
+        "operationId": "getInfo",
+        "responses": {
+          "200": {
+            "description": "Success.\n",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    },
     "/samples": {
+      "x-swagger-router-controller": "samples",
       "get": {
         "description": "This service returns metadata about samples, including higher-level meta-data around the study, subject, diagnosis, and sample processing (data relevant to MiAIRR data classes 1 through 3). The data returned is filtered based on the parameters provided.\nA successful call returns a json list with a sample level summary of each sample including a summary count of the number of sequences found for that sample.\n",
         "tags": [
@@ -700,6 +754,7 @@
       }
     },
     "/sequences_summary": {
+      "x-swagger-router-controller": "sequences",
       "get": {
         "description": "This service returns a summary of sequences that matches the GET provided filter. \"username\" parameter refers to external_users table.\n",
         "tags": [
@@ -1564,6 +1619,7 @@
       }
     },
     "/sequence_data": {
+      "x-swagger-router-controller": "sequences",
       "get": {
         "description": "This service returns the annotation data that matches the GET provided filter. \"username\" parameter refers to external_users table, and it requires the array of \"project_sample_id\", which limits which samples the sequences will be taken from. Other parameters are optional, and refer to the sequence_md_view view in iReceptor database.\n",
         "tags": [
@@ -2702,6 +2758,7 @@
       }
     },
     "/clones_summary": {
+      "x-swagger-router-controller": "clones",
       "get": {
         "description": "This service returns a summary of sequence clones that match the GET provided filter. \"username\" parameter refers to external_users table.\n",
         "tags": [
@@ -2784,6 +2841,7 @@
       }
     },
     "/clones_data": {
+      "x-swagger-router-controller": "clones",
       "get": {
         "description": "This service returns a list of clones that matches the GET provided filter. \"username\" parameter refers to external_users table.\n",
         "tags": [
