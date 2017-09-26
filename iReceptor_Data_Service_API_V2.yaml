@@ -8,10 +8,11 @@ info:
     email: breden@sfu.ca
   description: >
     Documentation of Major Version 2 of the iReceptor Adaptive Immune Receptor
-    Repertoire (AIRR) data source web service application programming interface (API).
-    V2 of the API implements an increased level of compliance with the [Minimal
-    Information for AIRR (MiAIRR) standard](https://github.com/airr-community/airr-standards).
-    Learn more about [iReceptor](http://www.ireceptor.org/)
+    Repertoire (AIRR) data source web service application programming interface
+    (API). V2 of the API implements an increased level of compliance with the
+    [Minimal Information for AIRR (MiAIRR)
+    standard](https://github.com/airr-community/airr-standards). Learn more
+    about [iReceptor](http://www.ireceptor.org/)
 host: ipa.ireceptor.org
 basePath: /v2
 schemes:
@@ -19,6 +20,8 @@ schemes:
 produces:
   - application/json
 tags:
+  - name: info
+    description: Service information
   - name: samples
     description: Queries for samples
   - name: sequences
@@ -26,17 +29,54 @@ tags:
   - name: clones
     description: Queries for clones
 paths:
+  /:
+    x-swagger-router-controller: status
+    get:
+      description: |
+        Service heartbeat.
+      operationId: getStatus
+      responses:
+        '200':
+          description: |
+            Success.
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+  /info:
+    x-swagger-router-controller: status
+    get:
+      description: |
+        Service information.
+      tags:
+        - info
+      operationId: getInfo
+      responses:
+        '200':
+          description: |
+            Success.
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+  /swagger:
+    x-swagger-pipe: swagger_raw
   /samples:
+    x-swagger-router-controller: samples
     get:
       description: >
         This service returns metadata about samples, including higher-level
         meta-data around the study, subject, diagnosis, and sample processing
-        (data relevant to MiAIRR data classes 1 through 3). The data
-        returned is filtered based on the parameters provided.
+        (data relevant to MiAIRR data classes 1 through 3). The data returned is
+        filtered based on the parameters provided.
 
         A successful call returns a json list with a sample level summary of
-        each sample including a summary count of the number of sequences found for
-        that sample.
+        each sample including a summary count of the number of sequences found
+        for that sample.
       tags:
         - samples
       parameters:
@@ -140,8 +180,9 @@ paths:
               properties:
                 sequence_count:
                   type: integer
-                  description: |
-                    The number of sequences that match the filter for this sample.
+                  description: >
+                    The number of sequences that match the filter for this
+                    sample.
                 study_id:
                   type: string
                   description: |
@@ -184,8 +225,7 @@ paths:
                     Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
                 subject_id:
                   type: string
-                  description: |
-                    UID assigned by submitter (e.g. SUB856413) (AIRR)
+                  description: "UID assigned by submitter (e.g.\_SUB856413) (AIRR)\n"
                 organism:
                   type: string
                   description: |
@@ -224,12 +264,13 @@ paths:
                     Strain name (e.g. C57BL/6J) (AIRR)
                 linked_subjects:
                   type: string
-                  description: |
-                    Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                  description: >
+                    Relation to other subjects (SubjectID e.g. SUB1355648)
+                    (AIRR)
                 link_type:
                   type: string
                   description: |
-                     Relation type (.e.g  sister, father, daughter) (AIRR)
+                    Relation type (.e.g  sister, father, daughter) (AIRR)
                 sample_id:
                   type: string
                   description: |
@@ -252,8 +293,9 @@ paths:
                     Sample collection time  (e.g. 10 days) (AIRR)
                 collection_time_event:
                   type: string
-                  description: |
-                    Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                  description: >
+                    Collection time event (T0) (e.g. vaccination, recruitment,
+                    etc) (AIRR)
                 source_commercial:
                   type: string
                   description: |
@@ -272,8 +314,9 @@ paths:
                     Study group description (e.g. Case vs. Control) (AIRR)
                 library_source:
                   type: string
-                  description: |
-                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
+                  description: >
+                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA)
+                    (AIRR)
                 subject_age:
                   type: integer
                   description: |
@@ -304,47 +347,61 @@ paths:
                     e.g. null
                 subject_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a subject.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    subject.
                 project_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a project.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    project.
                 project_parent_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a parent/child
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    parent/child
+
                     relationship between this project and its parent project.
                 lab_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a lab.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    lab.
                 case_control_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an element in the case_control table.
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    element in the case_control table.
                 sample_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a sample.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    sample.
                 dna_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a DNA type.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    DNA type.
                 project_sample_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     a project with a sample.
                 sample_subject_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     between a sample and a subject.
                 sample_source_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     between a sample and a sample source.
         '400':
           description: malformed request
@@ -360,12 +417,12 @@ paths:
       description: >
         This service returns metadata about samples, including higher-level
         meta-data around the study, subject, diagnosis, and sample processing
-        (data relevant to MiAIRR data classes 1 through 3). The data
-        returned is filtered based on the parameters provided.
+        (data relevant to MiAIRR data classes 1 through 3). The data returned is
+        filtered based on the parameters provided.
 
         A successful call returns a json list with a sample level summary of
-        each sample including a summary count of the number of sequences found for
-        that sample.
+        each sample including a summary count of the number of sequences found
+        for that sample.
       tags:
         - samples
       parameters:
@@ -455,8 +512,9 @@ paths:
               properties:
                 sequence_count:
                   type: integer
-                  description: |
-                    The number of sequences that match the filter for this sample.
+                  description: >
+                    The number of sequences that match the filter for this
+                    sample.
                 study_id:
                   type: string
                   description: |
@@ -499,8 +557,7 @@ paths:
                     Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
                 subject_id:
                   type: string
-                  description: |
-                    UID assigned by submitter (e.g. SUB856413) (AIRR)
+                  description: "UID assigned by submitter (e.g.\_SUB856413) (AIRR)\n"
                 organism:
                   type: string
                   description: |
@@ -539,12 +596,13 @@ paths:
                     Strain name (e.g. C57BL/6J) (AIRR)
                 linked_subjects:
                   type: string
-                  description: |
-                    Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                  description: >
+                    Relation to other subjects (SubjectID e.g. SUB1355648)
+                    (AIRR)
                 link_type:
                   type: string
                   description: |
-                     Relation type (.e.g  sister, father, daughter) (AIRR)
+                    Relation type (.e.g  sister, father, daughter) (AIRR)
                 sample_id:
                   type: string
                   description: |
@@ -567,8 +625,9 @@ paths:
                     Sample collection time  (e.g. 10 days) (AIRR)
                 collection_time_event:
                   type: string
-                  description: |
-                    Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                  description: >
+                    Collection time event (T0) (e.g. vaccination, recruitment,
+                    etc) (AIRR)
                 source_commercial:
                   type: string
                   description: |
@@ -587,8 +646,9 @@ paths:
                     Study group description (e.g. Case vs. Control) (AIRR)
                 library_source:
                   type: string
-                  description: |
-                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
+                  description: >
+                    Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA)
+                    (AIRR)
                 subject_age:
                   type: integer
                   description: |
@@ -619,47 +679,61 @@ paths:
                     e.g. null
                 subject_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a subject.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    subject.
                 project_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a project.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    project.
                 project_parent_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a parent/child
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    parent/child
+
                     relationship between this project and its parent project.
                 lab_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a lab.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    lab.
                 case_control_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an element in the case_control table.
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    element in the case_control table.
                 sample_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a sample.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    sample.
                 dna_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify a DNA type.
+                  description: >
+                    Identifier used internally by the repository to identify a
+                    DNA type.
                 project_sample_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     a project with a sample.
                 sample_subject_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     between a sample and a subject.
                 sample_source_db_id:
                   type: integer
-                  description: |
-                    Identifier used internally by the repository to identify an association
+                  description: >
+                    Identifier used internally by the repository to identify an
+                    association
+
                     between a sample and a sample source.
         '400':
           description: malformed request
@@ -672,6 +746,7 @@ paths:
         '405':
           description: method not allowed
   /sequences_summary:
+    x-swagger-router-controller: sequences
     get:
       description: >
         This service returns a summary of sequences that matches the GET
@@ -1623,6 +1698,7 @@ paths:
         '405':
           description: method not allowed
   /sequences_data:
+    x-swagger-router-controller: sequences
     get:
       description: >
         This service returns the annotation data that matches the GET provided
@@ -2806,6 +2882,7 @@ paths:
         '405':
           description: method not allowed
   /clones_summary:
+    x-swagger-router-controller: clones
     get:
       description: >
         This service returns a summary of sequence clones that match the GET
@@ -3562,8 +3639,6 @@ paths:
                       type: string
                       description: |
                         e.g. VQuest
-
-
         '400':
           description: malformed request
         '401':
@@ -3575,6 +3650,7 @@ paths:
         '405':
           description: method not allowed
   /clones_data:
+    x-swagger-router-controller: clones
     get:
       description: >
         This service returns a list of clones that matches the GET provided
