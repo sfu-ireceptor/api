@@ -711,13 +711,19 @@ paths:
       responses:
         '200':
           description: >
-            A successful call returns an summary of sequence data as an array of
-            'category' = count pairs in which the 'category' are string tags of
-            parameters of interest from a controlled vocabulary term set.
+            A successful call returns two components, an aggregated summary of the data
+            that satisfies the query and an example subset of the annotated sequence data
+            that meets the query criteria. The aggreated data returns a summary similar
+            to that returned by the /samples API entry point, returning the number of
+            sequences and the study/subject/sample meta-data for each sample. The example
+            subset of sequence data that is returned is a small subset of annotated sequences
+            that met the search criteria. The number of sequences returned is given in the
+            "num_sequences" paramter to the query and the format in which the sequences are
+            returned is provided by the "sequence_format" parameter to the query.
           schema:
             type: object
             properties:
-              aggregation_summary:
+              summary:
                 type: array
                 items:
                   type: object
@@ -725,118 +731,143 @@ paths:
                     sequence_count:
                       type: integer
                       description: |
-                        e.g. 0
+                        The number of sequences that match the filter for this sample.
+                    study_id:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
                     study_title:
                       type: string
                       description: |
-                        Publication or Protocol Title (e.g. My Study) (AIRR)(v1 = project_name)
+                        Publication or Protocol Title (e.g. My Study) (AIRR)
                     study_type:
                       type: string
                       description: |
-                        Type of project/study (e.g. Cancer) (AIRR)(v1 = project_type)
-                    study:
+                        Type of project/study (e.g. Cancer) (AIRR)
+                    inclusion_exclusion_criteria:
                       type: string
                       description: |
-                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)(sra_accession)
-                    subject_code:
+                        Study inclusion/exclusion criteria (AIRR)
+                    grants:
                       type: string
                       description: |
-                        e.g. Subject One
+                        Grant funding agency (AIRR)
+                    lab_name:
+                      type: string
+                      description: |
+                        Lab name (AIRR)                    
+                    collected_by:
+                      type: string
+                      description: |
+                        Contact information (data collection) (AIRR)
+                    uploaded_by:
+                      type: string
+                      description: |
+                        Contact information (data deposition) (AIRR)
+                    lab_address:
+                      type: string
+                      description: |
+                        Lab address (AIRR)
+                    pubs_ids:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
                     subject_id:
-                      type: integer
-                      description: |
-                        e.g. 1
-                    subject_gender:
                       type: string
                       description: |
-                        e.g. Male
-                    subject_species:
+                        UID assigned by submitter (e.g. SUB856413) (AIRR)
+                    organism:
                       type: string
                       description: |
-                        e.g. Mouse
-                    subject_ethnicity:
+                        Organism-based (human, mouse) or synthetic (AIRR)
+                    sex:
                       type: string
                       description: |
-                        e.g. Eth1
+                        Sex (e.g. M/F) (AIRR)
+                    age:
+                      type: string
+                      description: |
+                        Age - Time duration and unit (e.g. 200 days) (AIRR)
+                    age_event:
+                      type: string
+                      description: |
+                        Age event (e.g. Enrollment) (AIRR)
+                    ancestry_population:
+                      type: string
+                      description: |
+                        Ancestry population (AIRR)
+                    ethnicity:
+                      type: string
+                      description: |
+                        Ethnicity (e.g. Tamil) (AIRR)
+                    race:
+                      type: string
+                      description: |
+                        Race (e.g. South Indian) (AIRR)
+                    species_name:
+                      type: string
+                      description: |
+                        Species name (e.g. Homo Sapiens) (AIRR)
+                    strain_name:
+                      type: string
+                      description: |
+                        Strain name (e.g. C57BL/6J) (AIRR)
+                    linked_subjects:
+                      type: string
+                      description: |
+                        Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                    link_type:
+                      type: string
+                      description: |
+                         Relation type (.e.g  sister, father, daughter) (AIRR)
+                    sample_id:
+                      type: string
+                      description: |
+                        Biological sample ID - UID assigned by submitter (AIRR)
+                    sample_type:
+                      type: string
+                      description: |
+                        Sample type (e.g. Tissue, body fluid) (AIRR)
+                    tissue:
+                      type: string
+                      description: |
+                        Anatomic site (e.g. spleen) (AIRR)
+                    disease_state_sample:
+                      type: string
+                      description: |
+                        Disease state of sample (e.g. tumor vs margin) (AIRR)
+                    collection_date:
+                      type: string
+                      description: |
+                        Sample collection time  (e.g. 10 days) (AIRR)
+                    collection_time_event:
+                      type: string
+                      description: |
+                        Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                    source_commercial:
+                      type: string
+                      description: |
+                        Commercial source of sample (e.g. XYZ Pharma) (AIRR)
+                    cell_subset:
+                      type: string
+                      description: |
+                        Cell subset (Controlled vocabulary) (AIRR)
+                    cell_phenotype:
+                      type: string
+                      description: |
+                        Cell subset phenotype (lab specific description) (AIRR)
+                    study_group_description:
+                      type: string
+                      description: |
+                        Study group description (e.g. Case vs. Control) (AIRR)
+                    library_source:
+                      type: string
+                      description: |
+                        Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
                     subject_age:
                       type: integer
                       description: |
                         e.g. 1
-                    project_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-
-                    project_parent_id:
-                      type: integer
-                      description: |
-                        e.g. null
-
-                    lab_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    lab_name:
-                      type: string
-                      description: |
-                        Name of the Laboratory running the study (AIRR)
-                    disease_state_id:
-                      type: integer
-                      description: |
-                        e.g. 1
-                    disease_state_name:
-                      type: string
-                      description: |
-                        e.g. HIV-1 infected
-                    case_control_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    case_control_name:
-                      type: string
-                      description: |
-                        e.g. Control
-                    sample_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    sample_name:
-                      type: string
-                      description: |
-                        e.g. Blood Sample 01
-                    project_sample_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    sample_subject_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-
-                    dna_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    dna_type:
-                      type: string
-                      description: |
-                        e.g. cDNA
-                    sample_source_id:
-                      type: integer
-                      description: |
-                        e.g. 0
-                    sample_source_name:
-                      type: string
-                      description: |
-                        e.g. Blood (PBMC)
-                    lab_cell_subset_name:
-                      type: string
-                      description: |
-                        e.g. Naive B Alpha
-                    ireceptor_cell_subset_name:
-                      type: string
-                      description: |
-                        e.g. Naive B
                     marker_1:
                       type: string
                       description: |
@@ -861,15 +892,94 @@ paths:
                       type: string
                       description: |
                         e.g. null
-                    sequences:
+                    subject_db_id:
                       type: integer
                       description: |
-                        e.g. 167793
-              sequences:
+                        Identifier used internally by the repository to identify a subject.
+                    project_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a project.
+                    project_parent_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a parent/child
+                        relationship between this project and its parent project.
+                    lab_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a lab.
+                    case_control_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an element in the case_control table.
+                    sample_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a sample.
+                    dna_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a DNA type.
+                    project_sample_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        a project with a sample.
+                    sample_subject_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        between a sample and a subject.
+                    sample_source_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        between a sample and a sample source.
+              items:
                 type: array
                 items:
                   type: object
                   properties:
+                    germline_database:
+                      type: string
+                      description: >
+                        Source of germline V(D)J segments, with version number or
+                        date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+                    cell_index:
+                      type: integer
+                      description: |
+                        Cell Index (UID linking sequences from the same cell) (AIRR)
+                    v_allele:
+                      type: string
+                      description: |
+                        V gene with allele (e.g. IGHV4-59*01) (AIRR)
+                    d_allele:
+                      type: string
+                      description: |
+                        D gene with allele (e.g. IGHD3-10*01) (AIRR)
+                    j_allele:
+                      type: string
+                      description: |
+                        J gene with allele (e.g. IGHJ4*02) (AIRR)
+                    c_allele:
+                      type: string
+                      description: |
+                        C region with allele (AIRR)                     
+                    junction_nt:
+                      type: string
+                      description: >
+                        JUNCTION nucleotide sequence (Sequence of the CDR3
+                        region (nucleotide)) (AIRR)
+                    junction_aa:
+                      type: string
+                      description: >
+                        JUNCTION amino acid sequence (Sequence of the CDR3
+                        region (amino acid)) (AIRR)
+                    duplicate_count:
+                      type: integer
+                      description: |
+                        Number of times the sequence has been duplicated in a file (AIRR)
                     seq_id:
                       type: integer
                       description: |
@@ -900,10 +1010,6 @@ paths:
                       type: string
                       description: |
                         e.g. IGHV4-59
-                    vgene_allele:
-                      type: string
-                      description: |
-                        e.g. IGHV4-59*01 or  IGHV4-59*07
                     dgene_string:
                       type: string
                       description: |
@@ -916,10 +1022,6 @@ paths:
                       type: string
                       description: |
                         e.g. IGHD3-10
-                    dgene_allele:
-                      type: string
-                      description: |
-                        e.g. IGHD3-10*01
                     jgene_string:
                       type: string
                       description: |
@@ -932,10 +1034,6 @@ paths:
                       type: string
                       description: |
                         e.g. IGHJ4
-                    jgene_allele:
-                      type: string
-                      description: |
-                        e.g. IGHJ4*02
                     functionality:
                       type: string
                       description: |
@@ -1024,10 +1122,6 @@ paths:
                       type: string
                       description: |
                         cdr3 region nucleotide sequence
-                    junction_sequence_nt:
-                      type: string
-                      description: |
-                        junction nucleotide sequence
                     vdjregion_sequence_nt_gapped:
                       type: string
                       description: |
@@ -1136,10 +1230,6 @@ paths:
                       type: string
                       description: |
                         cdr3 region amino acid sequence
-                    junction_sequence_aa:
-                      type: string
-                      description: |
-                        junction amino acid sequence
                     vdjregion_sequence_aa_gapped:
                       type: string
                       description: |
@@ -1346,7 +1436,7 @@ paths:
                         e.g. VQuest
           examples:
             application/json:
-              aggregation_summary:
+              summary:
                 - subject_code: IAVI 84
                   subject_id: 1
                   subject_gender: null
@@ -1390,7 +1480,7 @@ paths:
                   marker_5: ' CD14'
                   marker_6: ' CD16, IgM, IgA, IgD '
                   sequences: 167793
-              sequences:
+              items:
                 - seq_id: 2
                   seq_name: SRR654169.17_G912ZWU01EPN4E_length=379
                   project_sample_id: 1
@@ -1398,15 +1488,15 @@ paths:
                   vgene_string: Homsap IGHV1-24*01 F
                   vgene_family: IGHV1
                   vgene_gene: IGHV1-24
-                  vgene_allele: ' IGHV1-24*01 '
+                  v_allele: ' IGHV1-24*01 '
                   jgene_string: Homsap IGHJ3*02 F
                   jgene_family: IGHJ3
                   jgene_gene: IGHJ3
-                  jgene_allele: ' IGHJ3*02 '
+                  j_allele: ' IGHJ3*02 '
                   dgene_string: Homsap IGHD3-22*01 F
                   dgene_family: IGHD3
                   dgene_gene: IGHD3-22
-                  dgene_allele: ' IGHD3-22*01 '
+                  d_allele: ' IGHD3-22*01 '
                   functionality: productive
                   vgene_score: 1417
                   vgene_probablity: null
@@ -1432,7 +1522,7 @@ paths:
                   cdr1region_sequence_nt: ggatacaccctcactgaattatcc
                   cdr2region_sequence_nt: tttgatcctgaagatggtgaaaca
                   cdr3region_sequence_nt: gcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatc
-                  junction_sequence_nt: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
+                  junction_nt: tgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctgg
                   vdjregion_sequence_nt_gapped: >-
                     caggtccagctggtagagtctggggct...gaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggtttccggatacaccctc............actgaattatccatgcactgggtgcgacaggctcctggaaaagggcttgagtggatgggaggttttgatcctgaa......gatggtgaaacaatctacgcacagaagttccag...ggcagaatcaccatgaccgaggacacatctacagacacagcctacatggagctgagcagcctgagatctgaggacacggccgtgtattactgtgcaacaaggagtcctccgatagttgtgattatggacgatggttttgatatctggggccaagggacaatggtcaccgtctcttcag
                   vjregion_sequence_nt_gapped: ''
@@ -1468,7 +1558,7 @@ paths:
                   cdr1region_sequence_aa: GYTLTELS
                   cdr2region_sequence_aa: FDPEDGET
                   cdr3region_sequence_aa: ATRSPPIVVIMDDGFDI
-                  junction_sequence_aa: CATRSPPIVVIMDDGFDIW
+                  junction_aa: CATRSPPIVVIMDDGFDIW
                   vdjregion_sequence_aa_gapped: >-
                     QVQLVESGA.EVKKPGASVKVSCKVSGYTL....TELSMHWVRQAPGKGLEWMGGFDPE..DGETIYAQKFQ.GRITMTEDTSTDTAYMELSSLRSEDTAVYYCATRSPPIVVIMDDGFDIWGQGTMVTVSS
                   vjregion_sequence_aa_gapped: ''
@@ -1532,7 +1622,7 @@ paths:
           description: data not found
         '405':
           description: method not allowed
-  /sequence_data:
+  /sequences_data:
     get:
       description: >
         This service returns the annotation data that matches the GET provided
@@ -1595,6 +1685,45 @@ paths:
             items:
               type: object
               properties:
+                germline_database:
+                  type: string
+                  description: >
+                    Source of germline V(D)J segments, with version number or
+                    date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+                cell_index:
+                  type: integer
+                  description: |
+                    Cell Index (UID linking sequences from the same cell) (AIRR)
+                v_allele:
+                  type: string
+                  description: |
+                    V gene with allele (e.g. IGHV4-59*01) (AIRR)
+                d_allele:
+                  type: string
+                  description: |
+                    D gene with allele (e.g. IGHD3-10*01) (AIRR)
+                j_allele:
+                  type: string
+                  description: |
+                    J gene with allele (e.g. IGHJ4*02) (AIRR)
+                c_allele:
+                  type: string
+                  description: |
+                    C region with allele (AIRR)                     
+                junction_nt:
+                  type: string
+                  description: >
+                    JUNCTION nucleotide sequence (Sequence of the CDR3
+                    region (nucleotide)) (AIRR)
+                junction_aa:
+                  type: string
+                  description: >
+                    JUNCTION amino acid sequence (Sequence of the CDR3
+                    region (amino acid)) (AIRR)
+                duplicate_count:
+                  type: integer
+                  description: |
+                    Number of times the sequence has been duplicated in a file (AIRR)
                 seq_id:
                   type: integer
                   description: |
@@ -1623,10 +1752,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHV4-59
-                vgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHV4-59*01 or  IGHV4-59*07
                 dgene_string:
                   type: string
                   description: |
@@ -1639,10 +1764,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHD3-10
-                dgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHD3-10*01
                 jgene_string:
                   type: string
                   description: |
@@ -1655,10 +1776,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHJ4
-                jgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHJ4*02
                 functionality:
                   type: string
                   description: |
@@ -1747,10 +1864,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region nucleotide sequence
-                junction_sequence_nt:
-                  type: string
-                  description: |
-                    junction nucleotide sequence
                 vdjregion_sequence_nt_gapped:
                   type: string
                   description: |
@@ -1859,10 +1972,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region amino acid sequence
-                junction_sequence_aa:
-                  type: string
-                  description: |
-                    junction amino acid sequence
                 vdjregion_sequence_aa_gapped:
                   type: string
                   description: |
@@ -2076,7 +2185,7 @@ paths:
                 M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
               vgene_gene: |
                 IGHV4-59
-              vgene_allele: |
+              v_allele: |
                 IGHV4-59*01 or  IGHV4-59*07
               dgene_string: |
                 Homsap IGHD3-10*01 F
@@ -2084,7 +2193,7 @@ paths:
                 IGHD3
               dgene_gene: |
                 IGHD3-10
-              dgene_allele: |
+              d_allele: |
                 IGHD3-10*01
               jgene_string: |
                 Homsap IGHJ4*02 F
@@ -2092,7 +2201,7 @@ paths:
                 IGHJ4
               jgene_gene: |
                 IGHJ4
-              jgene_allele: |
+              j_allele: |
                 IGHJ4*02
               functionality: |
                 productive
@@ -2183,6 +2292,45 @@ paths:
             items:
               type: object
               properties:
+                germline_database:
+                  type: string
+                  description: >
+                    Source of germline V(D)J segments, with version number or
+                    date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+                cell_index:
+                  type: integer
+                  description: |
+                    Cell Index (UID linking sequences from the same cell) (AIRR)
+                v_allele:
+                  type: string
+                  description: |
+                    V gene with allele (e.g. IGHV4-59*01) (AIRR)
+                d_allele:
+                  type: string
+                  description: |
+                    D gene with allele (e.g. IGHD3-10*01) (AIRR)
+                j_allele:
+                  type: string
+                  description: |
+                    J gene with allele (e.g. IGHJ4*02) (AIRR)
+                c_allele:
+                  type: string
+                  description: |
+                    C region with allele (AIRR)                     
+                junction_nt:
+                  type: string
+                  description: >
+                    JUNCTION nucleotide sequence (Sequence of the CDR3
+                    region (nucleotide)) (AIRR)
+                junction_aa:
+                  type: string
+                  description: >
+                    JUNCTION amino acid sequence (Sequence of the CDR3
+                    region (amino acid)) (AIRR)
+                duplicate_count:
+                  type: integer
+                  description: |
+                    Number of times the sequence has been duplicated in a file (AIRR)
                 seq_id:
                   type: integer
                   description: |
@@ -2207,23 +2355,17 @@ paths:
                   type: string
                 vgene_gene:
                   type: string
-                vgene_allele:
-                  type: string
                 dgene_string:
                   type: string
                 dgene_family:
                   type: string
                 dgene_gene:
                   type: string
-                dgene_allele:
-                  type: string
                 jgene_string:
                   type: string
                 jgene_family:
                   type: string
                 jgene_gene:
-                  type: string
-                jgene_allele:
                   type: string
                 functionality:
                   type: string
@@ -2311,10 +2453,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region nucleotide sequence
-                junction_sequence_nt:
-                  type: string
-                  description: |
-                    junction nucleotide sequence
                 vdjregion_sequence_nt_gapped:
                   type: string
                   description: |
@@ -2423,10 +2561,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region amino acid sequence
-                junction_sequence_aa:
-                  type: string
-                  description: |
-                    junction amino acid sequence
                 vdjregion_sequence_aa_gapped:
                   type: string
                   description: |
@@ -2622,7 +2756,7 @@ paths:
                 M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
               vgene_gene: |
                 IGHV4-59
-              vgene_allele: |
+              v_allele: |
                 IGHV4-59*01 or  IGHV4-59*07
               dgene_string: |
                 Homsap IGHD3-10*01 F
@@ -2630,7 +2764,7 @@ paths:
                 IGHD3
               dgene_gene: |
                 IGHD3-10
-              dgene_allele: |
+              d_allele: |
                 IGHD3-10*01
               jgene_string: |
                 Homsap IGHJ4*02 F
@@ -2638,7 +2772,7 @@ paths:
                 IGHJ4
               jgene_gene: |
                 IGHJ4
-              jgene_allele: |
+              j_allele: |
                 IGHJ4*02
               functionality: |
                 productive
@@ -2715,18 +2849,721 @@ paths:
             'category' = count pairs in which the 'category' are string tags of
             parameters of interest from a controlled vocabulary term set.
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                category:
-                  type: string
-                  description: |
-                    e.g. samples
-                count:
-                  type: integer
-                  description: |
-                    e.g. 100
+            type: object
+            properties:
+              summary:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sequence_count:
+                      type: integer
+                      description: |
+                        The number of sequences that match the filter for this sample.
+                    study_id:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
+                    study_title:
+                      type: string
+                      description: |
+                        Publication or Protocol Title (e.g. My Study) (AIRR)
+                    study_type:
+                      type: string
+                      description: |
+                        Type of project/study (e.g. Cancer) (AIRR)
+                    inclusion_exclusion_criteria:
+                      type: string
+                      description: |
+                        Study inclusion/exclusion criteria (AIRR)
+                    grants:
+                      type: string
+                      description: |
+                        Grant funding agency (AIRR)
+                    lab_name:
+                      type: string
+                      description: |
+                        Lab name (AIRR)                    
+                    collected_by:
+                      type: string
+                      description: |
+                        Contact information (data collection) (AIRR)
+                    uploaded_by:
+                      type: string
+                      description: |
+                        Contact information (data deposition) (AIRR)
+                    lab_address:
+                      type: string
+                      description: |
+                        Lab address (AIRR)
+                    pubs_ids:
+                      type: string
+                      description: |
+                        Alphanumeric UID assigned by NCBI (e.g. PRJNA349) (AIRR)
+                    subject_id:
+                      type: string
+                      description: |
+                        UID assigned by submitter (e.g. SUB856413) (AIRR)
+                    organism:
+                      type: string
+                      description: |
+                        Organism-based (human, mouse) or synthetic (AIRR)
+                    sex:
+                      type: string
+                      description: |
+                        Sex (e.g. M/F) (AIRR)
+                    age:
+                      type: string
+                      description: |
+                        Age - Time duration and unit (e.g. 200 days) (AIRR)
+                    age_event:
+                      type: string
+                      description: |
+                        Age event (e.g. Enrollment) (AIRR)
+                    ancestry_population:
+                      type: string
+                      description: |
+                        Ancestry population (AIRR)
+                    ethnicity:
+                      type: string
+                      description: |
+                        Ethnicity (e.g. Tamil) (AIRR)
+                    race:
+                      type: string
+                      description: |
+                        Race (e.g. South Indian) (AIRR)
+                    species_name:
+                      type: string
+                      description: |
+                        Species name (e.g. Homo Sapiens) (AIRR)
+                    strain_name:
+                      type: string
+                      description: |
+                        Strain name (e.g. C57BL/6J) (AIRR)
+                    linked_subjects:
+                      type: string
+                      description: |
+                        Relation to other subjects (SubjectID e.g. SUB1355648) (AIRR)
+                    link_type:
+                      type: string
+                      description: |
+                         Relation type (.e.g  sister, father, daughter) (AIRR)
+                    sample_id:
+                      type: string
+                      description: |
+                        Biological sample ID - UID assigned by submitter (AIRR)
+                    sample_type:
+                      type: string
+                      description: |
+                        Sample type (e.g. Tissue, body fluid) (AIRR)
+                    tissue:
+                      type: string
+                      description: |
+                        Anatomic site (e.g. spleen) (AIRR)
+                    disease_state_sample:
+                      type: string
+                      description: |
+                        Disease state of sample (e.g. tumor vs margin) (AIRR)
+                    collection_date:
+                      type: string
+                      description: |
+                        Sample collection time  (e.g. 10 days) (AIRR)
+                    collection_time_event:
+                      type: string
+                      description: |
+                        Collection time event (T0) (e.g. vaccination, recruitment, etc) (AIRR)
+                    source_commercial:
+                      type: string
+                      description: |
+                        Commercial source of sample (e.g. XYZ Pharma) (AIRR)
+                    cell_subset:
+                      type: string
+                      description: |
+                        Cell subset (Controlled vocabulary) (AIRR)
+                    cell_phenotype:
+                      type: string
+                      description: |
+                        Cell subset phenotype (lab specific description) (AIRR)
+                    study_group_description:
+                      type: string
+                      description: |
+                        Study group description (e.g. Case vs. Control) (AIRR)
+                    library_source:
+                      type: string
+                      description: |
+                        Target substrate (Controlled vocabulary e.g. cDNA/gDNA/RNA) (AIRR)
+                    subject_age:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    marker_1:
+                      type: string
+                      description: |
+                        e.g. CR19
+                    marker_2:
+                      type: string
+                      description: |
+                        e.g. CR20
+                    marker_3:
+                      type: string
+                      description: |
+                        e.g. CR21
+                    marker_4:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_5:
+                      type: string
+                      description: |
+                        e.g. null
+                    marker_6:
+                      type: string
+                      description: |
+                        e.g. null
+                    subject_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a subject.
+                    project_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a project.
+                    project_parent_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a parent/child
+                        relationship between this project and its parent project.
+                    lab_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a lab.
+                    case_control_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an element in the case_control table.
+                    sample_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a sample.
+                    dna_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify a DNA type.
+                    project_sample_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        a project with a sample.
+                    sample_subject_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        between a sample and a subject.
+                    sample_source_db_id:
+                      type: integer
+                      description: |
+                        Identifier used internally by the repository to identify an association
+                        between a sample and a sample source.
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    germline_database:
+                      type: string
+                      description: >
+                        Source of germline V(D)J segments, with version number or
+                        date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+                    cell_index:
+                      type: integer
+                      description: |
+                        Cell Index (UID linking sequences from the same cell) (AIRR)
+                    v_allele:
+                      type: string
+                      description: |
+                        V gene with allele (e.g. IGHV4-59*01) (AIRR)
+                    d_allele:
+                      type: string
+                      description: |
+                        D gene with allele (e.g. IGHD3-10*01) (AIRR)
+                    j_allele:
+                      type: string
+                      description: |
+                        J gene with allele (e.g. IGHJ4*02) (AIRR)
+                    c_allele:
+                      type: string
+                      description: |
+                        C region with allele (AIRR)                     
+                    junction_nt:
+                      type: string
+                      description: >
+                        JUNCTION nucleotide sequence (Sequence of the CDR3
+                        region (nucleotide)) (AIRR)
+                    junction_aa:
+                      type: string
+                      description: >
+                        JUNCTION amino acid sequence (Sequence of the CDR3
+                        region (amino acid)) (AIRR)
+                    duplicate_count:
+                      type: integer
+                      description: |
+                        Number of times the sequence has been duplicated in a file (AIRR)
+                    seq_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    seq_name:
+                      type: string
+                    project_sample_id:
+                      type: integer
+                      description: |
+                        e.g. 6
+                    id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    sequence_id:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    vgene_string:
+                      type: string
+                      description: |
+                        e.g IGHV4-59*01 or  IGHV4-59*07
+                    vgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHV4
+                    vgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHV4-59
+                    dgene_string:
+                      type: string
+                      description: |
+                        e.g. Homsap IGHD3-10*01 F
+                    dgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHD3
+                    dgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHD3-10
+                    jgene_string:
+                      type: string
+                      description: |
+                        e.g. Homsap IGHJ4*02 F
+                    jgene_family:
+                      type: string
+                      description: |
+                        e.g. IGHJ4
+                    jgene_gene:
+                      type: string
+                      description: |
+                        e.g. IGHJ4
+                    functionality:
+                      type: string
+                      description: |
+                        e.g. productive
+                    functionality_comment:
+                      type: string
+                      description: |
+                        e.g. ""
+                    orientation:
+                      type: string
+                      description: |
+                        e.g. +
+                    vgene_score:
+                      type: integer
+                      description: |
+                        e.g. 1127
+                    vgene_probability:
+                      type: integer
+                      description: |
+                        e.g. 95
+                    dregion_reading_frame:
+                      type: integer
+                      description: |
+                        e.g. 2
+                    cdr1_length:
+                      type: integer
+                      description: |
+                        e.g. 8
+                    cdr2_length:
+                      type: integer
+                      description: |
+                        e.g. 7
+                    cdr3_length:
+                      type: integer
+                      description: |
+                        e.g. 13
+                    vdjregion_sequence_nt:
+                      type: string
+                      description: |
+                        vdj region nucleotide sequence
+                    vjregion_sequence_nt:
+                      type: string
+                      description: |
+                        vj region nucleotide sequence
+                    djregion_sequence_nt:
+                      type: string
+                      description: |
+                        dj region nucleotide sequence
+                    vregion_sequence_nt:
+                      type: string
+                      description: |
+                        v region nucleotide sequence
+                    dregion_sequence_nt:
+                      type: string
+                      description: |
+                        d region nucleotide sequence
+                    jregion_sequence_nt:
+                      type: string
+                      description: |
+                        j region nucleotide sequence
+                    fr1region_sequence_nt:
+                      type: string
+                      description: |
+                        fr1 region nucleotide sequence
+                    fr2region_sequence_nt:
+                      type: string
+                      description: |
+                        fr2 region nucleotide sequence
+                    fr3region_sequence_nt:
+                      type: string
+                      description: |
+                        fr3 region nucleotide sequence
+                    fr4region_sequence_nt:
+                      type: string
+                      description: |
+                        fr4 region nucleotide sequence
+                    cdr1region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr1 region nucleotide sequence
+                    cdr2region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr2 region nucleotide sequence
+                    cdr3region_sequence_nt:
+                      type: string
+                      description: |
+                        cdr3 region nucleotide sequence
+                    vdjregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped vdj region nucleotide sequence
+                    vjregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped vj region nucleotide sequence
+                    djregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped dj region nucleotide sequence
+                    vregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped v region nucleotide sequence
+                    dregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped d region nucleotide sequence
+                    jregion_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped j region nucleotide sequence
+                    fr1region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr1 region nucleotide sequence
+                    fr2region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr2 region nucleotide sequence
+                    fr3region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr3 region nucleotide sequence
+                    fr4region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped fr4 region nucleotide sequence
+                    cdr1region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr1 region nucleotide sequence
+                    cdr2region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr2 region nucleotide sequence
+                    cdr3region_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped cdr3 region nucleotide sequence
+                    junction_sequence_nt_gapped:
+                      type: string
+                      description: |
+                        gapped junction nucleotide sequence
+                    vdjregion_sequence_aa:
+                      type: string
+                      description: |
+                        vdj region amino acid sequence
+                    vjregion_sequence_aa:
+                      type: string
+                      description: |
+                        vj region amino acid sequence
+                    djregion_sequence_aa:
+                      type: string
+                      description: |
+                        dj region amino acid sequence
+                    vregion_sequence_aa:
+                      type: string
+                      description: |
+                        v region amino acid sequence
+                    dregion_sequence_aa:
+                      type: string
+                      description: |
+                        d region amino acid sequence
+                    jregion_sequence_aa:
+                      type: string
+                      description: |
+                        j region amino acid sequence
+                    fr1region_sequence_aa:
+                      type: string
+                      description: |
+                        fr1 region amino acid sequence
+                    fr2region_sequence_aa:
+                      type: string
+                      description: |
+                        fr2 region amino acid sequence
+                    fr3region_sequence_aa:
+                      type: string
+                      description: |
+                        fr3 region amino acid sequence
+                    fr4region_sequence_aa:
+                      type: string
+                      description: |
+                        fr4 region amino acid sequence
+                    cdr1region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr1 region amino acid sequence
+                    cdr2region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr2 region amino acid sequence
+                    cdr3region_sequence_aa:
+                      type: string
+                      description: |
+                        cdr3 region amino acid sequence
+                    vdjregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped vdj region amino acid sequence
+                    vjregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped vj region amino acid sequence
+                    djregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped dj region amino acid sequence
+                    vregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped v region amino acid sequence
+                    dregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped d region amino acid sequence
+                    jregion_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped j region amino acid sequence
+                    fr1region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr1 region amino acid sequence
+                    fr2region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr2 region amino acid sequence
+                    fr3region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr3 region amino acid sequence
+                    fr4region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped fr4 region amino acid sequence
+                    cdr1region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr1 region amino acid sequence
+                    cdr2region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr2 region amino acid sequence
+                    cdr3region_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped cdr3 region amino acid sequence
+                    junction_sequence_aa_gapped:
+                      type: string
+                      description: |
+                        gapped junction amino acid sequence
+                    vdjregion_start:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    vdjregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    vjregion_start:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    vjregion_end:
+                      type: integer
+                      description: |
+                        e.g. 0
+                    djregion_start:
+                      type: integer
+                      description: |
+                        e.g. 254
+                    djregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    vregion_start:
+                      type: integer
+                      description: |
+                        e.g. 286
+                    vregion_end:
+                      type: integer
+                      description: |
+                        e.g. 252
+                    dregion_start:
+                      type: integer
+                      description: |
+                        e.g. 254
+                    dregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    jregion_start:
+                      type: integer
+                      description: |
+                        e.g. 286
+                    jregion_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    fr1region_start:
+                      type: integer
+                      description: |
+                        e.g. 1
+                    fr1region_end:
+                      type: integer
+                      description: |
+                        e.g. 38
+                    fr2region_start:
+                      type: integer
+                      description: |
+                        e.g. 63
+                    fr2region_end:
+                      type: integer
+                      description: |
+                        e.g. 113
+                    fr3region_start:
+                      type: integer
+                      description: |
+                        e.g. 135
+                    fr3region_end:
+                      type: integer
+                      description: |
+                        e.g. 248
+                    fr4region_start:
+                      type: integer
+                      description: |
+                        e.g. 288
+                    fr4region_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    cdr1region_start:
+                      type: integer
+                      description: |
+                        e.g. 39
+                    cdr1region_end:
+                      type: integer
+                      description: |
+                        e.g. 321
+                    cdr2region_start:
+                      type: integer
+                      description: |
+                        e.g. 62
+                    cdr2region_end:
+                      type: integer
+                      description: |
+                        e.g. 134
+                    cdr3region_start:
+                      type: integer
+                      description: |
+                        e.g. 249
+                    cdr3region_end:
+                      type: integer
+                      description: |
+                        e.g. 287
+                    junction_start:
+                      type: integer
+                      description: |
+                        e.g. 246
+                    junction_end:
+                      type: integer
+                      description: |
+                        e.g. 290
+                    vregion_mutation_string:
+                      type: string
+                      description: >
+                        e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+                        +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+                        -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                        -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+                    fr1region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+                    fr2region_mutation_string:
+                      type: string
+                      description: |
+                        e.g.             
+                    fr3region_mutation_string:
+                      type: string
+                      description: >
+                        e.g.  c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+                        -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|"
+                    cdr1region_mutation_string:
+                      type: string
+                      description: |
+                        e.g.
+                    cdr2region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+                    cdr3region_mutation_string:
+                      type: string
+                      description: |
+                        e.g. g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+                    annotation_tool:
+                      type: string
+                      description: |
+                        e.g. VQuest
+
+
         '400':
           description: malformed request
         '401':
@@ -2788,6 +3625,45 @@ paths:
             items:
               type: object
               properties:
+                germline_database:
+                  type: string
+                  description: >
+                    Source of germline V(D)J segments, with version number or
+                    date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+                cell_index:
+                  type: integer
+                  description: |
+                    Cell Index (UID linking sequences from the same cell) (AIRR)
+                v_allele:
+                  type: string
+                  description: |
+                    V gene with allele (e.g. IGHV4-59*01) (AIRR)
+                d_allele:
+                  type: string
+                  description: |
+                    D gene with allele (e.g. IGHD3-10*01) (AIRR)
+                j_allele:
+                  type: string
+                  description: |
+                    J gene with allele (e.g. IGHJ4*02) (AIRR)
+                c_allele:
+                  type: string
+                  description: |
+                    C region with allele (AIRR)                     
+                junction_nt:
+                  type: string
+                  description: >
+                    JUNCTION nucleotide sequence (Sequence of the CDR3
+                    region (nucleotide)) (AIRR)
+                junction_aa:
+                  type: string
+                  description: >
+                    JUNCTION amino acid sequence (Sequence of the CDR3
+                    region (amino acid)) (AIRR)
+                duplicate_count:
+                  type: integer
+                  description: |
+                    Number of times the sequence has been duplicated in a file (AIRR)
                 seq_id:
                   type: integer
                   description: |
@@ -2816,10 +3692,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHV4-59
-                vgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHV4-59*01 or  IGHV4-59*07
                 dgene_string:
                   type: string
                   description: |
@@ -2832,10 +3704,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHD3-10
-                dgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHD3-10*01
                 jgene_string:
                   type: string
                   description: |
@@ -2848,10 +3716,6 @@ paths:
                   type: string
                   description: |
                     e.g. IGHJ4
-                jgene_allele:
-                  type: string
-                  description: |
-                    e.g. IGHJ4*02
                 functionality:
                   type: string
                   description: |
@@ -2940,10 +3804,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region nucleotide sequence
-                junction_sequence_nt:
-                  type: string
-                  description: |
-                    junction nucleotide sequence
                 vdjregion_sequence_nt_gapped:
                   type: string
                   description: |
@@ -3052,10 +3912,6 @@ paths:
                   type: string
                   description: |
                     cdr3 region amino acid sequence
-                junction_sequence_aa:
-                  type: string
-                  description: |
-                    junction amino acid sequence
                 vdjregion_sequence_aa_gapped:
                   type: string
                   description: |
@@ -3269,7 +4125,7 @@ paths:
                 M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
               vgene_gene: |
                 IGHV4-59
-              vgene_allele: |
+              v_allele: |
                 IGHV4-59*01 or  IGHV4-59*07
               dgene_string: |
                 Homsap IGHD3-10*01 F
@@ -3277,7 +4133,7 @@ paths:
                 IGHD3
               dgene_gene: |
                 IGHD3-10
-              dgene_allele: |
+              d_allele: |
                 IGHD3-10*01
               jgene_string: |
                 Homsap IGHJ4*02 F
