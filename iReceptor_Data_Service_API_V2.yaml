@@ -16,9 +16,126 @@ info:
 host: ipa.ireceptor.org
 basePath: /v2
 definitions:
-  airr_sequence_model:
+  # A definition of the summary response for an iReceptor API call. This 
+  # response is used wherever summary data at the sample level is provided
+  # by an API call.
+  ireceptor_summary_response:
     type: array
     items:
+      allOf:
+      - $ref: '#/definitions/ireceptor_sequence_count_model'
+      - $ref: '#/definitions/airr_summary_model'
+      - $ref: '#/definitions/ireceptor_summary_model'
+  ireceptor_sequence_response:
+    type: array
+    items:
+      allOf:
+      - $ref: '#/definitions/airr_sequence_annotation_model'
+      - $ref: '#/definitions/ireceptor_sequence_annotation_model'
+  # The AIRR Minimal Standards model for metadata above the sequence annotation level.
+  airr_summary_model:
+    allOf:
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Study'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Subject'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Diagnosis'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Sample'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/CellProcessing'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/NucleicAcidProcessing'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/RawSequenceData'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/SoftwareProcessing'
+  # A simple model to represent a sequence count, used to make the 
+  # composite responses clean in that they all refer to models.
+  ireceptor_sequence_count_model:
+      type: object
+      properties:
+        sequence_count:
+          type: integer
+          example: 123456
+  # This model defines ancillary information returned by iReceptor
+  # on top of that provided by the AIRR standard.
+  ireceptor_summary_model:
+      type: object
+      properties:
+        subject_age:
+          type: integer
+          description: |
+            e.g. 1
+        marker_1:
+          type: string
+          description: |
+            e.g. CR19
+        marker_2:
+          type: string
+          description: |
+            e.g. CR20
+        marker_3:
+          type: string
+          description: |
+            e.g. CR21
+        marker_4:
+          type: string
+          description: |
+            e.g. null
+        marker_5:
+          type: string
+          description: |
+            e.g. null
+        marker_6:
+          type: string
+          description: |
+            e.g. null
+        subject_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            subject.
+        project_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            project.
+        project_parent_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            parent/child
+            relationship between this project and its parent project.
+        lab_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            lab.
+        case_control_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify an
+            element in the case_control table.
+        sample_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            sample.
+        dna_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            DNA type.
+        project_sample_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify an
+            association a project with a sample.
+        sample_subject_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify an
+            association between a sample and a subject.
+        sample_source_db_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify an
+            association between a sample and a sample source.
+  airr_sequence_annotation_model:
       type: object
       properties:
         germline_database:
@@ -62,56 +179,15 @@ definitions:
             Number of times the sequence has been duplicated in a file (AIRR)
   extended_sequence_model:
     allOf:
-    - $ref: '#/definitions/airr_sequence_model'
+    - $ref: '#/definitions/airr_sequence_annotation_model'
     - type: object
       properties:
         an_extended_model_element:
           type: string
           description: This does not seem to extend the model, it replaces it!
-  airr_and_ireceptor_sequence_model:
-    type: array
-    items:
+  ireceptor_sequence_annotation_model:
       type: object
       properties:
-        germline_database:
-          type: string
-          description: >
-            Source of germline V(D)J segments, with version number or
-            date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
-        cell_index:
-          type: integer
-          description: |
-            Cell Index (UID linking sequences from the same cell) (AIRR)
-        v_allele:
-          type: string
-          description: |
-            V gene with allele (e.g. IGHV4-59*01) (AIRR)
-        d_allele:
-          type: string
-          description: |
-            D gene with allele (e.g. IGHD3-10*01) (AIRR)
-        j_allele:
-          type: string
-          description: |
-            J gene with allele (e.g. IGHJ4*02) (AIRR)
-        c_allele:
-          type: string
-          description: |
-            C region with allele (AIRR)                     
-        junction_nt:
-          type: string
-          description: >
-            JUNCTION nucleotide sequence (Sequence of the CDR3
-            region (nucleotide)) (AIRR)
-        junction_aa:
-          type: string
-          description: >
-            JUNCTION amino acid sequence (Sequence of the CDR3
-            region (amino acid)) (AIRR)
-        duplicate_count:
-          type: integer
-          description: |
-            Number of times the sequence has been duplicated in a file (AIRR)
         seq_id:
           type: integer
           description: |
@@ -604,7 +680,7 @@ definitions:
           type: string
           description: |
             Contact information (data collection) (AIRR)
-        uploaded_by:
+        submitted_by:
           type: string
           description: |
             Contact information (data deposition) (AIRR)
@@ -953,7 +1029,7 @@ paths:
             as well as repository specific data that is required to query the
             repository about those types of elements. 
           schema:
-            $ref: '#/definitions/summary_model'
+            $ref: '#/definitions/ireceptor_summary_response'
         '400':
           description: malformed request
         '401':
@@ -1057,7 +1133,7 @@ paths:
             A successful call returns the metadata for each sample, including
             the number of sequences found for that sample.
           schema:
-            $ref: '#/definitions/summary_model'
+            $ref: '#/definitions/ireceptor_summary_response'
         '400':
           description: malformed request
         '401':
@@ -1122,9 +1198,9 @@ paths:
             type: object
             properties:
               summary:
-                $ref: '#/definitions/summary_model'
+                $ref: '#/definitions/ireceptor_summary_response'
               items:
-                $ref: '#/definitions/airr_and_ireceptor_sequence_model'
+                $ref: '#/definitions/ireceptor_sequence_response'
         '400':
           description: malformed request
         '401':
@@ -1195,7 +1271,7 @@ paths:
             comma-separated format; "tsv" returns a tab-delimited outputs; 
             "airr" returns AIRR minimal standards encoded tab-delimited outputs.
           schema:
-            $ref: '#/definitions/airr_and_ireceptor_sequence_model'
+            $ref: '#/definitions/ireceptor_sequence_response'
         '400':
           description: malformed request
         '401':
@@ -1260,7 +1336,7 @@ paths:
             comma-separated format; "tsv" returns a tab-delimited outputs; 
             "airr" returns AIRR minimal standards encoded tab-delimited outputs.
           schema:
-            $ref: '#/definitions/airr_and_ireceptor_sequence_model'
+            $ref: '#/definitions/ireceptor_sequence_response'
         '400':
           description: malformed request
         '401':
@@ -1319,9 +1395,9 @@ paths:
             type: object
             properties:
               summary:
-                $ref: '#/definitions/summary_model'
+                $ref: '#/definitions/ireceptor_summary_response'
               items:
-                $ref: '#/definitions/airr_and_ireceptor_sequence_model'
+                $ref: '#/definitions/ireceptor_sequence_response'
         '400':
           description: malformed request
         '401':
@@ -1380,7 +1456,7 @@ paths:
             sample information and annotation tool information, in a
             comma-separated format. 
           schema:
-            $ref: '#/definitions/airr_and_ireceptor_sequence_model'
+            $ref: '#/definitions/ireceptor_sequence_response'
           examples:
             application/json:
               seq_name: |
