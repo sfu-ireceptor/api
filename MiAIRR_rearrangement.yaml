@@ -47,27 +47,4 @@ Rearrangements:
           type: integer
           description: |
             Number of times the sequence has been duplicated in a file (AIRR)
-
-
-   type: object
-   properties:
-      study_id:
-         type: string
-      study_title:
-         type: string
-      study_description:
-         type: string
-      inclusion_exclusion_criteria:
-         type: string
-      grants:
-         type: string
-      lab_name:
-         type: string
-      collected_by:
-         type: string
-      submitted_by:
-         type: string
-      lab_address:
-         type: string
-      pub_ids:
-         type: string
+            
