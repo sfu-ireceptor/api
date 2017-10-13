@@ -1,0 +1,73 @@
+#
+# Schema definitions for AIRR minimal standards objects
+#
+
+# The MiAIRR rearrangements
+
+Rearrangements:
+   discriminator: MiAIRR
+   type: object
+   properties:
+        germline_database:
+          type: string
+          description: >
+            Source of germline V(D)J segments, with version number or
+            date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+        cell_index:
+          type: integer
+          description: |
+            Cell Index (UID linking sequences from the same cell) (AIRR)
+        v_allele:
+          type: string
+          description: |
+            V gene with allele (e.g. IGHV4-59*01) (AIRR)
+        d_allele:
+          type: string
+          description: |
+            D gene with allele (e.g. IGHD3-10*01) (AIRR)
+        j_allele:
+          type: string
+          description: |
+            J gene with allele (e.g. IGHJ4*02) (AIRR)
+        c_allele:
+          type: string
+          description: |
+            C region with allele (AIRR)                     
+        junction_nt:
+          type: string
+          description: >
+            JUNCTION nucleotide sequence (Sequence of the CDR3
+            region (nucleotide)) (AIRR)
+        junction_aa:
+          type: string
+          description: >
+            JUNCTION amino acid sequence (Sequence of the CDR3
+            region (amino acid)) (AIRR)
+        duplicate_count:
+          type: integer
+          description: |
+            Number of times the sequence has been duplicated in a file (AIRR)
+
+
+   type: object
+   properties:
+      study_id:
+         type: string
+      study_title:
+         type: string
+      study_description:
+         type: string
+      inclusion_exclusion_criteria:
+         type: string
+      grants:
+         type: string
+      lab_name:
+         type: string
+      collected_by:
+         type: string
+      submitted_by:
+         type: string
+      lab_address:
+         type: string
+      pub_ids:
+         type: string
