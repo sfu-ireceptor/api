@@ -82,71 +82,75 @@
     "ireceptor_summary_model": {
       "type": "object",
       "properties": {
-        "subject_age": {
+        "ir_subject_age": {
           "type": "integer",
           "description": "e.g. 1\n"
         },
-        "marker_1": {
+        "ir_sra_run_id": {
+          "type": "string",
+          "description": ""
+        },
+        "ir_marker_1": {
           "type": "string",
           "description": "e.g. CR19\n"
         },
-        "marker_2": {
+        "ir_marker_2": {
           "type": "string",
           "description": "e.g. CR20\n"
         },
-        "marker_3": {
+        "ir_marker_3": {
           "type": "string",
           "description": "e.g. CR21\n"
         },
-        "marker_4": {
+        "ir_marker_4": {
           "type": "string",
           "description": "e.g. null\n"
         },
-        "marker_5": {
+        "ir_marker_5": {
           "type": "string",
           "description": "e.g. null\n"
         },
-        "marker_6": {
+        "ir_marker_6": {
           "type": "string",
           "description": "e.g. null\n"
         },
-        "subject_db_id": {
+        "ir_subject_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a subject.\n"
         },
-        "project_db_id": {
+        "ir_project_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a project.\n"
         },
-        "project_parent_db_id": {
+        "ir_project_parent_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a parent/child relationship between this project and its parent project.\n"
         },
-        "lab_db_id": {
+        "ir_lab_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a lab.\n"
         },
-        "case_control_db_id": {
+        "ir_case_control_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify an element in the case_control table.\n"
         },
-        "sample_db_id": {
+        "ir_sample_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a sample.\n"
         },
-        "dna_db_id": {
+        "ir_dna_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a DNA type.\n"
         },
-        "project_sample_db_id": {
+        "ir_project_sample_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify an association a project with a sample.\n"
         },
-        "sample_subject_db_id": {
+        "ir_sample_subject_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify an association between a sample and a subject.\n"
         },
-        "sample_source_db_id": {
+        "ir_sample_source_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify an association between a sample and a sample source.\n"
         }
