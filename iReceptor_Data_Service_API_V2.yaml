@@ -63,7 +63,7 @@ definitions:
         ir_sra_run_id:
           type: string
           description: |
-            
+            e.g. SRR4102110
         ir_marker_1:
           type: string
           description: |
@@ -88,11 +88,10 @@ definitions:
           type: string
           description: |
             e.g. null
-        ir_subject_id:
-          type: integer
+        ir_project_sample_note:
+          type: string
           description: >
-            Identifier used internally by the repository to identify a
-            subject.
+            A note about the sample.
         ir_project_id:
           type: integer
           description: >
@@ -109,6 +108,11 @@ definitions:
           description: >
             Identifier used internally by the repository to identify a
             lab.
+        ir_disease_state_id:
+          type: integer
+          description: >
+            Identifier used internally by the repository to identify a
+            an element in the disease state table.
         ir_case_control_id:
           type: integer
           description: >

@@ -88,7 +88,7 @@
         },
         "ir_sra_run_id": {
           "type": "string",
-          "description": ""
+          "description": "e.g. SRR4102110\n"
         },
         "ir_marker_1": {
           "type": "string",
@@ -114,9 +114,9 @@
           "type": "string",
           "description": "e.g. null\n"
         },
-        "ir_subject_id": {
-          "type": "integer",
-          "description": "Identifier used internally by the repository to identify a subject.\n"
+        "ir_project_sample_note": {
+          "type": "string",
+          "description": "A note about the sample.\n"
         },
         "ir_project_id": {
           "type": "integer",
@@ -129,6 +129,10 @@
         "ir_lab_id": {
           "type": "integer",
           "description": "Identifier used internally by the repository to identify a lab.\n"
+        },
+        "ir_disease_state_id": {
+          "type": "integer",
+          "description": "Identifier used internally by the repository to identify a an element in the disease state table.\n"
         },
         "ir_case_control_id": {
           "type": "integer",
