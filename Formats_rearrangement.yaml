@@ -1,0 +1,132 @@
+#
+# Schema definitions for AIRR Formats rearrangement objects
+#
+
+# The Formats rearrangements
+# Note: This is an extension of the MiAIRR rearrangements, and assumes that
+# the MiAIRR has defined the MiAIRR rearrangement objects.
+
+Formats_Rearrangements:
+    discriminator: AIRRFormats
+    type: object
+    required:
+      - sequence_id
+      - sequence
+      - sample_id
+      - constant
+      - functional
+      - rev_comp
+      - v_score
+      - d_score
+      - j_score
+      - v_cigar
+      - d_cigar
+      - j_cigar
+    properties:
+      sequence_id:
+        type: string
+        description: Read/sequence identifier
+      sequence:
+        type: string
+        description: Nucleotide sequence (e.g., the "read" sequence; revcomp'd if
+           necessary)
+      sample_id:
+        type: string
+        description: The biological sample this read derives from (e.g., from BioSample
+             database)
+      constant:
+        type: string
+        description: Constant region gene (e.g., IGHG4, IGHA2, IGHE, TRBC)
+      functional:
+        type: boolean
+        description: VDJ sequence is predicted to be functional
+      rev_comp:
+        type: boolean
+        description: Sequence is reverse complemented
+      v_score:
+        type: float
+        description: V alignment score
+      d_score:
+        type: float
+        description: D alignment score
+      j_score:
+        type: float
+        description: J alignment score
+      v_cigar:
+        type: string
+        description: V alignment CIGAR string
+      d_cigar:
+        type: string
+        description: D alignment CIGAR string
+      j_cigar:
+        type: string
+        description: J alignment CIGAR string
+      v_evalue:
+        type: float
+        description: V alignment E-value (when applicable)
+      d_evalue:
+        type: float
+        description: D alignment E-value (when applicable)
+      j_evalue:
+        type: float
+        description: J alignment E-value (when applicable)
+      v_identity:
+        type: float
+        description:  V alignment identity
+      d_identity:
+        type: float
+        description:  D alignment identity
+      j_identity:
+        type: float
+        description:  J alignment identity
+      vdj_score:
+        type: float
+        description: Score for aligners that consider the full sequence as a whole
+      vdj_evalue:
+        type: float
+        description: E-value for aligners that consider the full sequence as a whole
+      vdj_identity:
+        type: float
+        description: Identity for aligners that consider the full sequence as a whole
+      fwr1_start:
+        type: integer
+        description: FWR1 start coordinate in sequence (transferred from germline)
+      cdr1_start:
+        type: integer
+        description: CDR1 start coord in sequence (transferred from germline)
+      fwr2_start:
+        type: integer
+        description: FWR2 start coord in sequence (transferred from germline)
+      cdr2_start:
+        type: integer
+        description: CDR2 start coord in sequence (transferred from germline)
+      fwr3_start:
+        type: integer
+        description: FWR3 start coord in sequence (transferred from germline)
+      cdr3_start:
+        type: integer
+        description: CDR3 start coord in sequence (transferred from germline)
+      v_end:
+        type: integer
+        description: End coordinate of the V segment (generally inside the CDR3)
+      d_start:
+        type: integer
+        description: Start coordinate of the D segment
+      d_end:
+        type: integer
+        description: End coordinate of the D segment
+      j_start:
+        type: integer
+        description: Start coordinate of the J segment (generally inside the CDR3)
+      cdr3_end:
+        type: integer
+        description: CDR3 end coord in sequence (transferred from germline)
+      fwr4_end:
+        type: integer
+        description: FWR4 end coord in sequence (transferred from germline)
+      duplicate_count:
+        type: integer
+        description: Number of duplicate reads for this sequence
+      clone:
+        type: string
+        description: Clone assignment for this sequence
