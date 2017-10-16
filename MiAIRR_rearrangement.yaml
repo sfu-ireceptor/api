@@ -1,10 +1,10 @@
 #
-# Schema definitions for AIRR minimal standards objects
+# Schema definitions for AIRR minimal standards rearrangement objects
 #
 
 # The MiAIRR rearrangements
 
-Rearrangements:
+MiAIRR_Rearrangements:
    discriminator: MiAIRR
    type: object
    properties:
