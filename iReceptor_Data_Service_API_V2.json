@@ -34,7 +34,10 @@
       "items": {
         "allOf": [
           {
-            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/Rearrangements"
+            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements"
+          },
+          {
+            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/Formats_rearrangement.yaml#/Formats_Rearrangements"
           },
           {
             "$ref": "#/definitions/ireceptor_sequence_annotation_model"
