@@ -26,7 +26,7 @@ definitions:
       allOf:
       - $ref: '#/definitions/ireceptor_sequence_count_model'
       - $ref: '#/definitions/airr_summary_model'
-      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_sequences.yaml#/ireceptor_summary_model'
+      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_summary.yaml#/ireceptor_summary_model'
   # A definition of the sequence response for an iReceptor API call. This
   # response is used wherever sequence data is provided by an API call.
   # It is a composite of the sequence fields defined by the MiAIRR standard,
@@ -38,7 +38,7 @@ definitions:
       allOf:
       - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements'
       - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/Formats_rearrangement.yaml#/Formats_Rearrangements'
-      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_sequences.yaml#/ireceptor_sequence_annotation_model'
+      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_sequence.yaml#/ireceptor_sequence_annotation_model'
   # The AIRR Minimal Standards model for metadata above the sequence annotation level.
   airr_summary_model:
     allOf:
