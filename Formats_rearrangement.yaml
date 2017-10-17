@@ -12,12 +12,16 @@
 #      - constant
 #      - functional
 #      - rev_comp
+#      - c_call
 #      - v_score
 #      - d_score
 #      - j_score
+#      - c_score
 #      - v_cigar
 #      - d_cigar
 #      - j_cigar
+#      - c_cigar
+
 
 Formats_Rearrangements:
     discriminator: AIRRFormats
@@ -43,6 +47,9 @@ Formats_Rearrangements:
       rev_comp:
         type: boolean
         description: Sequence is reverse complemented
+      c_call:
+        type: string
+        description: C gene assignment        
       v_score:
         type: float
         description: V alignment score
@@ -52,6 +59,9 @@ Formats_Rearrangements:
       j_score:
         type: float
         description: J alignment score
+      c_score:
+        type: float
+        description: C alignment score
       v_cigar:
         type: string
         description: V alignment CIGAR string
@@ -61,6 +71,9 @@ Formats_Rearrangements:
       j_cigar:
         type: string
         description: J alignment CIGAR string
+      c_cigar:
+        type: string
+        description: C alignment CIGAR string
       v_evalue:
         type: float
         description: V alignment E-value (when applicable)
@@ -88,45 +101,108 @@ Formats_Rearrangements:
       vdj_identity:
         type: float
         description: Identity for aligners that consider the full sequence as a whole
+      v_start:
+        type: integer
+        description: Position of first V nucleotide in 'sequence' field
+      v_germ_start:
+        type: integer
+        description: Position of 'v_start' field in IMGT numbered germline V(D)J sequence
       fwr1_start:
         type: integer
         description: FWR1 start coordinate in sequence (transferred from germline)
+      fwr1_end:
+        type: integer
+        description: FWR1 end coordinate in sequence (transferred from germline)
       cdr1_start:
         type: integer
         description: CDR1 start coord in sequence (transferred from germline)
+      cdr1_end:
+        type: integer
+        description: CDR1 end coord in sequence (transferred from germline)
       fwr2_start:
         type: integer
         description: FWR2 start coord in sequence (transferred from germline)
+      fwr2_end:
+        type: integer
+        description: FWR2 end coord in sequence (transferred from germline)
       cdr2_start:
         type: integer
         description: CDR2 start coord in sequence (transferred from germline)
+      cdr2_end:
+        type: integer
+        description: CDR2 end coord in sequence (transferred from germline)
       fwr3_start:
         type: integer
         description: FWR3 start coord in sequence (transferred from germline)
+      fwr3_end:
+        type: integer
+        description: FWR3 end coord in sequence (transferred from germline)
       cdr3_start:
         type: integer
         description: CDR3 start coord in sequence (transferred from germline)
+      cdr3_end:
+        type: integer
+        description: CDR3 end coord in sequence (transferred from germline)
+      fwr4_start:
+        type: integer
+        description: FWR3 start coord in sequence (transferred from germline)
+      fwr4_end:
+        type: integer
+        description: FWR4 end coord in sequence (transferred from germline)
       v_end:
         type: integer
         description: End coordinate of the V segment (generally inside the CDR3)
       d_start:
         type: integer
         description: Start coordinate of the D segment
+      d_germ_start:
+        type: integer
+        description: Position of 'd_start' field in IMGT numbered germline V(D)J sequence
       d_end:
         type: integer
         description: End coordinate of the D segment
       j_start:
         type: integer
         description: Start coordinate of the J segment (generally inside the CDR3)
-      cdr3_end:
+      j_germ_start:
         type: integer
-        description: CDR3 end coord in sequence (transferred from germline)
-      fwr4_end:
+        description: Position of 'j_start' field in IMGT numbered germline V(D)J sequence
+      j_end:
         type: integer
-        description: FWR4 end coord in sequence (transferred from germline)
+        description: End coordinate of the J segment
+      junction_length:
+        type: integer
+        description: Number of junction nucleotides in sequence_vdj
+      np1_length:
+        type: integer
+        description: Number of of nucleotides between sample V and D sequences
+      np2_length:
+        type: integer
+        description: Number of of nucleotides between sample D and J sequences
+      n1_length:
+        type: integer
+        description: Nucleotides 5' of the D-segment
+      n2_length:
+        type: integer
+        description: Nucleotides 3' of the D-segment
+      p3v_length:
+        type: integer
+        description: Palindromic nucleotides 3' of the V-segment
+      p5d_length:
+        type: integer
+        description: Palindromic nucleotides 5' of the D-segment
+      p3d_length:
+        type: integer
+        description: Palindromic nucleotides 3' of the D-segment
+      p5j_length:
+        type: integer
+        description: Palindromic nucleotides 5' of the J-segment
       duplicate_count:
         type: integer
         description: Number of duplicate reads for this sequence
+      consensus_count:
+        type: integer
+        description: Number of reads contributing to the consensus for this sequence
       clone:
         type: string
         description: Clone assignment for this sequence
