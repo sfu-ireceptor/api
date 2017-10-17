@@ -101,6 +101,9 @@ Formats_Rearrangements:
       vdj_identity:
         type: float
         description: Identity for aligners that consider the full sequence as a whole
+      vdj_cigar:
+        type: string
+        description: VDJ alignment CIGAR string
       v_start:
         type: integer
         description: Position of first V nucleotide in 'sequence' field
