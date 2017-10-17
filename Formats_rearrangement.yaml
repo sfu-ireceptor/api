@@ -9,19 +9,19 @@
 Formats_Rearrangements:
     discriminator: AIRRFormats
     type: object
-    required:
-      - sequence_id
-      - sequence
-      - sample_id
-      - constant
-      - functional
-      - rev_comp
-      - v_score
-      - d_score
-      - j_score
-      - v_cigar
-      - d_cigar
-      - j_cigar
+#    required:
+#      - sequence_id
+#      - sequence
+#      - sample_id
+#      - constant
+#      - functional
+#      - rev_comp
+#      - v_score
+#      - d_score
+#      - j_score
+#      - v_cigar
+#      - d_cigar
+#      - j_cigar
     properties:
       sequence_id:
         type: string
