@@ -60,26 +60,32 @@ definitions:
           description: Number of sequences found that met the search criteria for this sample
           example: 123456
 parameters:
+  #
+  # Generally useful parameters for all API entry points.
+  #
   ir_username:
-    name: username
+    name: ir_username
     in: query
     description: >
       Username of the individual requesting access to the iReceptor
-      repository node.
+      repository node. If the iReceptor repository is a public repository,
+      then this parameter is not required. If the repository is not public
+      then the username must be supplied and the repository will determine
+      the access for that user for that repository.
     required: false
     type: string
   ir_sample_id_list:
-    name: project_sample_id_list
+    name: ir_project_sample_id_list
     in: query
     description: >
-      List of unique identifiers (specific to the repository) that identifies the samples
+      List of unique identifiers (specific to the repository) that identify the samples
       to apply the query to.
     required: false
     type: array
     items:
-      type: integer
+      type: string
   ir_data_format:
-    name: format
+    name: ir_data_format
     in: query
     description: >-
       Data format to return the sequence data in, one of:</br>
@@ -88,6 +94,11 @@ parameters:
       'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)
     required: false
     type: string
+  #
+  # MiAIRR compliant parameters for /samples entry points.
+  # Note: Currently only those parameters used by iReceptor repositories
+  # are defined here.
+  #
   study_id:
     name: study_id
     type: string
@@ -100,34 +111,94 @@ parameters:
     name: study_description
     type: string
     in: query
-  inclusion_exclusion_criteria:
-    name: inclusion_exclusion_criteria
-    type: string
-    in: query
-  grants:
-    name: grants
-    type: string
-    in: query
   lab_name:
     name: lab_name
     type: string
     in: query
-  collected_by:
-    name: collected_by
+  subject_id:
+    name: subject_id
     type: string
     in: query
-  submitted_by:
-    name: submitted_by
+  organism:
+    name: organism
     type: string
     in: query
-  lab_address:
-    name: lab_address
+  sex:
+    name: sex
     type: string
     in: query
-  pub_ids:
-    name: pub_ids
+  ethnicity:
+    name: ethnicity
     type: string
     in: query
+  study_group_description:
+    name: study_group_description
+    type: string
+    in: query
+  sample_id:
+    name: sample_id
+    type: string
+    in: query
+  tissue:
+    name: tissue
+    type: string
+    in: query
+  disease_state_sample:
+    name: disease_state_sample
+    type: string
+    in: query
+  cell_subset:
+    name: cell_subset
+    type: string
+    in: query
+  cell_phenotype:
+    name: cell_phenotype
+    type: string
+    in: query
+  library_source:
+    name: library_source
+    type: string
+    in: query
+  platform:
+    name: platform
+    type: string
+    in: query
+  #
+  # iReceptor specific parameters for the /samples API entry point.
+  #
+  ir_lab_id:
+    name: ir_lab_id
+    in: query
+    description: |
+      e.g. 1
+    required: false
+    type: string
+  ir_project_id:
+    name: ir_project_id
+    in: query
+    description: |
+      e.g. 1
+    required: false
+    type: array
+    items:
+      type: string
+  ir_subject_age_min:
+    name: ir_subject_age_min
+    in: query
+    description: |
+      e.g. 10
+    required: false
+    type: integer
+  ir_subject_age_max:
+    name: ir_subject_age_max
+    in: query
+    description: |
+      e.g. 12
+    required: false
+    type: integer    
+  #
+  # MiAIRR compliant parameters for rearrangements (/sequences* entry points)
+  #
   germline_database:
     name: germline_database
     in: query
@@ -185,6 +256,9 @@ parameters:
     type: integer
     description: |
       Number of times the sequence has been duplicated in a file (AIRR)
+  #
+  # iReceptor specific parameters for rearrangements (/sequences* entry points)
+  #
   ir_junction_nt_length:
     name: ir_junction_nt_length
     in: query
@@ -264,87 +338,26 @@ paths:
       tags:
         - samples
       parameters:
-        - $ref: '#/parameters/ir_username'
-        - name: lab_id
-          in: query
-          description: |
-            e.g. 1
-          required: false
-          type: integer
-        - name: project_id
-          in: query
-          description: |
-            e.g. 1
-          required: false
-          type: array
-          items:
-            type: integer
-        - name: subject_code
-          in: query
-          description: |
-            e.g. test
-          required: false
-          type: string
-        - name: subject_gender
-          in: query
-          description: |
-            e.g. Male or Female
-          required: false
-          type: string
-        - name: subject_species
-          in: query
-          description: |
-            e.g. Human
-          required: false
-          type: string
-        - name: subject_ethnicity
-          in: query
-          description: |
-            e.g. Caucasian
-          required: false
-          type: string
-        - name: subject_age_min
-          in: query
-          description: |
-            e.g. 10
-          required: false
-          type: integer
-        - name: subject_age_max
-          in: query
-          description: |
-            e.g. 12
-          required: false
-          type: integer
-        - name: case_control_name
-          in: query
-          description: |
-            e.g. Control
-          required: false
-          type: string
-        - name: sample_name
-          in: query
-          description: |
-            e.g. test2
-          required: false
-          type: string
-        - name: sample_source_name
-          in: query
-          description: |
-            e.g. Blood (PBMC)
-          required: false
-          type: string
-        - name: ireceptor_cell_subset_name
-          in: query
-          description: |
-            e.g. NaiveB
-          required: false
-          type: string
-        - name: dna_type
-          in: query
-          description: |
-            e.g. cDNA, gDNA
-          required: false
-          type: string
+        - $ref: '#/parameters/study_id'
+        - $ref: '#/parameters/study_title'
+        - $ref: '#/parameters/study_description'
+        - $ref: '#/parameters/lab_name'
+        - $ref: '#/parameters/subject_id'
+        - $ref: '#/parameters/organism'
+        - $ref: '#/parameters/sex'
+        - $ref: '#/parameters/ethnicity'
+        - $ref: '#/parameters/study_group_description'
+        - $ref: '#/parameters/sample_id'
+        - $ref: '#/parameters/tissue'
+        - $ref: '#/parameters/disease_state_sample'
+        - $ref: '#/parameters/cell_subset'
+        - $ref: '#/parameters/cell_phenotype'
+        - $ref: '#/parameters/library_source'
+        - $ref: '#/parameters/platform'
+        - $ref: '#/parameters/ir_lab_id'
+        - $ref: '#/parameters/ir_project_id'
+        - $ref: '#/parameters/ir_subject_age_min'
+        - $ref: '#/parameters/ir_subject_age_max'
       operationId: getSamples
       responses:
         '200':

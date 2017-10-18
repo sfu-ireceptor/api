@@ -86,24 +86,24 @@
   },
   "parameters": {
     "ir_username": {
-      "name": "username",
+      "name": "ir_username",
       "in": "query",
-      "description": "Username of the individual requesting access to the iReceptor repository node.\n",
+      "description": "Username of the individual requesting access to the iReceptor repository node. If the iReceptor repository is a public repository, then this parameter is not required. If the repository is not public then the username must be supplied and the repository will determine the access for that user for that repository.\n",
       "required": false,
       "type": "string"
     },
     "ir_sample_id_list": {
-      "name": "project_sample_id_list",
+      "name": "ir_project_sample_id_list",
       "in": "query",
-      "description": "List of unique identifiers (specific to the repository) that identifies the samples to apply the query to.\n",
+      "description": "List of unique identifiers (specific to the repository) that identify the samples to apply the query to.\n",
       "required": false,
       "type": "array",
       "items": {
-        "type": "integer"
+        "type": "string"
       }
     },
     "ir_data_format": {
-      "name": "format",
+      "name": "ir_data_format",
       "in": "query",
       "description": "Data format to return the sequence data in, one of:</br> 'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
       "required": false,
@@ -124,40 +124,101 @@
       "type": "string",
       "in": "query"
     },
-    "inclusion_exclusion_criteria": {
-      "name": "inclusion_exclusion_criteria",
-      "type": "string",
-      "in": "query"
-    },
-    "grants": {
-      "name": "grants",
-      "type": "string",
-      "in": "query"
-    },
     "lab_name": {
       "name": "lab_name",
       "type": "string",
       "in": "query"
     },
-    "collected_by": {
-      "name": "collected_by",
+    "subject_id": {
+      "name": "subject_id",
       "type": "string",
       "in": "query"
     },
-    "submitted_by": {
-      "name": "submitted_by",
+    "organism": {
+      "name": "organism",
       "type": "string",
       "in": "query"
     },
-    "lab_address": {
-      "name": "lab_address",
+    "sex": {
+      "name": "sex",
       "type": "string",
       "in": "query"
     },
-    "pub_ids": {
-      "name": "pub_ids",
+    "ethnicity": {
+      "name": "ethnicity",
       "type": "string",
       "in": "query"
+    },
+    "study_group_description": {
+      "name": "study_group_description",
+      "type": "string",
+      "in": "query"
+    },
+    "sample_id": {
+      "name": "sample_id",
+      "type": "string",
+      "in": "query"
+    },
+    "tissue": {
+      "name": "tissue",
+      "type": "string",
+      "in": "query"
+    },
+    "disease_state_sample": {
+      "name": "disease_state_sample",
+      "type": "string",
+      "in": "query"
+    },
+    "cell_subset": {
+      "name": "cell_subset",
+      "type": "string",
+      "in": "query"
+    },
+    "cell_phenotype": {
+      "name": "cell_phenotype",
+      "type": "string",
+      "in": "query"
+    },
+    "library_source": {
+      "name": "library_source",
+      "type": "string",
+      "in": "query"
+    },
+    "platform": {
+      "name": "platform",
+      "type": "string",
+      "in": "query"
+    },
+    "ir_lab_id": {
+      "name": "ir_lab_id",
+      "in": "query",
+      "description": "e.g. 1\n",
+      "required": false,
+      "type": "string"
+    },
+    "ir_project_id": {
+      "name": "ir_project_id",
+      "in": "query",
+      "description": "e.g. 1\n",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ir_subject_age_min": {
+      "name": "ir_subject_age_min",
+      "in": "query",
+      "description": "e.g. 10\n",
+      "required": false,
+      "type": "integer"
+    },
+    "ir_subject_age_max": {
+      "name": "ir_subject_age_max",
+      "in": "query",
+      "description": "e.g. 12\n",
+      "required": false,
+      "type": "integer"
     },
     "germline_database": {
       "name": "germline_database",
@@ -311,101 +372,64 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ir_username"
+            "$ref": "#/parameters/study_id"
           },
           {
-            "name": "lab_id",
-            "in": "query",
-            "description": "e.g. 1\n",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/study_title"
           },
           {
-            "name": "project_id",
-            "in": "query",
-            "description": "e.g. 1\n",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/parameters/study_description"
           },
           {
-            "name": "subject_code",
-            "in": "query",
-            "description": "e.g. test\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/lab_name"
           },
           {
-            "name": "subject_gender",
-            "in": "query",
-            "description": "e.g. Male or Female\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/subject_id"
           },
           {
-            "name": "subject_species",
-            "in": "query",
-            "description": "e.g. Human\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/organism"
           },
           {
-            "name": "subject_ethnicity",
-            "in": "query",
-            "description": "e.g. Caucasian\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/sex"
           },
           {
-            "name": "subject_age_min",
-            "in": "query",
-            "description": "e.g. 10\n",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/ethnicity"
           },
           {
-            "name": "subject_age_max",
-            "in": "query",
-            "description": "e.g. 12\n",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/study_group_description"
           },
           {
-            "name": "case_control_name",
-            "in": "query",
-            "description": "e.g. Control\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/sample_id"
           },
           {
-            "name": "sample_name",
-            "in": "query",
-            "description": "e.g. test2\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/tissue"
           },
           {
-            "name": "sample_source_name",
-            "in": "query",
-            "description": "e.g. Blood (PBMC)\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/disease_state_sample"
           },
           {
-            "name": "ireceptor_cell_subset_name",
-            "in": "query",
-            "description": "e.g. NaiveB\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/cell_subset"
           },
           {
-            "name": "dna_type",
-            "in": "query",
-            "description": "e.g. cDNA, gDNA\n",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/cell_phenotype"
+          },
+          {
+            "$ref": "#/parameters/library_source"
+          },
+          {
+            "$ref": "#/parameters/platform"
+          },
+          {
+            "$ref": "#/parameters/ir_lab_id"
+          },
+          {
+            "$ref": "#/parameters/ir_project_id"
+          },
+          {
+            "$ref": "#/parameters/ir_subject_age_min"
+          },
+          {
+            "$ref": "#/parameters/ir_subject_age_max"
           }
         ],
         "operationId": "getSamples",
