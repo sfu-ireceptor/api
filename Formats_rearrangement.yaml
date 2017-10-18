@@ -51,16 +51,16 @@ Formats_Rearrangements:
         type: string
         description: C gene assignment        
       v_score:
-        type: float
+        type: number
         description: V alignment score
       d_score:
-        type: float
+        type: number
         description: D alignment score
       j_score:
-        type: float
+        type: number
         description: J alignment score
       c_score:
-        type: float
+        type: number
         description: C alignment score
       v_cigar:
         type: string
@@ -75,31 +75,31 @@ Formats_Rearrangements:
         type: string
         description: C alignment CIGAR string
       v_evalue:
-        type: float
+        type: number
         description: V alignment E-value (when applicable)
       d_evalue:
-        type: float
+        type: number
         description: D alignment E-value (when applicable)
       j_evalue:
-        type: float
+        type: number
         description: J alignment E-value (when applicable)
       v_identity:
-        type: float
+        type: number
         description:  V alignment identity
       d_identity:
-        type: float
+        type: number
         description:  D alignment identity
       j_identity:
-        type: float
+        type: number
         description:  J alignment identity
       vdj_score:
-        type: float
+        type: number
         description: Score for aligners that consider the full sequence as a whole
       vdj_evalue:
-        type: float
+        type: number
         description: E-value for aligners that consider the full sequence as a whole
       vdj_identity:
-        type: float
+        type: number
         description: Identity for aligners that consider the full sequence as a whole
       vdj_cigar:
         type: string
