@@ -86,26 +86,26 @@
   },
   "parameters": {
     "ir_username": {
-      "name": "ir_username",
+      "name": "username",
       "in": "query",
       "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-      "required": true,
+      "required": false,
       "type": "string"
     },
     "ir_sample_id_list": {
-      "name": "ir_sample_id_list",
+      "name": "project_sample_id_list",
       "in": "query",
       "description": "List of unique identifiers (specific to the repository) that identifies the samples to apply the query to.\n",
-      "required": true,
+      "required": false,
       "type": "array",
       "items": {
         "type": "integer"
       }
     },
     "ir_data_format": {
-      "name": "ir_data_format",
+      "name": "format",
       "in": "query",
-      "description": "'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
+      "description": "Data format to return the sequence data in, one of:</br> 'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
       "required": false,
       "type": "string"
     },

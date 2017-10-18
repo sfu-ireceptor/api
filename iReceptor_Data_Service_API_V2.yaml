@@ -61,25 +61,25 @@ definitions:
           example: 123456
 parameters:
   ir_username:
-    name: ir_username
+    name: username
     in: query
     description: >
       Username of the individual requesting access to the iReceptor
       repository node.
-    required: true
+    required: false
     type: string
   ir_sample_id_list:
-    name: ir_sample_id_list
+    name: project_sample_id_list
     in: query
     description: >
       List of unique identifiers (specific to the repository) that identifies the samples
       to apply the query to.
-    required: true
+    required: false
     type: array
     items:
       type: integer
   ir_data_format:
-    name: ir_data_format
+    name: format
     in: query
     description: >-
       Data format to return the sequence data in, one of:</br>
