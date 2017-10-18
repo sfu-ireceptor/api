@@ -82,6 +82,58 @@
           "example": 123456
         }
       }
+    },
+    "ireceptor_samples_parameters_model": {
+      "type": "object",
+      "required": [
+        "ir_username"
+      ],
+      "properties": {
+        "ir_username": {
+          "type": "string",
+          "description": "Username of the individual requesting access to the iReceptor repository node.\n"
+        },
+        "ir_lab_id": {
+          "type": "integer",
+          "description": "e.g. 1\n"
+        },
+        "ir_project_id": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "e.g. 1\n"
+        }
+      }
+    },
+    "ireceptor_sequences_parameters_model": {
+      "type": "object",
+      "required": [
+        "ir_username"
+      ],
+      "properties": {
+        "ir_username": {
+          "type": "string",
+          "description": "Username of the individual requesting access to the iReceptor repository node.\n"
+        },
+        "ir_project_sample_id_list": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "ir_data_format": {
+          "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)\n  ir_junction_nt_length:"
+        },
+        "ir_junction_nt_length": {
+          "type": "integer",
+          "description": "Length of JUNCTION in nucleotide base pairs (iReceptor)"
+        },
+        "ir_junction_aa_length": {
+          "type": "integer",
+          "description": "Length of JUNCTION in amino acids (iReceptor)"
+        }
+      }
     }
   },
   "parameters": {
@@ -372,6 +424,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ir_username"
+          },
+          {
+            "$ref": "#/parameters/ir_lab_id"
+          },
+          {
+            "$ref": "#/parameters/ir_project_id"
+          },
+          {
             "$ref": "#/parameters/study_id"
           },
           {
@@ -420,12 +481,6 @@
             "$ref": "#/parameters/platform"
           },
           {
-            "$ref": "#/parameters/ir_lab_id"
-          },
-          {
-            "$ref": "#/parameters/ir_project_id"
-          },
-          {
             "$ref": "#/parameters/ir_subject_age_min"
           },
           {
@@ -468,80 +523,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "required": [
-                "username"
-              ],
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "description": "Username of the individual requesting access to the iReceptor repository node.\n"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/airr_summary_model"
                 },
-                "lab_id": {
-                  "type": "integer",
-                  "description": "e.g. 1\n"
-                },
-                "project_id": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  },
-                  "description": "e.g. 1\n"
-                },
-                "subject_code": {
-                  "type": "string",
-                  "description": "e.g. test\n"
-                },
-                "subject_gender": {
-                  "type": "string",
-                  "description": "e.g. Male\n"
-                },
-                "subject_ethnicity": {
-                  "type": "string",
-                  "description": "e.g. Caucasian\n"
-                },
-                "subject_species": {
-                  "type": "string",
-                  "description": "e.g. Human\n"
-                },
-                "subject_age_min": {
-                  "type": "integer",
-                  "description": "e.g. 10\n"
-                },
-                "subject_age_max": {
-                  "type": "integer",
-                  "description": "e.g. 12\n"
-                },
-                "case_control_name": {
-                  "type": "string",
-                  "description": "e.g. Control\n"
-                },
-                "sample_name": {
-                  "type": "string",
-                  "description": "e.g. test2\n"
-                },
-                "sample_source_name": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "e.g. Blood (PBMC)\n"
-                },
-                "ireceptor_cell_subset_name": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "e.g. NaiveB\n"
-                },
-                "dna_type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "e.g. cDNA\n"
+                {
+                  "$ref": "#/definitions/ireceptor_samples_parameters_model"
                 }
-              }
+              ]
             }
           }
         ],
@@ -727,35 +716,14 @@
             "name": "query",
             "in": "body",
             "schema": {
-              "type": "object",
-              "required": [
-                "username"
-              ],
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "description": "Username of the individual requesting access to the iReceptor repository node.\n"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ireceptor_sequences_parameters_model"
                 },
-                "project_sample_id_list": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  }
-                },
-                "cdr3_length": {
-                  "description": "length of complementarity determining region in nucleotide base pairs\n",
-                  "type": "integer"
-                },
-                "vgene_string": {
-                  "type": "string"
-                },
-                "jgene_string": {
-                  "type": "string"
-                },
-                "format": {
-                  "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)"
+                {
+                  "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements"
                 }
-              }
+              ]
             }
           }
         ],
@@ -912,18 +880,6 @@
             "description": "A successful call returns an array of sequence data. Optional \"output\" parameter determines the output format. Default is a JSON response, limited to top 50 results. If \"output\" is set to \"csv\", it will return all the matching sequence annotations, in addition to sample information and annotation tool information, in a comma-separated format. \n",
             "schema": {
               "$ref": "#/definitions/ireceptor_sequence_response"
-            },
-            "examples": {
-              "application/json": {
-                "seq_name": "M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0\n",
-                "v_allele": "IGHV4-59*01 or  IGHV4-59*07\n",
-                "d_allele": "IGHD3-10*01\n",
-                "j_allele": "IGHJ4*02\n",
-                "citation": {
-                  "doi": "10.1093/cid/ciw767",
-                  "title": "RNA-Seq Analysis of Gene Expression, Viral Pathogen, and B-Cell/T-Cell Receptor Signatures in Complex Chronic Disease.\n"
-                }
-              }
             }
           },
           "400": {

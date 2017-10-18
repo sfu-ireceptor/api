@@ -59,6 +59,55 @@ definitions:
           type: integer
           description: Number of sequences found that met the search criteria for this sample
           example: 123456
+  ireceptor_samples_parameters_model:
+      type: object
+      required:
+        - ir_username
+      properties:
+        ir_username:
+          type: string
+          description: >
+            Username of the individual requesting access to the iReceptor
+            repository node.
+        ir_lab_id:
+          type: integer
+          description: |
+            e.g. 1
+        ir_project_id:
+          type: array
+          items:
+            type: integer
+          description: |
+            e.g. 1
+  ireceptor_sequences_parameters_model:
+      type: object
+      required:
+        - ir_username
+      properties:
+        ir_username:
+          type: string
+          description: >
+            Username of the individual requesting access to the iReceptor
+            repository node.
+        ir_project_sample_id_list:
+          type: array
+          items:
+            type: integer
+        ir_data_format:
+          description: >-
+            'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based
+            TSV (as per /v1 with tab delimiters instead of commas); 'airr'
+            - AIRR Formats rearrangements TSV (as per AIRR formats
+            rearrangements spec)
+              ir_junction_nt_length:
+        ir_junction_nt_length:
+          type: integer
+          description: >-
+            Length of JUNCTION in nucleotide base pairs (iReceptor)
+        ir_junction_aa_length:
+          type: integer
+          description: >-
+            Length of JUNCTION in amino acids (iReceptor)
 parameters:
   #
   # Generally useful parameters for all API entry points.
@@ -338,6 +387,9 @@ paths:
       tags:
         - samples
       parameters:
+        - $ref: '#/parameters/ir_username'
+        - $ref: '#/parameters/ir_lab_id'
+        - $ref: '#/parameters/ir_project_id'
         - $ref: '#/parameters/study_id'
         - $ref: '#/parameters/study_title'
         - $ref: '#/parameters/study_description'
@@ -354,8 +406,6 @@ paths:
         - $ref: '#/parameters/cell_phenotype'
         - $ref: '#/parameters/library_source'
         - $ref: '#/parameters/platform'
-        - $ref: '#/parameters/ir_lab_id'
-        - $ref: '#/parameters/ir_project_id'
         - $ref: '#/parameters/ir_subject_age_min'
         - $ref: '#/parameters/ir_subject_age_max'
       operationId: getSamples
@@ -398,75 +448,9 @@ paths:
           in: body
           required: true
           schema:
-            type: object
-            required:
-              - username
-            properties:
-              username:
-                type: string
-                description: >
-                  Username of the individual requesting access to the iReceptor
-                  repository node.
-              lab_id:
-                type: integer
-                description: |
-                  e.g. 1
-              project_id:
-                type: array
-                items:
-                  type: integer
-                description: |
-                  e.g. 1
-              subject_code:
-                type: string
-                description: |
-                  e.g. test
-              subject_gender:
-                type: string
-                description: |
-                  e.g. Male
-              subject_ethnicity:
-                type: string
-                description: |
-                  e.g. Caucasian
-              subject_species:
-                type: string
-                description: |
-                  e.g. Human
-              subject_age_min:
-                type: integer
-                description: |
-                  e.g. 10
-              subject_age_max:
-                type: integer
-                description: |
-                  e.g. 12
-              case_control_name:
-                type: string
-                description: |
-                  e.g. Control
-              sample_name:
-                type: string
-                description: |
-                  e.g. test2
-              sample_source_name:
-                type: array
-                items:
-                  type: string
-                description: |
-                  e.g. Blood (PBMC)
-              ireceptor_cell_subset_name:
-                type: array
-                items:
-                  type: string
-                description: |
-                  e.g. NaiveB
-              dna_type:
-                type: array
-                items:
-                  type: string
-                description: |
-                  e.g. cDNA
+            allOf:
+            - $ref: '#/definitions/airr_summary_model'
+            - $ref: '#/definitions/ireceptor_samples_parameters_model'
       operationId: postSamples
       responses:
         '200':
@@ -596,34 +580,9 @@ paths:
         - name: query
           in: body
           schema:
-            type: object
-            required:
-              - username
-            properties:
-              username:
-                type: string
-                description: >
-                  Username of the individual requesting access to the iReceptor
-                  repository node.
-              project_sample_id_list:
-                type: array
-                items:
-                  type: integer
-              cdr3_length:
-                description: >
-                  length of complementarity determining region in nucleotide
-                  base pairs
-                type: integer
-              vgene_string:
-                type: string
-              jgene_string:
-                type: string
-              format:
-                description: >-
-                  'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based
-                  TSV (as per /v1 with tab delimiters instead of commas); 'airr'
-                  - AIRR Formats rearrangements TSV (as per AIRR formats
-                  rearrangements spec)
+            allOf:
+            - $ref: '#/definitions/ireceptor_sequences_parameters_model'
+            - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements'
       operationId: postSequenceData
       responses:
         '200':
@@ -724,21 +683,6 @@ paths:
             comma-separated format. 
           schema:
             $ref: '#/definitions/ireceptor_sequence_response'
-          examples:
-            application/json:
-              seq_name: |
-                M00930:18:000000000-A3782:1:1101:11543:3128_1:N:0
-              v_allele: |
-                IGHV4-59*01 or  IGHV4-59*07
-              d_allele: |
-                IGHD3-10*01
-              j_allele: |
-                IGHJ4*02
-              citation:
-                doi: 10.1093/cid/ciw767
-                title: >
-                  RNA-Seq Analysis of Gene Expression, Viral Pathogen, and
-                  B-Cell/T-Cell Receptor Signatures in Complex Chronic Disease.
         '400':
           description: malformed request
         '401':
