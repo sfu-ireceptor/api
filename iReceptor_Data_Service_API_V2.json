@@ -78,9 +78,154 @@
       "properties": {
         "sequence_count": {
           "type": "integer",
+          "description": "Number of sequences found that met the search criteria for this sample",
           "example": 123456
         }
       }
+    }
+  },
+  "parameters": {
+    "ir_username": {
+      "name": "ir_username",
+      "in": "query",
+      "description": "Username of the individual requesting access to the iReceptor repository node.\n",
+      "required": true,
+      "type": "string"
+    },
+    "ir_sample_id_list": {
+      "name": "ir_sample_id_list",
+      "in": "query",
+      "description": "List of unique identifiers (specific to the repository) that identifies the samples to apply the query to.\n",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "ir_data_format": {
+      "name": "ir_data_format",
+      "in": "query",
+      "description": "'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
+      "required": false,
+      "type": "string"
+    },
+    "study_id": {
+      "name": "study_id",
+      "type": "string",
+      "in": "query"
+    },
+    "study_title": {
+      "name": "study_title",
+      "type": "string",
+      "in": "query"
+    },
+    "study_description": {
+      "name": "study_description",
+      "type": "string",
+      "in": "query"
+    },
+    "inclusion_exclusion_criteria": {
+      "name": "inclusion_exclusion_criteria",
+      "type": "string",
+      "in": "query"
+    },
+    "grants": {
+      "name": "grants",
+      "type": "string",
+      "in": "query"
+    },
+    "lab_name": {
+      "name": "lab_name",
+      "type": "string",
+      "in": "query"
+    },
+    "collected_by": {
+      "name": "collected_by",
+      "type": "string",
+      "in": "query"
+    },
+    "submitted_by": {
+      "name": "submitted_by",
+      "type": "string",
+      "in": "query"
+    },
+    "lab_address": {
+      "name": "lab_address",
+      "type": "string",
+      "in": "query"
+    },
+    "pub_ids": {
+      "name": "pub_ids",
+      "type": "string",
+      "in": "query"
+    },
+    "germline_database": {
+      "name": "germline_database",
+      "in": "query",
+      "type": "string",
+      "description": "Source of germline V(D)J segments, with version number or date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)\n"
+    },
+    "cell_index": {
+      "name": "cell_index",
+      "in": "query",
+      "type": "integer",
+      "description": "Cell Index (UID linking sequences from the same cell) (AIRR)\n"
+    },
+    "v_allele": {
+      "name": "v_allele",
+      "in": "query",
+      "type": "string",
+      "description": "V gene with allele (e.g. IGHV4-59*01) (AIRR)\n"
+    },
+    "d_allele": {
+      "name": "d_allele",
+      "in": "query",
+      "type": "string",
+      "description": "D gene with allele (e.g. IGHD3-10*01) (AIRR)\n"
+    },
+    "j_allele": {
+      "name": "j_allele",
+      "in": "query",
+      "type": "string",
+      "description": "J gene with allele (e.g. IGHJ4*02) (AIRR)\n"
+    },
+    "c_allele": {
+      "name": "c_allele",
+      "in": "query",
+      "type": "string",
+      "description": "C region with allele (AIRR)                     \n"
+    },
+    "junction_nt": {
+      "name": "junction_nt",
+      "in": "query",
+      "type": "string",
+      "description": "JUNCTION nucleotide sequence (Sequence of the CDR3 region (nucleotide)) (AIRR)\n"
+    },
+    "junction_aa": {
+      "name": "junction_aa",
+      "in": "query",
+      "type": "string",
+      "description": "JUNCTION amino acid sequence (Sequence of the CDR3 region (amino acid)) (AIRR)\n"
+    },
+    "duplicate_count": {
+      "name": "duplicate_count",
+      "in": "query",
+      "type": "integer",
+      "description": "Number of times the sequence has been duplicated in a file (AIRR)\n"
+    },
+    "ir_junction_nt_length": {
+      "name": "ir_junction_nt_length",
+      "in": "query",
+      "description": "Length of JUNCTION in nucleotide base pairs (iReceptor)",
+      "required": false,
+      "type": "integer"
+    },
+    "ir_junction_aa_length": {
+      "name": "ir_junction_aa_length",
+      "in": "query",
+      "description": "Length of JUNCTION in amino acids (iReceptor)",
+      "required": false,
+      "type": "integer"
     }
   },
   "schemes": [
@@ -166,11 +311,7 @@
         ],
         "parameters": [
           {
-            "name": "username",
-            "in": "query",
-            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ir_username"
           },
           {
             "name": "lab_id",
@@ -415,39 +556,37 @@
         ],
         "parameters": [
           {
-            "name": "username",
-            "in": "query",
-            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ir_username"
           },
           {
-            "name": "project_sample_id_list",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "name": "cdr3_length",
-            "in": "query",
-            "description": "length of complementarity determining region in nucleotide base pairs",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/germline_database"
           },
           {
-            "name": "vgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/v_allele"
           },
           {
-            "name": "jgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/d_allele"
+          },
+          {
+            "$ref": "#/parameters/j_allele"
+          },
+          {
+            "$ref": "#/parameters/c_allele"
+          },
+          {
+            "$ref": "#/parameters/junction_nt"
+          },
+          {
+            "$ref": "#/parameters/junction_aa"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_nt_length"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getSequenceSummary",
@@ -493,46 +632,40 @@
         ],
         "parameters": [
           {
-            "name": "username",
-            "in": "query",
-            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ir_username"
           },
           {
-            "name": "project_sample_id_list",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "name": "cdr3_length",
-            "in": "query",
-            "description": "length of complementarity determining region in nucleotide base pairs",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/ir_data_format"
           },
           {
-            "name": "vgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/germline_database"
           },
           {
-            "name": "jgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/v_allele"
           },
           {
-            "name": "format",
-            "in": "query",
-            "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/d_allele"
+          },
+          {
+            "$ref": "#/parameters/j_allele"
+          },
+          {
+            "$ref": "#/parameters/c_allele"
+          },
+          {
+            "$ref": "#/parameters/junction_nt"
+          },
+          {
+            "$ref": "#/parameters/junction_aa"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_nt_length"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getSequenceData",
@@ -637,39 +770,37 @@
         ],
         "parameters": [
           {
-            "name": "username",
-            "in": "query",
-            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ir_username"
           },
           {
-            "name": "project_sample_id_list",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "name": "cdr3_length",
-            "in": "query",
-            "description": "length of complementarity determining region in nucleotide base pairs",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/germline_database"
           },
           {
-            "name": "vgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/v_allele"
           },
           {
-            "name": "jgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/d_allele"
+          },
+          {
+            "$ref": "#/parameters/j_allele"
+          },
+          {
+            "$ref": "#/parameters/c_allele"
+          },
+          {
+            "$ref": "#/parameters/junction_nt"
+          },
+          {
+            "$ref": "#/parameters/junction_aa"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_nt_length"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getCloneSummary",
@@ -715,39 +846,40 @@
         ],
         "parameters": [
           {
-            "name": "username",
-            "in": "query",
-            "description": "Username of the individual requesting access to the iReceptor repository node.\n",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ir_username"
           },
           {
-            "name": "project_sample_id_list",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "name": "cdr3_length",
-            "in": "query",
-            "description": "length of complementarity determining region in nucleotide base pairs",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/ir_data_format"
           },
           {
-            "name": "vgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/germline_database"
           },
           {
-            "name": "jgene_string",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/v_allele"
+          },
+          {
+            "$ref": "#/parameters/d_allele"
+          },
+          {
+            "$ref": "#/parameters/j_allele"
+          },
+          {
+            "$ref": "#/parameters/c_allele"
+          },
+          {
+            "$ref": "#/parameters/junction_nt"
+          },
+          {
+            "$ref": "#/parameters/junction_aa"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_nt_length"
+          },
+          {
+            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getCloneData",
