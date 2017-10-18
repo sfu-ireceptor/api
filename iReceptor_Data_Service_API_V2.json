@@ -123,7 +123,7 @@
           }
         },
         "ir_data_format": {
-          "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)\n  ir_junction_nt_length:"
+          "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)"
         },
         "ir_junction_nt_length": {
           "type": "integer",

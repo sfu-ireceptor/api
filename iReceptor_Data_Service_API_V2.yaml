@@ -99,7 +99,6 @@ definitions:
             TSV (as per /v1 with tab delimiters instead of commas); 'airr'
             - AIRR Formats rearrangements TSV (as per AIRR formats
             rearrangements spec)
-              ir_junction_nt_length:
         ir_junction_nt_length:
           type: integer
           description: >-
