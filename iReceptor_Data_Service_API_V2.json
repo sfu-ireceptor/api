@@ -76,14 +76,14 @@
     "ireceptor_sequence_count_model": {
       "type": "object",
       "properties": {
-        "sequence_count": {
+        "ir_sequence_count": {
           "type": "integer",
           "description": "Number of sequences found that met the search criteria for this sample",
           "example": 123456
         }
       }
     },
-    "ireceptor_samples_parameters_model": {
+    "ireceptor_core_samples_parameters_model": {
       "type": "object",
       "required": [
         "ir_username"
@@ -94,19 +94,45 @@
           "description": "Username of the individual requesting access to the iReceptor repository node.\n"
         },
         "ir_lab_id": {
-          "type": "integer",
+          "type": "string",
           "description": "e.g. 1\n"
         },
         "ir_project_id": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "string"
           },
           "description": "e.g. 1\n"
         }
       }
     },
-    "ireceptor_sequences_parameters_model": {
+    "ireceptor_ancillary_samples_parameters_model": {
+      "type": "object",
+      "properties": {
+        "ir_subject_age_min": {
+          "type": "integer",
+          "description": "e.g. 30\n"
+        },
+        "ir_subject_age_max": {
+          "type": "integer",
+          "description": "e.g. 50\n"
+        }
+      }
+    },
+    "airr_formats_sequences_parameters_model": {
+      "type": "object",
+      "properties": {
+        "junction_length": {
+          "type": "integer",
+          "description": "Number of junction nucleotides in sequence_vdj (CDR3 + preserved residues)\n"
+        },
+        "functional": {
+          "type": "string",
+          "description": "Filter for sequences that are either functional, non-functional, or both\n"
+        }
+      }
+    },
+    "ireceptor_core_sequences_parameters_model": {
       "type": "object",
       "required": [
         "ir_username"
@@ -119,15 +145,20 @@
         "ir_project_sample_id_list": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "string"
           }
         },
         "ir_data_format": {
           "description": "'csv' - vQuest based CSV (as per /v1);  'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas); 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)"
-        },
-        "ir_junction_nt_length": {
-          "type": "integer",
-          "description": "Length of JUNCTION in nucleotide base pairs (iReceptor)"
+        }
+      }
+    },
+    "ireceptor_ancillary_sequences_parameters_model": {
+      "type": "object",
+      "properties": {
+        "ir_show_unproductive": {
+          "type": "string",
+          "description": "By default, only productive sequences are returned. In order to return unproductive sequences, set this parameter to \"T\""
         },
         "ir_junction_aa_length": {
           "type": "integer",
@@ -141,23 +172,6 @@
       "name": "ir_username",
       "in": "query",
       "description": "Username of the individual requesting access to the iReceptor repository node. If the iReceptor repository is a public repository, then this parameter is not required. If the repository is not public then the username must be supplied and the repository will determine the access for that user for that repository.\n",
-      "required": false,
-      "type": "string"
-    },
-    "ir_sample_id_list": {
-      "name": "ir_project_sample_id_list",
-      "in": "query",
-      "description": "List of unique identifiers (specific to the repository) that identify the samples to apply the query to.\n",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "ir_data_format": {
-      "name": "ir_data_format",
-      "in": "query",
-      "description": "Data format to return the sequence data in, one of:</br> 'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
       "required": false,
       "type": "string"
     },
@@ -312,13 +326,13 @@
       "name": "junction_nt",
       "in": "query",
       "type": "string",
-      "description": "JUNCTION nucleotide sequence (Sequence of the CDR3 region (nucleotide)) (AIRR)\n"
+      "description": "JUNCTION nucleotide sequence (Sequence of the CDR3 region + preserved residues (nucleotide)) (AIRR)\n"
     },
     "junction_aa": {
       "name": "junction_aa",
       "in": "query",
       "type": "string",
-      "description": "JUNCTION amino acid sequence (Sequence of the CDR3 region (amino acid)) (AIRR)\n"
+      "description": "JUNCTION amino acid sequence (Sequence of the CDR3 region + preserved residues (amino acid)) (AIRR)\n"
     },
     "duplicate_count": {
       "name": "duplicate_count",
@@ -326,17 +340,56 @@
       "type": "integer",
       "description": "Number of times the sequence has been duplicated in a file (AIRR)\n"
     },
+    "junction_length": {
+      "name": "junction_length",
+      "in": "query",
+      "type": "integer",
+      "description": "Number of junction nucleotides in sequence_vdj (CDR3 + preserved residues)\n"
+    },
+    "functional": {
+      "name": "functional",
+      "in": "query",
+      "type": "string",
+      "description": "Filter for sequences that are either functional, non-functional, or both\n"
+    },
+    "ir_sample_id_list": {
+      "name": "ir_project_sample_id_list",
+      "in": "query",
+      "description": "List of unique identifiers (specific to the repository) that identify the samples to apply the query to.\n",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ir_data_format": {
+      "name": "ir_data_format",
+      "in": "query",
+      "description": "Data format to return the sequence data in, one of:</br> 'csv' - vQuest based CSV (as per /v1)(default)</br> 'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br> 'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)",
+      "required": false,
+      "type": "string"
+    },
+    "ir_show_unproductive": {
+      "name": "ir_show_unproductive",
+      "in": "query",
+      "description": "By default, only productive sequences are returned. In order to return unproductive sequences, set this parameter to \"T\"\n",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "ir_junction_nt_length": {
       "name": "ir_junction_nt_length",
       "in": "query",
-      "description": "Length of JUNCTION in nucleotide base pairs (iReceptor)",
+      "description": "Length of JUNCTION (CDR3 + preserved residues) in nucleotide base pairs (iReceptor)",
       "required": false,
       "type": "integer"
     },
     "ir_junction_aa_length": {
       "name": "ir_junction_aa_length",
       "in": "query",
-      "description": "Length of JUNCTION in amino acids (iReceptor)",
+      "description": "Length of JUNCTION (CDR3 + preserved residues) in amino acids (iReceptor)",
       "required": false,
       "type": "integer"
     }
@@ -528,10 +581,13 @@
             "schema": {
               "allOf": [
                 {
+                  "$ref": "#/definitions/ireceptor_core_samples_parameters_model"
+                },
+                {
                   "$ref": "#/definitions/airr_summary_model"
                 },
                 {
-                  "$ref": "#/definitions/ireceptor_samples_parameters_model"
+                  "$ref": "#/definitions/ireceptor_ancillary_samples_parameters_model"
                 }
               ]
             }
@@ -578,9 +634,6 @@
             "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "$ref": "#/parameters/germline_database"
-          },
-          {
             "$ref": "#/parameters/v_allele"
           },
           {
@@ -590,16 +643,16 @@
             "$ref": "#/parameters/j_allele"
           },
           {
-            "$ref": "#/parameters/c_allele"
-          },
-          {
-            "$ref": "#/parameters/junction_nt"
-          },
-          {
             "$ref": "#/parameters/junction_aa"
           },
           {
-            "$ref": "#/parameters/ir_junction_nt_length"
+            "$ref": "#/parameters/junction_length"
+          },
+          {
+            "$ref": "#/parameters/functional"
+          },
+          {
+            "$ref": "#/parameters/ir_show_unproductive"
           },
           {
             "$ref": "#/parameters/ir_junction_aa_length"
@@ -657,9 +710,6 @@
             "$ref": "#/parameters/ir_data_format"
           },
           {
-            "$ref": "#/parameters/germline_database"
-          },
-          {
             "$ref": "#/parameters/v_allele"
           },
           {
@@ -669,16 +719,16 @@
             "$ref": "#/parameters/j_allele"
           },
           {
-            "$ref": "#/parameters/c_allele"
-          },
-          {
-            "$ref": "#/parameters/junction_nt"
-          },
-          {
             "$ref": "#/parameters/junction_aa"
           },
           {
-            "$ref": "#/parameters/ir_junction_nt_length"
+            "$ref": "#/parameters/junction_length"
+          },
+          {
+            "$ref": "#/parameters/functional"
+          },
+          {
+            "$ref": "#/parameters/ir_show_unproductive"
           },
           {
             "$ref": "#/parameters/ir_junction_aa_length"
@@ -721,10 +771,16 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ireceptor_sequences_parameters_model"
+                  "$ref": "#/definitions/ireceptor_core_sequences_parameters_model"
                 },
                 {
                   "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements"
+                },
+                {
+                  "$ref": "#/definitions/airr_formats_sequences_parameters_model"
+                },
+                {
+                  "$ref": "#/definitions/ireceptor_ancillary_sequences_parameters_model"
                 }
               ]
             }
@@ -771,9 +827,6 @@
             "$ref": "#/parameters/ir_sample_id_list"
           },
           {
-            "$ref": "#/parameters/germline_database"
-          },
-          {
             "$ref": "#/parameters/v_allele"
           },
           {
@@ -783,16 +836,16 @@
             "$ref": "#/parameters/j_allele"
           },
           {
-            "$ref": "#/parameters/c_allele"
-          },
-          {
-            "$ref": "#/parameters/junction_nt"
-          },
-          {
             "$ref": "#/parameters/junction_aa"
           },
           {
-            "$ref": "#/parameters/ir_junction_nt_length"
+            "$ref": "#/parameters/junction_length"
+          },
+          {
+            "$ref": "#/parameters/functional"
+          },
+          {
+            "$ref": "#/parameters/ir_show_unproductive"
           },
           {
             "$ref": "#/parameters/ir_junction_aa_length"
@@ -850,9 +903,6 @@
             "$ref": "#/parameters/ir_data_format"
           },
           {
-            "$ref": "#/parameters/germline_database"
-          },
-          {
             "$ref": "#/parameters/v_allele"
           },
           {
@@ -862,16 +912,16 @@
             "$ref": "#/parameters/j_allele"
           },
           {
-            "$ref": "#/parameters/c_allele"
-          },
-          {
-            "$ref": "#/parameters/junction_nt"
-          },
-          {
             "$ref": "#/parameters/junction_aa"
           },
           {
-            "$ref": "#/parameters/ir_junction_nt_length"
+            "$ref": "#/parameters/junction_length"
+          },
+          {
+            "$ref": "#/parameters/functional"
+          },
+          {
+            "$ref": "#/parameters/ir_show_unproductive"
           },
           {
             "$ref": "#/parameters/ir_junction_aa_length"
