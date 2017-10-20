@@ -347,6 +347,9 @@
   "produces": [
     "application/json"
   ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
   "tags": [
     {
       "name": "info",

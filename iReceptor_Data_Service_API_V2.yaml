@@ -325,6 +325,8 @@ schemes:
   - https
 produces:
   - application/json
+consumes:
+  - application/x-www-form-urlencoded
 tags:
   - name: info
     description: Service information
