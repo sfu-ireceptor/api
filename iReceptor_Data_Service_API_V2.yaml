@@ -99,7 +99,7 @@ definitions:
       junction_length:
         type: integer
         description: |
-          Number of junction nucleotides in sequence_vdj (CDR3 + preserved residues)
+          Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)
       functional:
         type: string
         description: |
@@ -302,14 +302,14 @@ parameters:
     type: string
     description: >
       JUNCTION nucleotide sequence (Sequence of the CDR3
-      region + preserved residues (nucleotide)) (AIRR)
+      region + conserved residues (nucleotide)) (AIRR)
   junction_aa:
     name: junction_aa
     in: query
     type: string
     description: >
       JUNCTION amino acid sequence (Sequence of the CDR3
-      region + preserved residues (amino acid)) (AIRR)
+      region + conserved residues (amino acid)) (AIRR)
   duplicate_count:
     name: duplicate_count
     in: query
@@ -324,7 +324,7 @@ parameters:
     in: query
     type: integer
     description: |
-      Number of junction nucleotides in sequence_vdj (CDR3 + preserved residues)
+      Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)
   functional:
     name: functional
     in: query
@@ -368,14 +368,14 @@ parameters:
     name: ir_junction_nt_length
     in: query
     description: >-
-      Length of JUNCTION (CDR3 + preserved residues) in nucleotide base pairs (iReceptor)
+      Length of JUNCTION (CDR3 + conserved residues) in nucleotide base pairs (iReceptor)
     required: false
     type: integer
   ir_junction_aa_length:
     name: ir_junction_aa_length
     in: query
     description: >-
-      Length of JUNCTION (CDR3 + preserved residues) in amino acids (iReceptor)
+      Length of JUNCTION (CDR3 + conserved residues) in amino acids (iReceptor)
     required: false
     type: integer
 schemes:
