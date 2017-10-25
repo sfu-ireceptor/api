@@ -33,15 +33,9 @@
       "type": "array",
       "items": {
         "allOf": [
-          {
-            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements"
-          },
-          {
-            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/Formats_rearrangement.yaml#/Formats_Rearrangements"
-          },
-          {
-            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_sequence.yaml#/ireceptor_sequence_annotation_model"
-          }
+	  {
+            "$ref": "https://raw.githubusercontent.com/airr-community/airr-standards/airr-formats/specs/definitions.yaml#/Rearrangement"
+	  }
         ]
       }
     },
@@ -175,89 +169,183 @@
       "required": false,
       "type": "string"
     },
+    "ir_username_form": {
+      "name": "ir_username",
+      "in": "formData",
+      "description": "Username of the individual requesting access to the iReceptor repository node. If the iReceptor repository is a public repository, then this parameter is not required. If the repository is not public then the username must be supplied and the repository will determine the access for that user for that repository.\n",
+      "required": true,
+      "type": "string"
+    },
     "study_id": {
       "name": "study_id",
       "type": "string",
       "in": "query"
+    },
+    "study_id_form": {
+      "name": "study_id",
+      "type": "string",
+      "in": "formData"
     },
     "study_title": {
       "name": "study_title",
       "type": "string",
       "in": "query"
     },
+    "study_title_form": {
+      "name": "study_title",
+      "type": "string",
+      "in": "formData"
+    },
     "study_description": {
       "name": "study_description",
       "type": "string",
       "in": "query"
+    },
+    "study_description_form": {
+      "name": "study_description",
+      "type": "string",
+      "in": "formData"
     },
     "lab_name": {
       "name": "lab_name",
       "type": "string",
       "in": "query"
     },
+    "lab_name_form": {
+      "name": "lab_name",
+      "type": "string",
+      "in": "formData"
+    },
     "subject_id": {
       "name": "subject_id",
       "type": "string",
       "in": "query"
+    },
+    "subject_id_form": {
+      "name": "subject_id",
+      "type": "string",
+      "in": "formData"
     },
     "organism": {
       "name": "organism",
       "type": "string",
       "in": "query"
     },
+    "organism_form": {
+      "name": "organism",
+      "type": "string",
+      "in": "formData"
+    },
     "sex": {
       "name": "sex",
       "type": "string",
       "in": "query"
+    },
+    "sex_form": {
+      "name": "sex",
+      "type": "string",
+      "in": "formData"
     },
     "ethnicity": {
       "name": "ethnicity",
       "type": "string",
       "in": "query"
     },
+    "ethnicity_form": {
+      "name": "ethnicity",
+      "type": "string",
+      "in": "formData"
+    },
     "study_group_description": {
       "name": "study_group_description",
       "type": "string",
       "in": "query"
+    },
+    "study_group_description_form": {
+      "name": "study_group_description",
+      "type": "string",
+      "in": "formData"
     },
     "sample_id": {
       "name": "sample_id",
       "type": "string",
       "in": "query"
     },
+    "sample_id_form": {
+      "name": "sample_id",
+      "type": "string",
+      "in": "formData"
+    },
     "tissue": {
       "name": "tissue",
       "type": "string",
       "in": "query"
+    },
+    "tissue_form": {
+      "name": "tissue",
+      "type": "string",
+      "in": "formData"
     },
     "disease_state_sample": {
       "name": "disease_state_sample",
       "type": "string",
       "in": "query"
     },
+    "disease_state_sample_form": {
+      "name": "disease_state_sample",
+      "type": "string",
+      "in": "formData"
+    },
     "cell_subset": {
       "name": "cell_subset",
       "type": "string",
       "in": "query"
+    },
+    "cell_subset_form": {
+      "name": "cell_subset",
+      "type": "string",
+      "in": "formData"
     },
     "cell_phenotype": {
       "name": "cell_phenotype",
       "type": "string",
       "in": "query"
     },
+    "cell_phenotype_form": {
+      "name": "cell_phenotype",
+      "type": "string",
+      "in": "formData"
+    },
     "library_source": {
       "name": "library_source",
       "type": "string",
       "in": "query"
+    },
+    "library_source_form": {
+      "name": "library_source",
+      "type": "string",
+      "in": "formData"
     },
     "platform": {
       "name": "platform",
       "type": "string",
       "in": "query"
     },
+    "platform_form": {
+      "name": "platform",
+      "type": "string",
+      "in": "formData"
+    },
     "ir_lab_id": {
       "name": "ir_lab_id",
       "in": "query",
+      "description": "e.g. 1\n",
+      "required": false,
+      "type": "string"
+    },
+    "ir_lab_id_form": {
+      "name": "ir_lab_id",
+      "in": "formData",
       "description": "e.g. 1\n",
       "required": false,
       "type": "string"
@@ -272,6 +360,16 @@
         "type": "string"
       }
     },
+    "ir_project_id_form": {
+      "name": "ir_project_id",
+      "in": "formData",
+      "description": "e.g. 1\n",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "ir_subject_age_min": {
       "name": "ir_subject_age_min",
       "in": "query",
@@ -279,9 +377,23 @@
       "required": false,
       "type": "integer"
     },
+    "ir_subject_age_min_form": {
+      "name": "ir_subject_age_min",
+      "in": "formData",
+      "description": "e.g. 10\n",
+      "required": false,
+      "type": "integer"
+    },
     "ir_subject_age_max": {
       "name": "ir_subject_age_max",
       "in": "query",
+      "description": "e.g. 12\n",
+      "required": false,
+      "type": "integer"
+    },
+    "ir_subject_age_max_form": {
+      "name": "ir_subject_age_max",
+      "in": "formData",
       "description": "e.g. 12\n",
       "required": false,
       "type": "integer"
@@ -576,22 +688,67 @@
         ],
         "parameters": [
           {
-            "name": "query",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ireceptor_core_samples_parameters_model"
-                },
-                {
-                  "$ref": "#/definitions/airr_summary_model"
-                },
-                {
-                  "$ref": "#/definitions/ireceptor_ancillary_samples_parameters_model"
-                }
-              ]
-            }
+            "$ref": "#/parameters/ir_username_form"
+          },
+          {
+            "$ref": "#/parameters/ir_lab_id_form"
+          },
+          {
+            "$ref": "#/parameters/ir_project_id_form"
+          },
+          {
+            "$ref": "#/parameters/study_id_form"
+          },
+          {
+            "$ref": "#/parameters/study_title_form"
+          },
+          {
+            "$ref": "#/parameters/study_description_form"
+          },
+          {
+            "$ref": "#/parameters/lab_name_form"
+          },
+          {
+            "$ref": "#/parameters/subject_id_form"
+          },
+          {
+            "$ref": "#/parameters/organism_form"
+          },
+          {
+            "$ref": "#/parameters/sex_form"
+          },
+          {
+            "$ref": "#/parameters/ethnicity_form"
+          },
+          {
+            "$ref": "#/parameters/study_group_description_form"
+          },
+          {
+            "$ref": "#/parameters/sample_id_form"
+          },
+          {
+            "$ref": "#/parameters/tissue_form"
+          },
+          {
+            "$ref": "#/parameters/disease_state_sample_form"
+          },
+          {
+            "$ref": "#/parameters/cell_subset_form"
+          },
+          {
+            "$ref": "#/parameters/cell_phenotype_form"
+          },
+          {
+            "$ref": "#/parameters/library_source_form"
+          },
+          {
+            "$ref": "#/parameters/platform_form"
+          },
+          {
+            "$ref": "#/parameters/ir_subject_age_min_form"
+          },
+          {
+            "$ref": "#/parameters/ir_subject_age_max_form"
           }
         ],
         "operationId": "postSamples",
