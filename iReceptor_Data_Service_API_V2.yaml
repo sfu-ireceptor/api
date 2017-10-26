@@ -371,9 +371,22 @@ parameters:
     description: >
       Source of germline V(D)J segments, with version number or
       date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
+  germline_database_form:
+    name: germline_database
+    in: formData
+    type: string
+    description: >
+      Source of germline V(D)J segments, with version number or
+      date accessed (e.g. IMGT/V-QUEST Release 201736-4 (7 September 2017)) (AIRR)
   cell_index:
     name: cell_index
     in: query
+    type: integer
+    description: |
+      Cell Index (UID linking sequences from the same cell) (AIRR)
+  cell_index_form:
+    name: cell_index
+    in: formData
     type: integer
     description: |
       Cell Index (UID linking sequences from the same cell) (AIRR)
@@ -383,9 +396,21 @@ parameters:
     type: string
     description: |
       V gene with allele (e.g. IGHV4-59*01) (AIRR)
+  v_allele_form:
+    name: v_allele
+    in: formData
+    type: string
+    description: |
+      V gene with allele (e.g. IGHV4-59*01) (AIRR)
   d_allele:
     name: d_allele
     in: query
+    type: string
+    description: |
+      D gene with allele (e.g. IGHD3-10*01) (AIRR)
+  d_allele_form:
+    name: d_allele
+    in: formData
     type: string
     description: |
       D gene with allele (e.g. IGHD3-10*01) (AIRR)
@@ -395,15 +420,34 @@ parameters:
     type: string
     description: |
       J gene with allele (e.g. IGHJ4*02) (AIRR)
+  j_allele_form:
+    name: j_allele
+    in: formData
+    type: string
+    description: |
+      J gene with allele (e.g. IGHJ4*02) (AIRR)
   c_allele:
     name: c_allele
     in: query
     type: string
     description: |
       C region with allele (AIRR)                     
+  c_allele_form:
+    name: c_allele
+    in: formData
+    type: string
+    description: |
+      C region with allele (AIRR)  
   junction_nt:
     name: junction_nt
     in: query
+    type: string
+    description: >
+      JUNCTION nucleotide sequence (Sequence of the CDR3
+      region + conserved residues (nucleotide)) (AIRR)
+  junction_nt_form:
+    name: junction_nt
+    in: formData
     type: string
     description: >
       JUNCTION nucleotide sequence (Sequence of the CDR3
@@ -415,9 +459,22 @@ parameters:
     description: >
       JUNCTION amino acid sequence (Sequence of the CDR3
       region + conserved residues (amino acid)) (AIRR)
+  junction_aa_form:
+    name: junction_aa
+    in: formData
+    type: string
+    description: >
+      JUNCTION amino acid sequence (Sequence of the CDR3
+      region + conserved residues (amino acid)) (AIRR)
   duplicate_count:
     name: duplicate_count
     in: query
+    type: integer
+    description: |
+      Number of times the sequence has been duplicated in a file (AIRR)
+  duplicate_count_form:
+    name: duplicate_count
+    in: formData
     type: integer
     description: |
       Number of times the sequence has been duplicated in a file (AIRR)
@@ -430,9 +487,21 @@ parameters:
     type: integer
     description: |
       Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)
+  junction_length_form:
+    name: junction_length
+    in: formData
+    type: integer
+    description: |
+      Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)
   functional:
     name: functional
     in: query
+    type: string
+    description: |
+      Filter for sequences that are either functional, non-functional, or both
+  functional_form:
+    name: functional
+    in: formData
     type: string
     description: |
       Filter for sequences that are either functional, non-functional, or both
@@ -442,6 +511,16 @@ parameters:
   ir_sample_id_list:
     name: ir_project_sample_id_list
     in: query
+    description: >
+      List of unique identifiers (specific to the repository) that identify the samples
+      to apply the query to.
+    required: false
+    type: array
+    items:
+      type: string
+  ir_sample_id_list_form:
+    name: ir_project_sample_id_list
+    in: formData
     description: >
       List of unique identifiers (specific to the repository) that identify the samples
       to apply the query to.
@@ -459,9 +538,29 @@ parameters:
       'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)
     required: false
     type: string
+  ir_data_format_form:
+    name: ir_data_format
+    in: formData
+    description: >-
+      Data format to return the sequence data in, one of:</br>
+      'csv' - vQuest based CSV (as per /v1)(default)</br>
+      'tsv' - vQuest based TSV (as per /v1 with tab delimiters instead of commas);</br>
+      'airr' - AIRR Formats rearrangements TSV (as per AIRR formats rearrangements spec)
+    required: false
+    type: string
   ir_show_unproductive:
     name: ir_show_unproductive
     in: query
+    description: >
+      By default, only productive sequences are returned. In order to return
+      unproductive sequences, set this parameter to "T"
+    required: false
+    type: array
+    items:
+      type: string
+  ir_show_unproductive_form:
+    name: ir_show_unproductive
+    in: formData
     description: >
       By default, only productive sequences are returned. In order to return
       unproductive sequences, set this parameter to "T"
@@ -476,9 +575,23 @@ parameters:
       Length of JUNCTION (CDR3 + conserved residues) in nucleotide base pairs (iReceptor)
     required: false
     type: integer
+  ir_junction_nt_length_form:
+    name: ir_junction_nt_length
+    in: formData
+    description: >-
+      Length of JUNCTION (CDR3 + conserved residues) in nucleotide base pairs (iReceptor)
+    required: false
+    type: integer
   ir_junction_aa_length:
     name: ir_junction_aa_length
     in: query
+    description: >-
+      Length of JUNCTION (CDR3 + conserved residues) in amino acids (iReceptor)
+    required: false
+    type: integer
+  ir_junction_aa_length_form:
+    name: ir_junction_aa_length
+    in: formData
     description: >-
       Length of JUNCTION (CDR3 + conserved residues) in amino acids (iReceptor)
     required: false
@@ -633,8 +746,13 @@ paths:
       responses:
         '200':
           description: >
-            A successful call returns the metadata for each sample, including
-            the number of sequences found for that sample.
+            A successful call returns an array of sample summary metadata for
+            each sample that meets the search criteria. The metadata returned
+            for each sample includes the number of sequences found for that sample
+            as well as the study/subject/sample data for that sample. The metadata
+            for each sample in the response contains a set of AIRR compliant data
+            as well as repository specific data that is required to query the
+            repository about those types of elements. 
           schema:
             $ref: '#/definitions/ireceptor_summary_response'
         '400':
@@ -652,7 +770,8 @@ paths:
     get:
       description: >
         This service returns a summary of sequences that matches the GET
-        provided filter. "username" parameter refers to external_users table.
+        provided filter. "ir_username" parameter refers to user requesting
+        access to the repository.
       tags:
         - sequences
       parameters:
@@ -667,6 +786,54 @@ paths:
         - $ref: '#/parameters/ir_show_unproductive'
         - $ref: '#/parameters/ir_junction_aa_length'
       operationId: getSequenceSummary
+      responses:
+        '200':
+          description: >
+            A successful call returns two components, an aggregated summary of the data
+            that satisfies the query and an example subset of the annotated sequence data
+            that meets the query criteria. The aggreated data returns a summary similar
+            to that returned by the /samples API entry point, returning the number of
+            sequences and the study/subject/sample meta-data for each sample. The example
+            subset of sequence data that is returned is a small subset of annotated sequences
+            that met the search criteria. The number of sequences returned is given in the
+            "num_sequences" paramter to the query and the format in which the sequences are
+            returned is provided by the "sequence_format" parameter to the query.
+          schema:
+            type: object
+            properties:
+              summary:
+                $ref: '#/definitions/ireceptor_summary_response'
+              items:
+                $ref: '#/definitions/ireceptor_sequence_response'
+        '400':
+          description: malformed request
+        '401':
+          description: authentication error
+        '403':
+          description: authorization error
+        '404':
+          description: data not found
+        '405':
+          description: method not allowed
+    post:
+      description: >
+        This service returns a summary of sequences that matches the POST
+        provided filter. "ir_username" parameter refers to user requesting
+        access to the repository.
+      tags:
+        - sequences
+      parameters:
+        - $ref: '#/parameters/ir_username_form'
+        - $ref: '#/parameters/ir_sample_id_list_form'
+        - $ref: '#/parameters/v_allele_form'
+        - $ref: '#/parameters/d_allele_form'
+        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/junction_aa_form'
+        - $ref: '#/parameters/junction_length_form'
+        - $ref: '#/parameters/functional_form'
+        - $ref: '#/parameters/ir_show_unproductive_form'
+        - $ref: '#/parameters/ir_junction_aa_length_form'
+      operationId: postSequenceSummary
       responses:
         '200':
           description: >
@@ -753,14 +920,17 @@ paths:
       tags:
         - sequences
       parameters:
-        - name: query
-          in: body
-          schema:
-            allOf:
-            - $ref: '#/definitions/ireceptor_core_sequences_parameters_model'
-            - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements'
-            - $ref: '#/definitions/airr_formats_sequences_parameters_model'
-            - $ref: '#/definitions/ireceptor_ancillary_sequences_parameters_model'
+        - $ref: '#/parameters/ir_username_form'
+        - $ref: '#/parameters/ir_sample_id_list_form'
+        - $ref: '#/parameters/ir_data_format_form'
+        - $ref: '#/parameters/v_allele_form'
+        - $ref: '#/parameters/d_allele_form'
+        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/junction_aa_form'
+        - $ref: '#/parameters/junction_length_form'
+        - $ref: '#/parameters/functional_form'
+        - $ref: '#/parameters/ir_show_unproductive_form'
+        - $ref: '#/parameters/ir_junction_aa_length_form'
       operationId: postSequenceData
       responses:
         '200':
@@ -786,24 +956,24 @@ paths:
           description: method not allowed
   /clones_summary:
     x-swagger-router-controller: clones
-    get:
+    post:
       description: >
         This service returns a summary of sequence clones that match the GET
         provided filter. "username" parameter refers to external_users table.
       tags:
         - clones
       parameters:
-        - $ref: '#/parameters/ir_username'
-        - $ref: '#/parameters/ir_sample_id_list'
-        - $ref: '#/parameters/v_allele'
-        - $ref: '#/parameters/d_allele'
-        - $ref: '#/parameters/j_allele'
-        - $ref: '#/parameters/junction_aa'
-        - $ref: '#/parameters/junction_length'
-        - $ref: '#/parameters/functional'
-        - $ref: '#/parameters/ir_show_unproductive'
-        - $ref: '#/parameters/ir_junction_aa_length'
-      operationId: getCloneSummary
+        - $ref: '#/parameters/ir_username_form'
+        - $ref: '#/parameters/ir_sample_id_list_form'
+        - $ref: '#/parameters/v_allele_form'
+        - $ref: '#/parameters/d_allele_form'
+        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/junction_aa_form'
+        - $ref: '#/parameters/junction_length_form'
+        - $ref: '#/parameters/functional_form'
+        - $ref: '#/parameters/ir_show_unproductive_form'
+        - $ref: '#/parameters/ir_junction_aa_length_form'
+      operationId: postCloneSummary
       responses:
         '200':
           description: >
@@ -829,25 +999,25 @@ paths:
           description: method not allowed
   /clones_data:
     x-swagger-router-controller: clones
-    get:
+    post:
       description: >
         This service returns a list of clones that matches the GET provided
         filter. "username" parameter refers to external_users table.
       tags:
         - clones
       parameters:
-        - $ref: '#/parameters/ir_username'
-        - $ref: '#/parameters/ir_sample_id_list'
-        - $ref: '#/parameters/ir_data_format'
-        - $ref: '#/parameters/v_allele'
-        - $ref: '#/parameters/d_allele'
-        - $ref: '#/parameters/j_allele'
-        - $ref: '#/parameters/junction_aa'
-        - $ref: '#/parameters/junction_length'
-        - $ref: '#/parameters/functional'
-        - $ref: '#/parameters/ir_show_unproductive'
-        - $ref: '#/parameters/ir_junction_aa_length'
-      operationId: getCloneData
+        - $ref: '#/parameters/ir_username_form'
+        - $ref: '#/parameters/ir_sample_id_list_form'
+        - $ref: '#/parameters/ir_data_format_form'
+        - $ref: '#/parameters/v_allele_form'
+        - $ref: '#/parameters/d_allele_form'
+        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/junction_aa_form'
+        - $ref: '#/parameters/junction_length_form'
+        - $ref: '#/parameters/functional_form'
+        - $ref: '#/parameters/ir_show_unproductive_form'
+        - $ref: '#/parameters/ir_junction_aa_length_form'
+      operationId: postCloneData
       responses:
         '200':
           description: >
