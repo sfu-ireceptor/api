@@ -36,20 +36,19 @@ definitions:
     type: array
     items:
       allOf:
-      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/MiAIRR_rearrangement.yaml#/MiAIRR_Rearrangements'
-      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/Formats_rearrangement.yaml#/Formats_Rearrangements'
+      - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/Rearrangement'
       - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_sequence.yaml#/ireceptor_sequence_annotation_model'
   # The AIRR Minimal Standards model for metadata above the sequence annotation level.
   airr_summary_model:
     allOf:
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Study'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Subject'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Diagnosis'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/Sample'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/CellProcessing'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/NucleicAcidProcessing'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/RawSequenceData'
-    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/master/specs/definitions.yaml#/SoftwareProcessing'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/Study'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/Subject'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/Diagnosis'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/Sample'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/CellProcessing'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/NucleicAcidProcessing'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/RawSequenceData'
+    - $ref: 'https://raw.githubusercontent.com/airr-community/airr-standards/v0.1.0/specs/definitions.yaml#/SoftwareProcessing'
   # A simple model to represent a sequence count, used to make the 
   # composite responses clean in that they all refer to models.
   ireceptor_sequence_count_model:
