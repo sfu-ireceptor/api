@@ -321,12 +321,12 @@ parameters:
     items:
       type: string
     in: formData
-  platform:
-    name: platform
+  sequencing_platform:
+    name: sequencing_platform
     type: string
     in: query
-  platform_form:
-    name: platform
+  sequencing_platform_form:
+    name: sequencing_platform
     type: string
     in: formData
   #
@@ -698,7 +698,7 @@ paths:
         - $ref: '#/parameters/cell_subset'
         - $ref: '#/parameters/cell_phenotype'
         - $ref: '#/parameters/template_class'
-        - $ref: '#/parameters/platform'
+        - $ref: '#/parameters/sequencing_platform'
         - $ref: '#/parameters/ir_subject_age_min'
         - $ref: '#/parameters/ir_subject_age_max'
       operationId: getSamples
@@ -755,7 +755,7 @@ paths:
         - $ref: '#/parameters/cell_subset_form'
         - $ref: '#/parameters/cell_phenotype_form'
         - $ref: '#/parameters/template_class_form'
-        - $ref: '#/parameters/platform_form'
+        - $ref: '#/parameters/sequencing_platform_form'
         - $ref: '#/parameters/ir_subject_age_min_form'
         - $ref: '#/parameters/ir_subject_age_max_form'
       operationId: postSamples

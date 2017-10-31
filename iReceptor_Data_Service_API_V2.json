@@ -375,13 +375,13 @@
       },
       "in": "formData"
     },
-    "platform": {
-      "name": "platform",
+    "sequencing_platform": {
+      "name": "sequencing_platform",
       "type": "string",
       "in": "query"
     },
-    "platform_form": {
-      "name": "platform",
+    "sequencing_platform_form": {
+      "name": "sequencing_platform",
       "type": "string",
       "in": "formData"
     },
@@ -788,7 +788,7 @@
             "$ref": "#/parameters/template_class"
           },
           {
-            "$ref": "#/parameters/platform"
+            "$ref": "#/parameters/sequencing_platform"
           },
           {
             "$ref": "#/parameters/ir_subject_age_min"
@@ -883,7 +883,7 @@
             "$ref": "#/parameters/template_class_form"
           },
           {
-            "$ref": "#/parameters/platform_form"
+            "$ref": "#/parameters/sequencing_platform_form"
           },
           {
             "$ref": "#/parameters/ir_subject_age_min_form"
