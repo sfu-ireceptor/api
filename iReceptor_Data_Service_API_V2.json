@@ -251,22 +251,34 @@
     },
     "ethnicity": {
       "name": "ethnicity",
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "in": "query"
     },
     "ethnicity_form": {
       "name": "ethnicity",
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "in": "formData"
     },
     "study_group_description": {
       "name": "study_group_description",
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "in": "query"
     },
     "study_group_description_form": {
       "name": "study_group_description",
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "in": "formData"
     },
     "sample_id": {
@@ -372,20 +384,6 @@
       "name": "platform",
       "type": "string",
       "in": "formData"
-    },
-    "ir_lab_id": {
-      "name": "ir_lab_id",
-      "in": "query",
-      "description": "e.g. 1\n",
-      "required": false,
-      "type": "string"
-    },
-    "ir_lab_id_form": {
-      "name": "ir_lab_id",
-      "in": "formData",
-      "description": "e.g. 1\n",
-      "required": false,
-      "type": "string"
     },
     "ir_project_id": {
       "name": "ir_project_id",
@@ -739,9 +737,6 @@
             "$ref": "#/parameters/ir_username"
           },
           {
-            "$ref": "#/parameters/ir_lab_id"
-          },
-          {
             "$ref": "#/parameters/ir_project_id"
           },
           {
@@ -835,9 +830,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ir_username_form"
-          },
-          {
-            "$ref": "#/parameters/ir_lab_id_form"
           },
           {
             "$ref": "#/parameters/ir_project_id_form"
