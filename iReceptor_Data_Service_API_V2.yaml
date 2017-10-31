@@ -249,13 +249,29 @@ parameters:
     name: sample_id
     type: string
     in: formData
+  sample_type:
+    name: sample_type
+    type: array
+    items:
+      type: string
+    in: query
+  sample_type_form:
+    name: sample_type
+    type: array
+    items:
+      type: string
+    in: formData
   tissue:
     name: tissue
-    type: string
+    type: array
+    items:
+      type: string
     in: query
   tissue_form:
     name: tissue
-    type: string
+    type: array
+    items:
+      type: string
     in: formData
   disease_state_sample:
     name: disease_state_sample
@@ -267,11 +283,15 @@ parameters:
     in: formData
   cell_subset:
     name: cell_subset
-    type: string
+    type: array
+    items:
+      type: string
     in: query
   cell_subset_form:
     name: cell_subset
-    type: string
+    type: array
+    items:
+      type: string
     in: formData
   cell_phenotype:
     name: cell_phenotype
@@ -281,13 +301,17 @@ parameters:
     name: cell_phenotype
     type: string
     in: formData
-  library_source:
-    name: library_source
-    type: string
+  template_class:
+    name: template_class
+    type: array
+    items:
+      type: string
     in: query
-  library_source_form:
-    name: library_source
-    type: string
+  template_class_form:
+    name: template_class
+    type: array
+    items:
+      type: string
     in: formData
   platform:
     name: platform
@@ -389,50 +413,50 @@ parameters:
     type: integer
     description: |
       Cell Index (UID linking sequences from the same cell) (AIRR)
-  v_allele:
-    name: v_allele
+  v_call:
+    name: v_call
     in: query
     type: string
     description: |
       V gene with allele (e.g. IGHV4-59*01) (AIRR)
-  v_allele_form:
-    name: v_allele
+  v_call_form:
+    name: v_call
     in: formData
     type: string
     description: |
       V gene with allele (e.g. IGHV4-59*01) (AIRR)
-  d_allele:
-    name: d_allele
+  d_call:
+    name: d_call
     in: query
     type: string
     description: |
       D gene with allele (e.g. IGHD3-10*01) (AIRR)
-  d_allele_form:
-    name: d_allele
+  d_call_form:
+    name: d_call
     in: formData
     type: string
     description: |
       D gene with allele (e.g. IGHD3-10*01) (AIRR)
-  j_allele:
-    name: j_allele
+  j_call:
+    name: j_call
     in: query
     type: string
     description: |
       J gene with allele (e.g. IGHJ4*02) (AIRR)
-  j_allele_form:
-    name: j_allele
+  j_call_form:
+    name: j_call
     in: formData
     type: string
     description: |
       J gene with allele (e.g. IGHJ4*02) (AIRR)
-  c_allele:
-    name: c_allele
+  c_call:
+    name: c_call
     in: query
     type: string
     description: |
       C region with allele (AIRR)                     
-  c_allele_form:
-    name: c_allele
+  c_call_form:
+    name: c_call
     in: formData
     type: string
     description: |
@@ -495,13 +519,13 @@ parameters:
   functional:
     name: functional
     in: query
-    type: string
+    type: boolean
     description: |
       Filter for sequences that are either functional, non-functional, or both
   functional_form:
     name: functional
     in: formData
-    type: string
+    type: boolean
     description: |
       Filter for sequences that are either functional, non-functional, or both
   #
@@ -556,7 +580,7 @@ parameters:
     required: false
     type: array
     items:
-      type: string
+      type: boolean
   ir_show_unproductive_form:
     name: ir_show_unproductive
     in: formData
@@ -566,7 +590,7 @@ parameters:
     required: false
     type: array
     items:
-      type: string
+      type: boolean
   ir_junction_nt_length:
     name: ir_junction_nt_length
     in: query
@@ -601,7 +625,6 @@ produces:
   - application/json
 consumes:
   - application/x-www-form-urlencoded
-  - application/json
 tags:
   - name: info
     description: Service information
@@ -676,11 +699,12 @@ paths:
         - $ref: '#/parameters/ethnicity'
         - $ref: '#/parameters/study_group_description'
         - $ref: '#/parameters/sample_id'
+        - $ref: '#/parameters/sample_type'
         - $ref: '#/parameters/tissue'
         - $ref: '#/parameters/disease_state_sample'
         - $ref: '#/parameters/cell_subset'
         - $ref: '#/parameters/cell_phenotype'
-        - $ref: '#/parameters/library_source'
+        - $ref: '#/parameters/template_class'
         - $ref: '#/parameters/platform'
         - $ref: '#/parameters/ir_subject_age_min'
         - $ref: '#/parameters/ir_subject_age_max'
@@ -733,11 +757,12 @@ paths:
         - $ref: '#/parameters/ethnicity_form'
         - $ref: '#/parameters/study_group_description_form'
         - $ref: '#/parameters/sample_id_form'
+        - $ref: '#/parameters/sample_type_form'
         - $ref: '#/parameters/tissue_form'
         - $ref: '#/parameters/disease_state_sample_form'
         - $ref: '#/parameters/cell_subset_form'
         - $ref: '#/parameters/cell_phenotype_form'
-        - $ref: '#/parameters/library_source_form'
+        - $ref: '#/parameters/template_class_form'
         - $ref: '#/parameters/platform_form'
         - $ref: '#/parameters/ir_subject_age_min_form'
         - $ref: '#/parameters/ir_subject_age_max_form'
@@ -776,9 +801,9 @@ paths:
       parameters:
         - $ref: '#/parameters/ir_username'
         - $ref: '#/parameters/ir_sample_id_list'
-        - $ref: '#/parameters/v_allele'
-        - $ref: '#/parameters/d_allele'
-        - $ref: '#/parameters/j_allele'
+        - $ref: '#/parameters/v_call'
+        - $ref: '#/parameters/d_call'
+        - $ref: '#/parameters/j_call'
         - $ref: '#/parameters/junction_aa'
         - $ref: '#/parameters/junction_length'
         - $ref: '#/parameters/functional'
@@ -824,9 +849,9 @@ paths:
       parameters:
         - $ref: '#/parameters/ir_username_form'
         - $ref: '#/parameters/ir_sample_id_list_form'
-        - $ref: '#/parameters/v_allele_form'
-        - $ref: '#/parameters/d_allele_form'
-        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/v_call_form'
+        - $ref: '#/parameters/d_call_form'
+        - $ref: '#/parameters/j_call_form'
         - $ref: '#/parameters/junction_aa_form'
         - $ref: '#/parameters/junction_length_form'
         - $ref: '#/parameters/functional_form'
@@ -877,9 +902,9 @@ paths:
         - $ref: '#/parameters/ir_username'
         - $ref: '#/parameters/ir_sample_id_list'
         - $ref: '#/parameters/ir_data_format'
-        - $ref: '#/parameters/v_allele'
-        - $ref: '#/parameters/d_allele'
-        - $ref: '#/parameters/j_allele'
+        - $ref: '#/parameters/v_call'
+        - $ref: '#/parameters/d_call'
+        - $ref: '#/parameters/j_call'
         - $ref: '#/parameters/junction_aa'
         - $ref: '#/parameters/junction_length'
         - $ref: '#/parameters/functional'
@@ -922,9 +947,9 @@ paths:
         - $ref: '#/parameters/ir_username_form'
         - $ref: '#/parameters/ir_sample_id_list_form'
         - $ref: '#/parameters/ir_data_format_form'
-        - $ref: '#/parameters/v_allele_form'
-        - $ref: '#/parameters/d_allele_form'
-        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/v_call_form'
+        - $ref: '#/parameters/d_call_form'
+        - $ref: '#/parameters/j_call_form'
         - $ref: '#/parameters/junction_aa_form'
         - $ref: '#/parameters/junction_length_form'
         - $ref: '#/parameters/functional_form'
@@ -964,9 +989,9 @@ paths:
       parameters:
         - $ref: '#/parameters/ir_username_form'
         - $ref: '#/parameters/ir_sample_id_list_form'
-        - $ref: '#/parameters/v_allele_form'
-        - $ref: '#/parameters/d_allele_form'
-        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/v_call_form'
+        - $ref: '#/parameters/d_call_form'
+        - $ref: '#/parameters/j_call_form'
         - $ref: '#/parameters/junction_aa_form'
         - $ref: '#/parameters/junction_length_form'
         - $ref: '#/parameters/functional_form'
@@ -1008,9 +1033,9 @@ paths:
         - $ref: '#/parameters/ir_username_form'
         - $ref: '#/parameters/ir_sample_id_list_form'
         - $ref: '#/parameters/ir_data_format_form'
-        - $ref: '#/parameters/v_allele_form'
-        - $ref: '#/parameters/d_allele_form'
-        - $ref: '#/parameters/j_allele_form'
+        - $ref: '#/parameters/v_call_form'
+        - $ref: '#/parameters/d_call_form'
+        - $ref: '#/parameters/j_call_form'
         - $ref: '#/parameters/junction_aa_form'
         - $ref: '#/parameters/junction_length_form'
         - $ref: '#/parameters/functional_form'
