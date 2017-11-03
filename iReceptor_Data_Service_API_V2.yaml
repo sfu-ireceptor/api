@@ -257,18 +257,6 @@ parameters:
     name: sample_id
     type: string
     in: formData
-  sample_type:
-    name: sample_type
-    type: array
-    items:
-      type: string
-    in: query
-  sample_type_form:
-    name: sample_type
-    type: array
-    items:
-      type: string
-    in: formData
   tissue:
     name: tissue
     type: array
@@ -692,7 +680,6 @@ paths:
         - $ref: '#/parameters/ethnicity'
         - $ref: '#/parameters/study_group_description'
         - $ref: '#/parameters/sample_id'
-        - $ref: '#/parameters/sample_type'
         - $ref: '#/parameters/tissue'
         - $ref: '#/parameters/disease_state_sample'
         - $ref: '#/parameters/cell_subset'
@@ -749,7 +736,6 @@ paths:
         - $ref: '#/parameters/ethnicity_form'
         - $ref: '#/parameters/study_group_description_form'
         - $ref: '#/parameters/sample_id_form'
-        - $ref: '#/parameters/sample_type_form'
         - $ref: '#/parameters/tissue_form'
         - $ref: '#/parameters/disease_state_sample_form'
         - $ref: '#/parameters/cell_subset_form'
