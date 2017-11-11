@@ -20,11 +20,19 @@ definitions:
   # response is used wherever summary data at the sample level is provided
   # by an API call. It is composed of the sequence count, the relevant AIRR
   # model elements, and the revelant iReceptor model elements.
-  ireceptor_summary_response:
+  ireceptor_sample_summary_response:
     type: array
     items:
       allOf:
       - $ref: '#/definitions/ireceptor_sequence_count_model'
+      - $ref: '#/definitions/airr_summary_model'
+      - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_summary.yaml#/ireceptor_summary_model'
+  ireceptor_sequence_summary_response:
+    type: array
+    items:
+      allOf:
+      - $ref: '#/definitions/ireceptor_sequence_count_model'
+      - $ref: '#/definitions/ireceptor_filtered_sequence_count_model'
       - $ref: '#/definitions/airr_summary_model'
       - $ref: 'https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_summary.yaml#/ireceptor_summary_model'
   # A definition of the sequence response for an iReceptor API call. This
@@ -56,8 +64,15 @@ definitions:
       properties:
         ir_sequence_count:
           type: integer
-          description: Number of sequences found that met the search criteria for this sample
+          description: Number of sequences found that met the sample search criteria for this sample
           example: 123456
+  ireceptor_filtered_sequence_count_model:
+      type: object
+      properties:
+        ir_filtered_sequence_count:
+          type: integer
+          description: Number of sequences found that met the sequence search criteria for this sample
+          example: 4321
   ireceptor_core_samples_parameters_model:
       type: object
       required:
@@ -700,7 +715,7 @@ paths:
             as well as repository specific data that is required to query the
             repository about those types of elements. 
           schema:
-            $ref: '#/definitions/ireceptor_summary_response'
+            $ref: '#/definitions/ireceptor_sample_summary_response'
         '400':
           description: malformed request
         '401':
@@ -756,7 +771,7 @@ paths:
             as well as repository specific data that is required to query the
             repository about those types of elements. 
           schema:
-            $ref: '#/definitions/ireceptor_summary_response'
+            $ref: '#/definitions/ireceptor_sample_summary_response'
         '400':
           description: malformed request
         '401':
@@ -804,7 +819,7 @@ paths:
             type: object
             properties:
               summary:
-                $ref: '#/definitions/ireceptor_summary_response'
+                $ref: '#/definitions/ireceptor_sequence_summary_response'
               items:
                 $ref: '#/definitions/ireceptor_sequence_response'
         '400':
@@ -852,7 +867,7 @@ paths:
             type: object
             properties:
               summary:
-                $ref: '#/definitions/ireceptor_summary_response'
+                $ref: '#/definitions/ireceptor_sequence_summary_response'
               items:
                 $ref: '#/definitions/ireceptor_sequence_response'
         '400':
@@ -986,7 +1001,7 @@ paths:
             type: object
             properties:
               summary:
-                $ref: '#/definitions/ireceptor_summary_response'
+                $ref: '#/definitions/ireceptor_sequence_summary_response'
               items:
                 $ref: '#/definitions/ireceptor_sequence_response'
         '400':

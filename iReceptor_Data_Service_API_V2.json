@@ -13,12 +13,31 @@
   "host": "ipa.ireceptor.org",
   "basePath": "/v2",
   "definitions": {
-    "ireceptor_summary_response": {
+    "ireceptor_sample_summary_response": {
       "type": "array",
       "items": {
         "allOf": [
           {
             "$ref": "#/definitions/ireceptor_sequence_count_model"
+          },
+          {
+            "$ref": "#/definitions/airr_summary_model"
+          },
+          {
+            "$ref": "https://raw.githubusercontent.com/sfu-ireceptor/api/AIRR-compliance/ireceptor_summary.yaml#/ireceptor_summary_model"
+          }
+        ]
+      }
+    },
+    "ireceptor_sequence_summary_response": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ireceptor_sequence_count_model"
+          },
+          {
+            "$ref": "#/definitions/ireceptor_filtered_sequence_count_model"
           },
           {
             "$ref": "#/definitions/airr_summary_model"
@@ -75,8 +94,18 @@
       "properties": {
         "ir_sequence_count": {
           "type": "integer",
-          "description": "Number of sequences found that met the search criteria for this sample",
+          "description": "Number of sequences found that met the sample search criteria for this sample",
           "example": 123456
+        }
+      }
+    },
+    "ireceptor_filtered_sequence_count_model": {
+      "type": "object",
+      "properties": {
+        "ir_filtered_sequence_count": {
+          "type": "integer",
+          "description": "Number of sequences found that met the sequence search criteria for this sample",
+          "example": 4321
         }
       }
     },
@@ -783,7 +812,7 @@
           "200": {
             "description": "A successful call returns an array of sample summary metadata for\neach sample that meets the search criteria. The metadata returned\nfor each sample includes the number of sequences found for that sample\nas well as the study/subject/sample data for that sample. The metadata\nfor each sample in the response contains a set of AIRR compliant data\nas well as repository specific data that is required to query the\nrepository about those types of elements. \n",
             "schema": {
-              "$ref": "#/definitions/ireceptor_summary_response"
+              "$ref": "#/definitions/ireceptor_sample_summary_response"
             }
           },
           "400": {
@@ -875,7 +904,7 @@
           "200": {
             "description": "A successful call returns an array of sample summary metadata for each sample that meets the search criteria. The metadata returned for each sample includes the number of sequences found for that sample as well as the study/subject/sample data for that sample. The metadata for each sample in the response contains a set of AIRR compliant data as well as repository specific data that is required to query the repository about those types of elements. \n",
             "schema": {
-              "$ref": "#/definitions/ireceptor_summary_response"
+              "$ref": "#/definitions/ireceptor_sample_summary_response"
             }
           },
           "400": {
@@ -943,7 +972,7 @@
               "type": "object",
               "properties": {
                 "summary": {
-                  "$ref": "#/definitions/ireceptor_summary_response"
+                  "$ref": "#/definitions/ireceptor_sequence_summary_response"
                 },
                 "items": {
                   "$ref": "#/definitions/ireceptor_sequence_response"
@@ -1013,7 +1042,7 @@
               "type": "object",
               "properties": {
                 "summary": {
-                  "$ref": "#/definitions/ireceptor_summary_response"
+                  "$ref": "#/definitions/ireceptor_sequence_summary_response"
                 },
                 "items": {
                   "$ref": "#/definitions/ireceptor_sequence_response"
@@ -1219,7 +1248,7 @@
               "type": "object",
               "properties": {
                 "summary": {
-                  "$ref": "#/definitions/ireceptor_summary_response"
+                  "$ref": "#/definitions/ireceptor_sequence_summary_response"
                 },
                 "items": {
                   "$ref": "#/definitions/ireceptor_sequence_response"
