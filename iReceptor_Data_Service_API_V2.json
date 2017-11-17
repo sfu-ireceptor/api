@@ -152,6 +152,10 @@
           "type": "integer",
           "description": "Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)\n"
         },
+        "junction_aa_length": {
+          "type": "integer",
+          "description": "Length of JUNCTION in amino acids"
+        },
         "functional": {
           "type": "string",
           "description": "Filter for sequences that are either functional, non-functional, or both\n"
@@ -185,10 +189,6 @@
         "ir_show_unproductive": {
           "type": "string",
           "description": "By default, only productive sequences are returned. In order to return unproductive sequences, set this parameter to \"T\""
-        },
-        "ir_junction_aa_length": {
-          "type": "integer",
-          "description": "Length of JUNCTION in amino acids (iReceptor)"
         }
       }
     }
@@ -566,6 +566,20 @@
       "type": "integer",
       "description": "Number of junction nucleotides in sequence_vdj (CDR3 + conserved residues)\n"
     },
+    "junction_aa_length": {
+      "name": "junction_aa_length",
+      "in": "query",
+      "description": "Length of JUNCTION (CDR3 + conserved residues) in amino acids",
+      "required": false,
+      "type": "integer"
+    },
+    "junction_aa_length_form": {
+      "name": "junction_aa_length",
+      "in": "formData",
+      "description": "Length of JUNCTION (CDR3 + conserved residues) in amino acids",
+      "required": false,
+      "type": "integer"
+    },
     "functional": {
       "name": "functional",
       "in": "query",
@@ -645,20 +659,6 @@
       "name": "ir_junction_nt_length",
       "in": "formData",
       "description": "Length of JUNCTION (CDR3 + conserved residues) in nucleotide base pairs (iReceptor)",
-      "required": false,
-      "type": "integer"
-    },
-    "ir_junction_aa_length": {
-      "name": "ir_junction_aa_length",
-      "in": "query",
-      "description": "Length of JUNCTION (CDR3 + conserved residues) in amino acids (iReceptor)",
-      "required": false,
-      "type": "integer"
-    },
-    "ir_junction_aa_length_form": {
-      "name": "ir_junction_aa_length",
-      "in": "formData",
-      "description": "Length of JUNCTION (CDR3 + conserved residues) in amino acids (iReceptor)",
       "required": false,
       "type": "integer"
     }
@@ -957,13 +957,13 @@
             "$ref": "#/parameters/junction_length"
           },
           {
+            "$ref": "#/parameters/junction_aa_length"
+          },
+          {
             "$ref": "#/parameters/functional"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getSequenceSummary",
@@ -1027,13 +1027,13 @@
             "$ref": "#/parameters/junction_length_form"
           },
           {
+            "$ref": "#/parameters/junction_aa_length_form"
+          },
+          {
             "$ref": "#/parameters/functional_form"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length_form"
           }
         ],
         "operationId": "postSequenceSummary",
@@ -1103,13 +1103,13 @@
             "$ref": "#/parameters/junction_length"
           },
           {
+            "$ref": "#/parameters/junction_aa_length"
+          },
+          {
             "$ref": "#/parameters/functional"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length"
           }
         ],
         "operationId": "getSequenceData",
@@ -1168,13 +1168,13 @@
             "$ref": "#/parameters/junction_length_form"
           },
           {
+            "$ref": "#/parameters/junction_aa_length_form"
+          },
+          {
             "$ref": "#/parameters/functional_form"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length_form"
           }
         ],
         "operationId": "postSequenceData",
@@ -1233,13 +1233,13 @@
             "$ref": "#/parameters/junction_length_form"
           },
           {
+            "$ref": "#/parameters/junction_aa_length_form"
+          },
+          {
             "$ref": "#/parameters/functional_form"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length_form"
           }
         ],
         "operationId": "postCloneSummary",
@@ -1309,13 +1309,13 @@
             "$ref": "#/parameters/junction_length_form"
           },
           {
+            "$ref": "#/parameters/junction_aa_length_form"
+          },
+          {
             "$ref": "#/parameters/functional_form"
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
-          },
-          {
-            "$ref": "#/parameters/ir_junction_aa_length_form"
           }
         ],
         "operationId": "postCloneData",
