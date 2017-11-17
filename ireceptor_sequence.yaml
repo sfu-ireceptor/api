@@ -4,6 +4,10 @@
   ireceptor_sequence_annotation_model:
       type: object
       properties:
+        junction_aa_length:
+          type: integer
+          description: >-
+            Length of JUNCTION in amino acids
         ir_seq_id:
           type: integer
           description: |
