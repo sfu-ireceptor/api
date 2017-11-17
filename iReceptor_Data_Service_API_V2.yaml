@@ -517,12 +517,14 @@ parameters:
     name: functional
     in: query
     type: boolean
+    default: true
     description: |
       Filter for sequences that are either functional, non-functional, or both
   functional_form:
     name: functional
     in: formData
     type: boolean
+    default: true
     description: |
       Filter for sequences that are either functional, non-functional, or both
   #
