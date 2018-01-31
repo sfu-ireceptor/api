@@ -1,0 +1,464 @@
+# This model defines ancillary information returned by iReceptor
+# as part of the sequence API.
+
+  ireceptor_sequence_annotation_model:
+      type: object
+      properties:
+        junction_aa_length:
+          type: integer
+          description: >-
+            Length of JUNCTION in amino acids
+        ir_seq_id:
+          type: integer
+          description: |
+            e.g. 1
+        ir_seq_name:
+          type: string
+        ir_project_sample_id:
+          type: integer
+          description: |
+            e.g. 6
+        ir_id:
+          type: integer
+          description: |
+            e.g. 1
+        ir_sequence_id:
+          type: integer
+          description: |
+            e.g. 1
+        ir_vgene_string:
+          type: string
+          description: |
+            e.g IGHV4-59*01 or  IGHV4-59*07
+        ir_vgene_family:
+          type: string
+          description: |
+            e.g. IGHV4
+        ir_vgene_gene:
+          type: string
+          description: |
+            e.g. IGHV4-59
+        ir_dgene_string:
+          type: string
+          description: |
+            e.g. Homsap IGHD3-10*01 F
+        ir_dgene_family:
+          type: string
+          description: |
+            e.g. IGHD3
+        ir_dgene_gene:
+          type: string
+          description: |
+            e.g. IGHD3-10
+        ir_jgene_string:
+          type: string
+          description: |
+            e.g. Homsap IGHJ4*02 F
+        ir_jgene_family:
+          type: string
+          description: |
+            e.g. IGHJ4
+        ir_jgene_gene:
+          type: string
+          description: |
+            e.g. IGHJ4
+        ir_functionality:
+          type: string
+          description: |
+            e.g. productive
+        ir_functionality_comment:
+          type: string
+          description: |
+            e.g. ""
+        ir_orientation:
+          type: string
+          description: |
+            e.g. +
+        ir_vgene_score:
+          type: integer
+          description: |
+            e.g. 1127
+        ir_vgene_probability:
+          type: integer
+          description: |
+            e.g. 95
+        ir_dregion_reading_frame:
+          type: integer
+          description: |
+            e.g. 2
+        ir_cdr1_length:
+          type: integer
+          description: |
+            e.g. 8
+        ir_cdr2_length:
+          type: integer
+          description: |
+            e.g. 7
+        ir_cdr3_length:
+          type: integer
+          description: |
+            e.g. 13
+        ir_vdjregion_sequence_nt:
+          type: string
+          description: |
+            vdj region nucleotide sequence
+        ir_vjregion_sequence_nt:
+          type: string
+          description: |
+            vj region nucleotide sequence
+        ir_djregion_sequence_nt:
+          type: string
+          description: |
+            dj region nucleotide sequence
+        ir_vregion_sequence_nt:
+          type: string
+          description: |
+            v region nucleotide sequence
+        ir_dregion_sequence_nt:
+          type: string
+          description: |
+            d region nucleotide sequence
+        ir_jregion_sequence_nt:
+          type: string
+          description: |
+            j region nucleotide sequence
+        ir_fr1region_sequence_nt:
+          type: string
+          description: |
+            fr1 region nucleotide sequence
+        ir_fr2region_sequence_nt:
+          type: string
+          description: |
+            fr2 region nucleotide sequence
+        ir_fr3region_sequence_nt:
+          type: string
+          description: |
+            fr3 region nucleotide sequence
+        ir_fr4region_sequence_nt:
+          type: string
+          description: |
+            fr4 region nucleotide sequence
+        ir_cdr1region_sequence_nt:
+          type: string
+          description: |
+            cdr1 region nucleotide sequence
+        ir_cdr2region_sequence_nt:
+          type: string
+          description: |
+            cdr2 region nucleotide sequence
+        ir_cdr3region_sequence_nt:
+          type: string
+          description: |
+            cdr3 region nucleotide sequence
+        ir_vdjregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped vdj region nucleotide sequence
+        ir_vjregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped vj region nucleotide sequence
+        ir_djregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped dj region nucleotide sequence
+        ir_vregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped v region nucleotide sequence
+        ir_dregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped d region nucleotide sequence
+        ir_jregion_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped j region nucleotide sequence
+        ir_fr1region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped fr1 region nucleotide sequence
+        ir_fr2region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped fr2 region nucleotide sequence
+        ir_fr3region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped fr3 region nucleotide sequence
+        ir_fr4region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped fr4 region nucleotide sequence
+        ir_cdr1region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped cdr1 region nucleotide sequence
+        ir_cdr2region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped cdr2 region nucleotide sequence
+        ir_cdr3region_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped cdr3 region nucleotide sequence
+        ir_junction_sequence_nt_gapped:
+          type: string
+          description: |
+            gapped junction nucleotide sequence
+        ir_vdjregion_sequence_aa:
+          type: string
+          description: |
+            vdj region amino acid sequence
+        ir_vjregion_sequence_aa:
+          type: string
+          description: |
+            vj region amino acid sequence
+        ir_djregion_sequence_aa:
+          type: string
+          description: |
+            dj region amino acid sequence
+        ir_vregion_sequence_aa:
+          type: string
+          description: |
+            v region amino acid sequence
+        ir_dregion_sequence_aa:
+          type: string
+          description: |
+            d region amino acid sequence
+        ir_jregion_sequence_aa:
+          type: string
+          description: |
+            j region amino acid sequence
+        ir_fr1region_sequence_aa:
+          type: string
+          description: |
+            fr1 region amino acid sequence
+        ir_fr2region_sequence_aa:
+          type: string
+          description: |
+            fr2 region amino acid sequence
+        ir_fr3region_sequence_aa:
+          type: string
+          description: |
+            fr3 region amino acid sequence
+        ir_fr4region_sequence_aa:
+          type: string
+          description: |
+            fr4 region amino acid sequence
+        ir_cdr1region_sequence_aa:
+          type: string
+          description: |
+            cdr1 region amino acid sequence
+        ir_cdr2region_sequence_aa:
+          type: string
+          description: |
+            cdr2 region amino acid sequence
+        ir_cdr3region_sequence_aa:
+          type: string
+          description: |
+            cdr3 region amino acid sequence
+        ir_vdjregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped vdj region amino acid sequence
+        ir_vjregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped vj region amino acid sequence
+        ir_djregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped dj region amino acid sequence
+        ir_vregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped v region amino acid sequence
+        ir_dregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped d region amino acid sequence
+        ir_jregion_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped j region amino acid sequence
+        ir_fr1region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped fr1 region amino acid sequence
+        ir_fr2region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped fr2 region amino acid sequence
+        fr3region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped fr3 region amino acid sequence
+        ir_fr4region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped fr4 region amino acid sequence
+        ir_cdr1region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped cdr1 region amino acid sequence
+        ir_cdr2region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped cdr2 region amino acid sequence
+        cdr3region_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped cdr3 region amino acid sequence
+        ir_junction_sequence_aa_gapped:
+          type: string
+          description: |
+            gapped junction amino acid sequence
+        ir_vdjregion_start:
+          type: integer
+          description: |
+            e.g. 1
+        ir_vdjregion_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_vjregion_start:
+          type: integer
+          description: |
+            e.g. 0
+        ir_vjregion_end:
+          type: integer
+          description: |
+            e.g. 0
+        ir_djregion_start:
+          type: integer
+          description: |
+            e.g. 254
+        ir_djregion_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_vregion_start:
+          type: integer
+          description: |
+            e.g. 286
+        ir_vregion_end:
+          type: integer
+          description: |
+            e.g. 252
+        ir_dregion_start:
+          type: integer
+          description: |
+            e.g. 254
+        ir_dregion_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_jregion_start:
+          type: integer
+          description: |
+            e.g. 286
+        ir_jregion_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_fr1region_start:
+          type: integer
+          description: |
+            e.g. 1
+        fr1region_end:
+          type: integer
+          description: |
+            e.g. 38
+        ir_fr2region_start:
+          type: integer
+          description: |
+            e.g. 63
+        ir_fr2region_end:
+          type: integer
+          description: |
+            e.g. 113
+        ir_fr3region_start:
+          type: integer
+          description: |
+            e.g. 135
+        ir_fr3region_end:
+          type: integer
+          description: |
+            e.g. 248
+        ir_fr4region_start:
+          type: integer
+          description: |
+            e.g. 288
+        ir_fr4region_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_cdr1region_start:
+          type: integer
+          description: |
+            e.g. 39
+        ir_cdr1region_end:
+          type: integer
+          description: |
+            e.g. 321
+        ir_cdr2region_start:
+          type: integer
+          description: |
+            e.g. 62
+        ir_cdr2region_end:
+          type: integer
+          description: |
+            e.g. 134
+        ir_cdr3region_start:
+          type: integer
+          description: |
+            e.g. 249
+        ir_cdr3region_end:
+          type: integer
+          description: |
+            e.g. 287
+        ir_junction_start:
+          type: integer
+          description: |
+            e.g. 246
+        ir_junction_end:
+          type: integer
+          description: |
+            e.g. 290
+        ir_vregion_mutation_string:
+          type: string
+          description: >
+            e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ -
+            +)|a166>c,I56>L(+ + +)|t172>a,Y58>N(- -
+            -)|c195>t|c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+            -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|
+        ir_fr1region_mutation_string:
+          type: string
+          description: |
+            e.g. a41>c|g42>t|c43>g,P15>A(- - -)|g51>t,E17>D(+ - +)|
+        ir_fr2region_mutation_string:
+          type: string
+          description: |
+            e.g.             
+        ir_fr3region_mutation_string:
+          type: string
+          description: >
+            e.g.  c198>g,N66>K(+ - -)|a220>g,S74>G(+ +
+            -)|a229>t,T77>S(+ - +)|g275>c,S92>T(+ - +)|t279>c|"
+        ir_cdr1region_mutation_string:
+          type: string
+          description: |
+            e.g.
+        ir_cdr2region_mutation_string:
+          type: string
+          description: |
+            e.g. a166>c,I56>L(+ + +)|t172>a,Y58>N(- - -)|c195>t|"
+        ir_cdr3region_mutation_string:
+          type: string
+          description: |
+            e.g. g317>c,R106>T(- - -)|a318>c,R106>T(- - -)|g319>t
+        ir_annotation_tool:
+          type: string
+          description: |
+            e.g. VQuest
