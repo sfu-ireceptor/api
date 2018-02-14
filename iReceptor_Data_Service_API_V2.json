@@ -1117,7 +1117,7 @@
           "200": {
             "description": "A successful call returns an array of sequence data. Optional \"format\" parameter determines the output format. Default is a JSON response, limited to top 50 results. If \"format\" is set to \"csv\", it will return all the matching sequence annotations, in addition to sample information and annotation tool information, in a comma-separated format; \"tsv\" returns a tab-delimited outputs;  \"airr\" returns AIRR minimal standards encoded tab-delimited outputs.\n",
             "schema": {
-              "$ref": "#/definitions/ireceptor_sequence_response"
+              "type": "file"
             }
           },
           "400": {
@@ -1182,7 +1182,7 @@
           "200": {
             "description": "A successful call returns an array of sequence data. Optional \"format\" parameter determines the output format. Default is a JSON response, limited to top 50 results. If \"format\" is set to \"csv\", it will return all the matching sequence annotations, in addition to sample information and annotation tool information, in a comma-separated format; \"tsv\" returns a tab-delimited outputs;  \"airr\" returns AIRR minimal standards encoded tab-delimited outputs.\n",
             "schema": {
-              "$ref": "#/definitions/ireceptor_sequence_response"
+              "type": "file"
             }
           },
           "400": {
