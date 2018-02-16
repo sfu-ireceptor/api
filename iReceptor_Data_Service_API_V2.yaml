@@ -918,7 +918,7 @@ paths:
             comma-separated format; "tsv" returns a tab-delimited outputs; 
             "airr" returns AIRR minimal standards encoded tab-delimited outputs.
           schema:
-	    type: file
+            type: file
         '400':
           description: malformed request
         '401':
@@ -963,7 +963,7 @@ paths:
             comma-separated format; "tsv" returns a tab-delimited outputs; 
             "airr" returns AIRR minimal standards encoded tab-delimited outputs.
           schema:
-	    type: file
+            type: file
         '400':
           description: malformed request
         '401':
