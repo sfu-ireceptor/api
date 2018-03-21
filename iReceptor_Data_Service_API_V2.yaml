@@ -640,6 +640,8 @@ paths:
     get:
       description: |
         Service heartbeat.
+      consumes:
+        - application/octet-stream
       operationId: getStatus
       responses:
         '200':
@@ -657,6 +659,8 @@ paths:
         Service information.
       tags:
         - info
+      consumes:
+        - application/octet-stream
       operationId: getInfo
       responses:
         '200':

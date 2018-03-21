@@ -695,6 +695,9 @@
       "x-swagger-router-controller": "status",
       "get": {
         "description": "Service heartbeat.\n",
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "getStatus",
         "responses": {
           "200": {
@@ -717,6 +720,9 @@
         "description": "Service information.\n",
         "tags": [
           "info"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "operationId": "getInfo",
         "responses": {
