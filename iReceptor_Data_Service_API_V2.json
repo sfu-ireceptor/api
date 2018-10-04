@@ -189,7 +189,15 @@
         "ir_show_unproductive": {
           "type": "string",
           "description": "By default, only productive sequences are returned. In order to return unproductive sequences, set this parameter to \"T\""
-        }
+        },
+      "ir_annotation_tool": {
+      "type": "string",
+      "description": "Name of the tool that performed the annotation (iReceptor)\n"
+      },
+      "ir_annotation_tool_form": {
+      "type": "string",
+      "description": "Name of the tool that performed the annotation (iReceptor)\n"
+      }
       }
     }
   },
@@ -659,7 +667,21 @@
       "description": "Length of JUNCTION (CDR3 + conserved residues) in nucleotide base pairs (iReceptor)",
       "required": false,
       "type": "integer"
-    }
+    },
+    "ir_annotation_tool": {
+      "name": "ir_annotation_tool",
+      "in": "query",
+      "description": "Name of the tool that performed the annotation (iReceptor)\n",     
+      "required": false,      
+      "type": "string"
+    },
+    "ir_annotation_tool_form": {
+      "name": "ir_annotation_tool",      
+      "in": "formData",
+      "description": "Name of the tool that performed the annotation (iReceptor)\n",     
+      "required": false,      
+      "type": "string" 
+    }    
   },
   "schemes": [
     "https"
@@ -968,6 +990,9 @@
           },
           {
             "$ref": "#/parameters/ir_show_unproductive"
+          },
+          {
+            "$ref": "#/parameters/ir_annotation_tool"
           }
         ],
         "operationId": "getSequenceSummary",
@@ -1038,6 +1063,9 @@
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
+          },
+          {
+            "$ref": "#/parameters/ir_annotation_tool_form"
           }
         ],
         "operationId": "postSequenceSummary",
@@ -1114,6 +1142,9 @@
           },
           {
             "$ref": "#/parameters/ir_show_unproductive"
+          },
+          {
+            "$ref": "#/parameters/ir_annotation_tool"
           }
         ],
         "operationId": "getSequenceData",
@@ -1179,6 +1210,9 @@
           },
           {
             "$ref": "#/parameters/ir_show_unproductive_form"
+          },
+          {
+            "$ref": "#/parameters/ir_annotation_tool_form"
           }
         ],
         "operationId": "postSequenceData",
