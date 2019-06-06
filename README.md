@@ -1,10 +1,11 @@
 # API
 Defintions of the iReceptor API
 
-YAML files are compatible with the online Swagger Editor. In order to view
-one of the APIs in the Swagger Editor do the following:
-- Copy a raw URL for one of the YAML files
-  - Navigate to one of the YAML files
+The iReceptor API is defined in the YAML file iReceptor_Data_Service_API_V2.yaml. This file uses the other YAML files in this directory for definitions within the main file.
+
+Since YAML files are compatible with the online Swagger Editor it is possible to view the API in a swagger editor. In order to view the API in the Swagger Editor do the following:
+- Copy a raw URL for the API YAML file
+  - Navigate to the API YAML file iReceptor_Data_Service_API_V2.yaml
   - Click on the "Raw" button to generate a "Raw" URL for the file
   - Copy the URL
 - Go to the swagger editor at: http://editor.swagger.io/
